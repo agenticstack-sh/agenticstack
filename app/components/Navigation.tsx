@@ -1,0 +1,22 @@
+import Link from "next/link";
+
+export default function Navigation() {
+  return (
+    <nav
+      style={{
+        borderBottom: "1px solid var(--border)",
+        background: "var(--background)",
+      }}
+      className="sticky top-0 z-10"
+    >
+      <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+        <Link href="/" className="font-semibold text-base tracking-tight no-underline" style={{ color: "var(--foreground)" }}>
+          AgenticStack
+        </Link>
+        <Link href="/categories/auth" className="text-sm transition-opacity hover:opacity-60 no-underline" style={{ color: "var(--foreground)" }}>
+          Auth & Identity
+        </Link>
+      </div>
+    </nav>
+  );
+}

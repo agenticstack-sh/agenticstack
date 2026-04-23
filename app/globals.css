@@ -1,0 +1,96 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f7f5ff;
+  --foreground: #1a1826;
+  --muted: #6b7280;
+  --border: #e2daf5;
+  --card: #ffffff;
+  --card-hover: #f0ecff;
+  --accent: #ede9fe;
+  --accent-text: #7c3aed;
+  --green-text: #15803d;
+  --green-bg: #dcfce7;
+  --amber-text: #b45309;
+  --amber-bg: #fef9c3;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--foreground);
+}
+
+a:hover {
+  opacity: 0.6;
+}
+
+.category-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+}
+
+.category-card:hover {
+  background: var(--card-hover);
+  border-color: #c4b5fd;
+}
+
+.tool-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+}
+
+.tool-card:hover {
+  background: var(--card-hover);
+}
+
+.prose {
+  max-width: 72ch;
+  line-height: 1.75;
+}
+
+.prose h1, .prose h2, .prose h3 {
+  font-weight: 600;
+  color: var(--foreground);
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.prose p {
+  margin-bottom: 1rem;
+}
+
+.prose ul, .prose ol {
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+}
+
+.prose li {
+  margin-bottom: 0.25rem;
+}
+
+.prose strong {
+  color: var(--foreground);
+}
+
+.prose code {
+  background: var(--accent);
+  color: var(--accent-text);
+  padding: 0.1rem 0.35rem;
+  border-radius: 4px;
+  font-size: 0.875em;
+}
+
+.prose pre {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem;
+  overflow-x: auto;
+  margin-bottom: 1rem;
+}

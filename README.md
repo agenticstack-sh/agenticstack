@@ -2,8 +2,6 @@
 
 Structured tool comparisons for AI agent developers. Auth & identity category live, more categories coming.
 
----
-
 ## What it is
 
 A comparison site for tools used in AI agent development. The primary interface is human-readable, but every tool page is also available as structured markdown with YAML frontmatter — designed to be fetched and parsed by AI coding agents.

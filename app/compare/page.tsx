@@ -106,6 +106,32 @@ function CompareContent({
           Select a category to get started.
         </div>
       )}
+      {/* Comparison guides */}
+      {comparisons.length > 0 && (
+        <div className="mt-16">
+          <h2 className="text-sm font-medium uppercase tracking-wide mb-4" style={{ color: "var(--muted)" }}>
+            Popular deep dives
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {comparisons.map((comp) => (
+              <Link
+                key={comp.slug}
+                href={`/compare/${comp.slug}`}
+                className="p-4 rounded-lg no-underline hover:opacity-80 transition-opacity flex items-start gap-3"
+                style={{ background: "var(--card)", border: "1px solid var(--border)" }}
+              >
+                <BookOpen size={16} className="mt-0.5 shrink-0" style={{ color: "var(--accent-text)" }} />
+                <div>
+                  <div className="font-medium text-sm">{comp.title}</div>
+                  <div className="text-xs mt-1" style={{ color: "var(--muted)" }}>
+                    {comp.verdict}
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

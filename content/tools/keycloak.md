@@ -5,6 +5,9 @@ category: auth
 type: self-hosted
 website: https://keycloak.org
 pricing: open-source
+pricing_tiers:
+  - "Free (self-hosted)"
+  - "Red Hat SSO (commercial support)"
 open_source: true
 self_hosted: true
 sdk_languages: [javascript, java, python, go]

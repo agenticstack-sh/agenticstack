@@ -50,10 +50,10 @@ export default async function CategoryPage({
             Compare tools →
           </Link>
           <a
-            href={`/content/categories/${slug}.md`}
+            href={`/categories/${slug}.json`}
             className="hover:opacity-60 transition-opacity no-underline"
           >
-            View as markdown →
+            View as JSON →
           </a>
         </div>
       </div>
@@ -62,7 +62,7 @@ export default async function CategoryPage({
         className="rounded-lg overflow-hidden"
         style={{ border: "1px solid var(--border)" }}
       >
-        <ComparisonTable tools={tools} />
+        <ComparisonTable tools={tools} showLogos={false} />
       </div>
 
       {html.trim() && (

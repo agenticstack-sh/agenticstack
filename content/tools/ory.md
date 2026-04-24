@@ -5,6 +5,10 @@ category: auth
 type: hybrid
 website: https://ory.sh
 pricing: open-source
+pricing_tiers:
+  - "Free (self-hosted)"
+  - "Ory Network usage-based"
+  - "Custom Enterprise"
 open_source: true
 self_hosted: true
 sdk_languages: [javascript, typescript, python, go, java, php, ruby]

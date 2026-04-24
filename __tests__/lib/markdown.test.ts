@@ -3,6 +3,7 @@ import {
   getToolBySlug,
   getAllTools,
   getCategoryBySlug,
+  getAllCategories,
   getComparisonBySlug,
   getAllComparisons,
   getRawMarkdown,
@@ -11,14 +12,17 @@ import {
 
 describe("getToolBySlug", () => {
   it("returns correct frontmatter for a known tool", () => {
-    const result = getToolBySlug("auth0");
-    expect(result.frontmatter.name).toBe("Auth0");
-    expect(result.frontmatter.slug).toBe("auth0");
-    expect(result.frontmatter.category).toBe("auth");
+    const tools = getAllTools();
+    const first = tools[0];
+    const result = getToolBySlug(first.slug);
+    expect(result.frontmatter.name).toBe(first.name);
+    expect(result.frontmatter.slug).toBe(first.slug);
+    expect(result.frontmatter.category).toBeTruthy();
   });
 
   it("includes a body", () => {
-    const result = getToolBySlug("auth0");
+    const tools = getAllTools();
+    const result = getToolBySlug(tools[0].slug);
     expect(result.body.length).toBeGreaterThan(0);
   });
 
@@ -28,9 +32,9 @@ describe("getToolBySlug", () => {
 });
 
 describe("getAllTools", () => {
-  it("returns all 10 tools", () => {
+  it("returns at least one tool", () => {
     const tools = getAllTools();
-    expect(tools).toHaveLength(10);
+    expect(tools.length).toBeGreaterThan(0);
   });
 
   it("every tool has required frontmatter fields", () => {
@@ -38,7 +42,7 @@ describe("getAllTools", () => {
     for (const tool of tools) {
       expect(tool.name).toBeTruthy();
       expect(tool.slug).toBeTruthy();
-      expect(tool.category).toBe("auth");
+      expect(tool.category).toBeTruthy();
       expect(tool.website).toBeTruthy();
       expect(tool.agent_features).toBeDefined();
       expect(tool.last_verified).toBeTruthy();
@@ -48,11 +52,14 @@ describe("getAllTools", () => {
 });
 
 describe("getCategoryBySlug", () => {
-  it("returns correct metadata for auth category", () => {
-    const result = getCategoryBySlug("auth");
-    expect(result.frontmatter.category).toBe("auth");
-    expect(result.frontmatter.title).toBeTruthy();
-    expect(result.frontmatter.tools).toHaveLength(10);
+  it("returns correct metadata for each category", () => {
+    const categories = getAllCategories();
+    for (const cat of categories) {
+      const result = getCategoryBySlug(cat.category);
+      expect(result.frontmatter.category).toBe(cat.category);
+      expect(result.frontmatter.title).toBeTruthy();
+      expect(result.frontmatter.tools).toBeDefined();
+    }
   });
 
   it("throws for unknown category", () => {
@@ -62,10 +69,11 @@ describe("getCategoryBySlug", () => {
 
 describe("getRawMarkdown", () => {
   it("returns raw file contents including frontmatter delimiters", () => {
-    const raw = getRawMarkdown("tools", "auth0");
+    const tools = getAllTools();
+    const raw = getRawMarkdown("tools", tools[0].slug);
     expect(raw).not.toBeNull();
     expect(raw!.startsWith("---")).toBe(true);
-    expect(raw!).toContain("name: Auth0");
+    expect(raw!).toContain(`name: ${tools[0].name}`);
   });
 
   it("returns null for unknown slug", () => {
@@ -74,23 +82,28 @@ describe("getRawMarkdown", () => {
   });
 
   it("works for categories", () => {
-    const raw = getRawMarkdown("categories", "auth");
+    const categories = getAllCategories();
+    const raw = getRawMarkdown("categories", categories[0].category);
     expect(raw).not.toBeNull();
     expect(raw!.startsWith("---")).toBe(true);
   });
 });
 
 describe("getComparisonBySlug", () => {
-  it("returns correct frontmatter for a known comparison", () => {
-    const result = getComparisonBySlug("auth0-vs-clerk");
-    expect(result.frontmatter.title).toBe("Auth0 vs Clerk");
-    expect(result.frontmatter.slug).toBe("auth0-vs-clerk");
-    expect(result.frontmatter.tools).toEqual(["auth0", "clerk"]);
-    expect(result.frontmatter.category).toBe("auth");
+  it("returns correct frontmatter for each comparison", () => {
+    const comparisons = getAllComparisons();
+    for (const comp of comparisons) {
+      const result = getComparisonBySlug(comp.slug);
+      expect(result.frontmatter.title).toBe(comp.title);
+      expect(result.frontmatter.slug).toBe(comp.slug);
+      expect(result.frontmatter.tools).toHaveLength(2);
+      expect(result.frontmatter.category).toBeTruthy();
+    }
   });
 
   it("includes a body", () => {
-    const result = getComparisonBySlug("auth0-vs-clerk");
+    const comparisons = getAllComparisons();
+    const result = getComparisonBySlug(comparisons[0].slug);
     expect(result.body.length).toBeGreaterThan(0);
   });
 

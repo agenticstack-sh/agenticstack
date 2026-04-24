@@ -5,6 +5,10 @@ category: auth
 type: cloud
 website: https://stytch.com
 pricing: freemium
+pricing_tiers:
+  - "Free up to 25 orgs"
+  - "Usage-based Pro"
+  - "Custom Enterprise"
 open_source: false
 self_hosted: false
 sdk_languages: [javascript, typescript, python, ruby, go]

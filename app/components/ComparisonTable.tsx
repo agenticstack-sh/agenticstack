@@ -1,21 +1,23 @@
 import Link from "next/link";
-import type { ToolFrontmatter } from "@/lib/types";
+import type { ToolFrontmatter, AgentFeatures } from "@/lib/types";
 import FeatureBadge from "./FeatureBadge";
+import { Bot, KeyRound, UserCheck, Shield, Plug, Clock, type LucideIcon } from "lucide-react";
 
 interface ComparisonTableProps {
   tools: ToolFrontmatter[];
+  showLogos?: boolean;
 }
 
-const FEATURE_COLS: { key: keyof ToolFrontmatter["agent_features"]; label: string; description: string }[] = [
-  { key: "agent_sdk", label: "Agent SDK", description: "Dedicated SDK for agentic workflows — agent sessions, token lifecycle, and authorization requests" },
-  { key: "token_delegation", label: "Token Delegation", description: "Issue scoped tokens an agent can use downstream without exposing user credentials" },
-  { key: "human_in_the_loop", label: "Human-in-loop", description: "Pause agent execution and require explicit user approval before proceeding" },
-  { key: "fga", label: "FGA", description: "Fine-Grained Authorization — relationship-based or attribute-based access control, not just role-based" },
-  { key: "mcp_support", label: "MCP", description: "Native OAuth/OIDC authorization layer for Model Context Protocol servers" },
-  { key: "async_authorization", label: "Async Authz", description: "Non-blocking approval workflows — agent continues and gets notified when approval is granted" },
+const FEATURE_COLS: { key: keyof AgentFeatures; label: string; description: string; icon: LucideIcon }[] = [
+  { key: "agent_sdk", label: "Agent SDK", description: "Dedicated SDK for agentic workflows — agent sessions, token lifecycle, and authorization requests", icon: Bot },
+  { key: "token_delegation", label: "Token Delegation", description: "Issue scoped tokens an agent can use downstream without exposing user credentials", icon: KeyRound },
+  { key: "human_in_the_loop", label: "Human-in-loop", description: "Pause agent execution and require explicit user approval before proceeding", icon: UserCheck },
+  { key: "fga", label: "FGA", description: "Fine-Grained Authorization — relationship-based or attribute-based access control, not just role-based", icon: Shield },
+  { key: "mcp_support", label: "MCP", description: "Native OAuth/OIDC authorization layer for Model Context Protocol servers", icon: Plug },
+  { key: "async_authorization", label: "Async Authz", description: "Non-blocking approval workflows — agent continues and gets notified when approval is granted", icon: Clock },
 ];
 
-export default function ComparisonTable({ tools }: ComparisonTableProps) {
+export default function ComparisonTable({ tools, showLogos = true }: ComparisonTableProps) {
   return (
     <div className="overflow-x-auto">
       <table className="w-full text-sm border-collapse">
@@ -38,8 +40,12 @@ export default function ComparisonTable({ tools }: ComparisonTableProps) {
                 key={col.key}
                 className="text-center py-3 px-3 font-medium"
                 style={{ color: "var(--muted)" }}
+                title={col.description}
               >
-                {col.label}
+                <div className="flex flex-col items-center gap-1">
+                  <col.icon size={14} />
+                  <span>{col.label}</span>
+                </div>
               </th>
             ))}
             <th className="text-center py-3 px-3 font-medium" style={{ color: "var(--muted)" }}>
@@ -59,16 +65,29 @@ export default function ComparisonTable({ tools }: ComparisonTableProps) {
               <td className="py-3 px-4">
                 <Link
                   href={`/tools/${tool.slug}`}
-                  className="font-medium hover:opacity-70 no-underline"
+                  className="font-medium hover:opacity-70 no-underline flex items-center gap-2"
                 >
+                  {showLogos && (
+                    <img
+                      src={`/logos/${tool.slug}.svg`}
+                      alt=""
+                      width={20}
+                      height={20}
+                      className="rounded"
+                    />
+                  )}
                   {tool.name}
                 </Link>
               </td>
               <td className="py-3 px-3 text-center text-xs" style={{ color: "var(--muted)" }}>
                 {tool.type}
               </td>
-              <td className="py-3 px-3 text-center text-xs" style={{ color: "var(--muted)" }}>
-                {tool.pricing}
+              <td className="py-3 px-3 text-xs" style={{ color: "var(--muted)" }}>
+                <div className="flex flex-col items-center gap-0.5">
+                  {tool.pricing_tiers?.map((tier, j) => (
+                    <span key={j}>{tier}</span>
+                  )) ?? tool.pricing}
+                </div>
               </td>
               <td className="py-3 px-3 text-center">
                 <FeatureBadge value={tool.open_source} size="sm" />
@@ -89,10 +108,10 @@ export default function ComparisonTable({ tools }: ComparisonTableProps) {
         </tbody>
       </table>
       <div className="mt-4 flex items-start justify-between gap-6 flex-wrap">
-        <p className="text-xs flex gap-3 flex-wrap" style={{ color: "var(--muted)" }}>
-          <span style={{ background: "var(--green-bg)", color: "var(--green-text)" }} className="px-1.5 py-0.5 rounded-full font-medium">✓</span> Supported
-          <span style={{ color: "var(--muted)" }}>✗</span> Not supported
-          <span style={{ background: "var(--amber-bg)", color: "var(--amber-text)" }} className="px-1.5 py-0.5 rounded-full font-medium">?</span> Unverified
+        <p className="text-xs flex gap-3 flex-wrap items-center" style={{ color: "var(--muted)" }}>
+          <span className="inline-flex items-center gap-1"><FeatureBadge value={true} size="sm" /> Supported</span>
+          <span className="inline-flex items-center gap-1"><FeatureBadge value={false} size="sm" /> Not supported</span>
+          <span className="inline-flex items-center gap-1"><FeatureBadge value={null} size="sm" /> Unverified</span>
         </p>
         <details className="text-xs" style={{ color: "var(--muted)" }}>
           <summary className="cursor-pointer select-none hover:opacity-60 transition-opacity">
@@ -100,9 +119,12 @@ export default function ComparisonTable({ tools }: ComparisonTableProps) {
           </summary>
           <ul className="mt-3 space-y-2 list-none p-0">
             {FEATURE_COLS.map((col) => (
-              <li key={col.key}>
-                <span className="font-medium" style={{ color: "var(--foreground)" }}>{col.label}</span>{" "}
-                — {col.description}
+              <li key={col.key} className="flex items-start gap-2">
+                <col.icon size={14} className="mt-0.5 shrink-0" style={{ color: "var(--accent-text)" }} />
+                <span>
+                  <span className="font-medium" style={{ color: "var(--foreground)" }}>{col.label}</span>{" "}
+                  — {col.description}
+                </span>
               </li>
             ))}
           </ul>

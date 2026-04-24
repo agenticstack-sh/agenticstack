@@ -5,6 +5,10 @@ category: auth
 type: cloud
 website: https://workos.com
 pricing: freemium
+pricing_tiers:
+  - "Free up to 1M MAU"
+  - "Pay-as-you-go after"
+  - "Custom Enterprise"
 open_source: false
 self_hosted: false
 sdk_languages: [javascript, typescript, python, go, ruby, java]

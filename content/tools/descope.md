@@ -5,6 +5,10 @@ category: auth
 type: cloud
 website: https://descope.com
 pricing: freemium
+pricing_tiers:
+  - "Free up to 7.5k MAU"
+  - "$0.05/MAU Pro"
+  - "Custom Enterprise"
 open_source: false
 self_hosted: false
 sdk_languages: [javascript, typescript, python, go, java]

@@ -12,7 +12,7 @@ export function GET() {
   const categoryLines = activeCategories
     .map(
       (cat) =>
-        `- [${cat.title}](/content/categories/${cat.category}.md): ${cat.description}`
+        `- [${cat.title}](/categories/${cat.category}.json): ${cat.description}`
     )
     .join("\n");
 
@@ -21,7 +21,7 @@ export function GET() {
       const catTools = tools.filter((t) => t.category === cat.category);
       if (catTools.length === 0) return "";
       const lines = catTools
-        .map((tool) => `- [${tool.name}](/content/tools/${tool.slug}.md): ${tool.best_for}`)
+        .map((tool) => `- [${tool.name}](/tools/${tool.slug}.json): ${tool.best_for}`)
         .join("\n");
       return `## ${cat.title}\n\n${lines}`;
     })
@@ -34,7 +34,13 @@ export function GET() {
 
 ## How to use this data
 
-Each tool page returns raw markdown with YAML frontmatter. Parse the frontmatter to compare tools programmatically. Key fields:
+Every resource is available as JSON. Append \`.json\` to any page URL to get structured data.
+
+- \`/categories/:slug.json\` returns the category with **all tools embedded** — one request for the full feature matrix
+- \`/tools/:slug.json\` returns a single tool's metadata
+- \`/compare/:slug.json\` returns the comparison with both tools embedded
+
+Key fields in each tool object:
 
 - \`agent_features\`: object with boolean | null values — null means unverified, not unsupported
 - \`last_verified\`: ISO date of last editorial check
@@ -53,7 +59,7 @@ ${(() => {
     const comparisons = getAllComparisons();
     if (comparisons.length === 0) return "";
     const lines = comparisons
-      .map((c) => `- [${c.title}](/content/comparisons/${c.slug}.md): ${c.verdict}`)
+      .map((c) => `- [${c.title}](/compare/${c.slug}.json): ${c.verdict}`)
       .join("\n");
     return `## Comparisons\n\n${lines}`;
   })()}

@@ -5,6 +5,10 @@ category: auth
 type: cloud
 website: https://clerk.com
 pricing: freemium
+pricing_tiers:
+  - "Free up to 10k MAU"
+  - "$25/mo Pro"
+  - "Custom Enterprise"
 open_source: false
 self_hosted: false
 sdk_languages: [javascript, typescript]

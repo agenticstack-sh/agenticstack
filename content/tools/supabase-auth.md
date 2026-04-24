@@ -5,6 +5,10 @@ category: auth
 type: hybrid
 website: https://supabase.com/docs/guides/auth
 pricing: freemium
+pricing_tiers:
+  - "Free up to 50k MAU"
+  - "$25/mo Pro"
+  - "Custom Enterprise"
 open_source: true
 self_hosted: true
 sdk_languages: [javascript, typescript, python, dart, swift, kotlin]

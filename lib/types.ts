@@ -27,6 +27,7 @@ export interface ToolFrontmatter {
   frameworks: string[];
   agent_features: AgentFeatures;
   compliance: string[];
+  pricing_tiers: string[];
   best_for: string;
   limitations: string;
   verified_by: "editorial" | "community" | "vendor";

@@ -5,6 +5,10 @@ category: auth
 type: cloud
 website: https://firebase.google.com/products/auth
 pricing: freemium
+pricing_tiers:
+  - "Free up to 50k MAU"
+  - "Blaze pay-as-you-go"
+  - "Phone auth: 10¢/verification"
 open_source: false
 self_hosted: false
 sdk_languages: [javascript, typescript, python, java, swift, kotlin, go]

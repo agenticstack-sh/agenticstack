@@ -5,6 +5,10 @@ category: auth
 type: cloud
 website: https://aws.amazon.com/cognito/
 pricing: freemium
+pricing_tiers:
+  - "Free up to 50k MAU"
+  - "$0.0055/MAU after"
+  - "SAML federation extra"
 open_source: false
 self_hosted: false
 sdk_languages: [javascript, typescript, python, java, swift, kotlin, go, ruby]

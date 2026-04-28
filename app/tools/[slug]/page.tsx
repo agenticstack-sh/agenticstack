@@ -1,4 +1,4 @@
-import { getToolBySlug, getAllTools, renderToHtml } from "@/lib/markdown";
+import { getToolBySlug, getAllTools, getCategoryBySlug, renderToHtml } from "@/lib/markdown";
 import FeatureBadge from "@/app/components/FeatureBadge";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -35,20 +35,32 @@ export default async function ToolPage({
   const { frontmatter: tool, body } = parsed;
   const html = await renderToHtml(body);
 
+  let categoryTitle = tool.category;
+  try {
+    categoryTitle = getCategoryBySlug(tool.category).frontmatter.title;
+  } catch {}
+
   return (
     <div className="max-w-4xl mx-auto px-6 py-12">
       <div className="mb-2">
         <Link
-          href="/categories/auth"
+          href={`/categories/${tool.category}`}
           className="text-sm no-underline hover:opacity-70 transition-opacity"
           style={{ color: "var(--muted)" }}
         >
-          ← Auth & Identity
+          ← {categoryTitle}
         </Link>
       </div>
 
       <div className="mb-8">
         <div className="flex items-start gap-4 mb-3">
+          <img
+            src={`/logos/${slug}.svg`}
+            alt=""
+            width={36}
+            height={36}
+            className="rounded-lg mt-0.5"
+          />
           <h1 className="text-2xl font-semibold tracking-tight">{tool.name}</h1>
           <div className="flex gap-2 mt-1">
             <span
@@ -57,12 +69,22 @@ export default async function ToolPage({
             >
               {tool.type}
             </span>
-            <span
-              className="text-xs px-2 py-0.5 rounded"
-              style={{ background: "var(--accent)", color: "var(--muted)" }}
-            >
-              {tool.pricing}
-            </span>
+            {tool.pricing_tiers?.map((tier, i) => (
+              <span
+                key={i}
+                className="text-xs px-2 py-0.5 rounded"
+                style={{ background: "var(--accent)", color: "var(--muted)" }}
+              >
+                {tier}
+              </span>
+            )) ?? (
+              <span
+                className="text-xs px-2 py-0.5 rounded"
+                style={{ background: "var(--accent)", color: "var(--muted)" }}
+              >
+                {tool.pricing}
+              </span>
+            )}
             {tool.open_source && (
               <span
                 className="text-xs px-2 py-0.5 rounded-full font-medium"
@@ -84,11 +106,11 @@ export default async function ToolPage({
             {tool.website} ↗
           </a>
           <a
-            href={`/content/tools/${slug}.md`}
+            href={`/tools/${slug}.json`}
             className="text-xs font-mono hover:text-white transition-colors no-underline"
             style={{ color: "var(--muted)" }}
           >
-            View as markdown →
+            View as JSON →
           </a>
         </div>
       </div>

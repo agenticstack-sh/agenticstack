@@ -5,6 +5,10 @@ category: auth
 type: cloud
 website: https://auth0.com
 pricing: freemium
+pricing_tiers:
+  - "Free up to 25k MAU"
+  - "$35/mo Essentials"
+  - "Custom Enterprise"
 open_source: false
 self_hosted: false
 sdk_languages: [python, javascript, typescript, go, java, csharp]

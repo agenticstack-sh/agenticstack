@@ -11,9 +11,9 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "AgenticStack — Auth & Identity Tools for AI Agents",
+  title: "AgenticStack — Compare Tools for AI Agents",
   description:
-    "Compare auth and identity tools for AI agent developers. Structured, editorially maintained data designed for both human developers and AI coding agents.",
+    "Compare tools for AI agent developers. Structured, editorially maintained data designed for both human developers and AI coding agents.",
 };
 
 export default function RootLayout({

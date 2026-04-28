@@ -11,12 +11,12 @@ function generateLlmsTxt(): string {
   const categoryLines = categories
     .map(
       (cat) =>
-        `- [${cat.title}](/content/categories/${cat.category}.md): ${cat.description}`
+        `- [${cat.title}](/categories/${cat.category}.json): ${cat.description}`
     )
     .join("\n");
 
   const toolLines = tools
-    .map((tool) => `- [${tool.name}](/content/tools/${tool.slug}.md): ${tool.best_for}`)
+    .map((tool) => `- [${tool.name}](/tools/${tool.slug}.json): ${tool.best_for}`)
     .join("\n");
 
   return `# AgenticStack
@@ -44,7 +44,7 @@ ${(() => {
     const comparisons = getAllComparisons();
     if (comparisons.length === 0) return "";
     const lines = comparisons
-      .map((c) => `- [${c.title}](/content/comparisons/${c.slug}.md): ${c.verdict}`)
+      .map((c) => `- [${c.title}](/compare/${c.slug}.json): ${c.verdict}`)
       .join("\n");
     return `## Comparisons\n\n${lines}`;
   })()}
@@ -61,7 +61,7 @@ describe("/llms.txt content", () => {
     const body = generateLlmsTxt();
     const tools = getAllTools();
     for (const tool of tools) {
-      expect(body).toContain(`/content/tools/${tool.slug}.md`);
+      expect(body).toContain(`/tools/${tool.slug}.json`);
     }
   });
 
@@ -69,17 +69,17 @@ describe("/llms.txt content", () => {
     const body = generateLlmsTxt();
     const categories = getAllCategories();
     for (const cat of categories) {
-      expect(body).toContain(`/content/categories/${cat.category}.md`);
+      expect(body).toContain(`/categories/${cat.category}.json`);
     }
   });
 
-  it("all tool links point to /content/tools/ paths", () => {
+  it("all tool links point to /tools/ paths", () => {
     const body = generateLlmsTxt();
     const toolLinkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
     const matches = [...body.matchAll(toolLinkRegex)];
     const toolLinks = matches
       .map((m) => m[2])
-      .filter((href) => href.startsWith("/content/tools/"));
+      .filter((href) => href.startsWith("/tools/"));
     expect(toolLinks.length).toBe(10);
   });
 
@@ -87,7 +87,7 @@ describe("/llms.txt content", () => {
     const body = generateLlmsTxt();
     const comparisons = getAllComparisons();
     for (const comp of comparisons) {
-      expect(body).toContain(`/content/comparisons/${comp.slug}.md`);
+      expect(body).toContain(`/compare/${comp.slug}.json`);
     }
   });
 });

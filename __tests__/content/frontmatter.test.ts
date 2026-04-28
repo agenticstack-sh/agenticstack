@@ -8,11 +8,6 @@ const REQUIRED_TOOL_FIELDS = [
   "agent_features", "last_verified", "source_urls", "best_for", "limitations",
 ];
 
-const REQUIRED_AGENT_FEATURES = [
-  "agent_sdk", "token_delegation", "human_in_the_loop",
-  "fga", "mcp_support", "async_authorization",
-];
-
 describe("Tool frontmatter validation", () => {
   const tools = getAllTools();
 
@@ -28,12 +23,18 @@ describe("Tool frontmatter validation", () => {
     }
   });
 
-  it("every agent_features object has all required keys", () => {
+  it("every tool has agent_features matching its category feature_definitions", () => {
+    const categories = getAllCategories();
     for (const tool of tools) {
-      for (const key of REQUIRED_AGENT_FEATURES) {
+      const cat = categories.find((c) => c.category === tool.category);
+      if (!cat) continue;
+      const catData = getCategoryBySlug(cat.category);
+      const featureDefs = catData.frontmatter.feature_definitions;
+      if (!featureDefs) continue;
+      for (const key of Object.keys(featureDefs)) {
         expect(
           key in tool.agent_features,
-          `${tool.slug} agent_features missing key: ${key}`
+          `${tool.slug} agent_features missing key: ${key} (defined in ${cat.category} category)`
         ).toBe(true);
       }
     }

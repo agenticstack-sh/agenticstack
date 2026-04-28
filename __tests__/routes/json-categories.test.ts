@@ -32,8 +32,7 @@ describe("/categories/:slug.json endpoint", () => {
         expect(tool.name).toBeTruthy();
         expect(tool.slug).toBeTruthy();
         expect(tool.agent_features).toBeDefined();
-        expect(tool.agent_features.agent_sdk).not.toBeUndefined();
-        expect(tool.agent_features.token_delegation).not.toBeUndefined();
+        expect(Object.keys(tool.agent_features).length).toBeGreaterThan(0);
       }
     }
   });

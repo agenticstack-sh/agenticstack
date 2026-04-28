@@ -1,4 +1,4 @@
-import { getComparisonBySlug, getAllComparisons, getToolBySlug, renderToHtml } from "@/lib/markdown";
+import { getComparisonBySlug, getAllComparisons, getToolBySlug, getCategoryBySlug, renderToHtml } from "@/lib/markdown";
 import ComparisonColumns from "@/app/components/ComparisonColumns";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -37,6 +37,13 @@ export default async function EditorialComparePage({
     })
     .filter((t): t is ToolFrontmatter => t !== null);
 
+  let featureDefinitions;
+  try {
+    featureDefinitions = getCategoryBySlug(frontmatter.category).frontmatter.feature_definitions;
+  } catch {
+    // category not found, skip feature definitions
+  }
+
   const dynamicUrl = `/compare?category=${frontmatter.category}&tools=${frontmatter.tools.join(",")}`;
 
   return (
@@ -70,7 +77,7 @@ export default async function EditorialComparePage({
             Live comparison
           </Link>
           <a
-            href={`/compare/${slug}.json`}
+            href={`/api/json/comparisons/${slug}`}
             className="hover:opacity-60 transition-opacity no-underline inline-flex items-center gap-1"
           >
             <Braces size={12} />
@@ -80,7 +87,7 @@ export default async function EditorialComparePage({
       </div>
 
       <div className="mb-10">
-        <ComparisonColumns tools={tools} />
+        <ComparisonColumns tools={tools} featureDefinitions={featureDefinitions} />
       </div>
 
       {html.trim() && (

@@ -15,7 +15,7 @@ interface ToolPickerProps {
 export default function ToolPicker({ categories }: ToolPickerProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const activeCategory = searchParams.get("category") ?? "";
+  const activeCategory = searchParams.get("category") ?? "auth";
   const selected = searchParams.get("tools")?.split(",").filter(Boolean) ?? [];
 
   const category = categories.find((c) => c.slug === activeCategory);

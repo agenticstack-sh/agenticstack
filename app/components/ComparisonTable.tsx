@@ -1,23 +1,23 @@
 import Link from "next/link";
-import type { ToolFrontmatter, AgentFeatures } from "@/lib/types";
+import type { ToolFrontmatter, FeatureDefinitions } from "@/lib/types";
 import FeatureBadge from "./FeatureBadge";
-import { Bot, KeyRound, UserCheck, Shield, Plug, Clock, type LucideIcon } from "lucide-react";
 
 interface ComparisonTableProps {
   tools: ToolFrontmatter[];
+  featureDefinitions?: FeatureDefinitions;
   showLogos?: boolean;
 }
 
-const FEATURE_COLS: { key: keyof AgentFeatures; label: string; description: string; icon: LucideIcon }[] = [
-  { key: "agent_sdk", label: "Agent SDK", description: "Dedicated SDK for agentic workflows — agent sessions, token lifecycle, and authorization requests", icon: Bot },
-  { key: "token_delegation", label: "Token Delegation", description: "Issue scoped tokens an agent can use downstream without exposing user credentials", icon: KeyRound },
-  { key: "human_in_the_loop", label: "Human-in-loop", description: "Pause agent execution and require explicit user approval before proceeding", icon: UserCheck },
-  { key: "fga", label: "FGA", description: "Fine-Grained Authorization — relationship-based or attribute-based access control, not just role-based", icon: Shield },
-  { key: "mcp_support", label: "MCP", description: "Native OAuth/OIDC authorization layer for Model Context Protocol servers", icon: Plug },
-  { key: "async_authorization", label: "Async Authz", description: "Non-blocking approval workflows — agent continues and gets notified when approval is granted", icon: Clock },
-];
+function featureLabel(key: string): string {
+  return key
+    .split("_")
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(" ");
+}
 
-export default function ComparisonTable({ tools, showLogos = true }: ComparisonTableProps) {
+export default function ComparisonTable({ tools, featureDefinitions, showLogos = true }: ComparisonTableProps) {
+  const featureKeys = featureDefinitions ? Object.keys(featureDefinitions) : [];
+
   return (
     <div className="overflow-x-auto">
       <table className="w-full text-sm border-collapse">
@@ -35,17 +35,14 @@ export default function ComparisonTable({ tools, showLogos = true }: ComparisonT
             <th className="text-center py-3 px-3 font-medium" style={{ color: "var(--muted)" }}>
               OSS
             </th>
-            {FEATURE_COLS.map((col) => (
+            {featureKeys.map((key) => (
               <th
-                key={col.key}
+                key={key}
                 className="text-center py-3 px-3 font-medium"
                 style={{ color: "var(--muted)" }}
-                title={col.description}
+                title={featureDefinitions![key]}
               >
-                <div className="flex flex-col items-center gap-1">
-                  <col.icon size={14} />
-                  <span>{col.label}</span>
-                </div>
+                {featureLabel(key)}
               </th>
             ))}
             <th className="text-center py-3 px-3 font-medium" style={{ color: "var(--muted)" }}>
@@ -92,9 +89,9 @@ export default function ComparisonTable({ tools, showLogos = true }: ComparisonT
               <td className="py-3 px-3 text-center">
                 <FeatureBadge value={tool.open_source} size="sm" />
               </td>
-              {FEATURE_COLS.map((col) => (
-                <td key={col.key} className="py-3 px-3 text-center">
-                  <FeatureBadge value={tool.agent_features[col.key]} size="sm" />
+              {featureKeys.map((key) => (
+                <td key={key} className="py-3 px-3 text-center">
+                  <FeatureBadge value={tool.agent_features[key] ?? null} size="sm" />
                 </td>
               ))}
               <td
@@ -113,22 +110,23 @@ export default function ComparisonTable({ tools, showLogos = true }: ComparisonT
           <span className="inline-flex items-center gap-1"><FeatureBadge value={false} size="sm" /> Not supported</span>
           <span className="inline-flex items-center gap-1"><FeatureBadge value={null} size="sm" /> Unverified</span>
         </p>
-        <details className="text-xs" style={{ color: "var(--muted)" }}>
-          <summary className="cursor-pointer select-none hover:opacity-60 transition-opacity">
-            What do these features mean?
-          </summary>
-          <ul className="mt-3 space-y-2 list-none p-0">
-            {FEATURE_COLS.map((col) => (
-              <li key={col.key} className="flex items-start gap-2">
-                <col.icon size={14} className="mt-0.5 shrink-0" style={{ color: "var(--accent-text)" }} />
-                <span>
-                  <span className="font-medium" style={{ color: "var(--foreground)" }}>{col.label}</span>{" "}
-                  — {col.description}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </details>
+        {featureKeys.length > 0 && (
+          <details className="text-xs" style={{ color: "var(--muted)" }}>
+            <summary className="cursor-pointer select-none hover:opacity-60 transition-opacity">
+              What do these features mean?
+            </summary>
+            <ul className="mt-3 space-y-2 list-none p-0">
+              {featureKeys.map((key) => (
+                <li key={key} className="flex items-start gap-2">
+                  <span>
+                    <span className="font-medium" style={{ color: "var(--foreground)" }}>{featureLabel(key)}</span>{" "}
+                    — {featureDefinitions![key]}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </details>
+        )}
       </div>
     </div>
   );

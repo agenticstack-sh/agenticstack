@@ -42,18 +42,20 @@ export default async function CategoryPage({
           {category.frontmatter.title}
         </h1>
         <p style={{ color: "var(--muted)" }}>{category.frontmatter.description}</p>
-        <div className="flex gap-4 mt-4 text-xs font-mono" style={{ color: "var(--muted)" }}>
+        <div className="flex gap-3 mt-5 flex-wrap">
           <Link
-            href="/compare"
-            className="hover:opacity-60 transition-opacity no-underline"
+            href={`/compare?category=${slug}`}
+            className="inline-flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-lg no-underline transition-opacity hover:opacity-80"
+            style={{ background: "var(--accent-text)", color: "#fff" }}
           >
-            Compare tools →
+            Compare tools
           </Link>
           <a
-            href={`/categories/${slug}.json`}
-            className="hover:opacity-60 transition-opacity no-underline"
+            href={`/api/json/categories/${slug}`}
+            className="inline-flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-lg no-underline transition-opacity hover:opacity-80"
+            style={{ background: "var(--card)", color: "var(--muted)", border: "1px solid var(--border)" }}
           >
-            View as JSON →
+            View as JSON
           </a>
         </div>
       </div>
@@ -62,7 +64,7 @@ export default async function CategoryPage({
         className="rounded-lg overflow-hidden"
         style={{ border: "1px solid var(--border)" }}
       >
-        <ComparisonTable tools={tools} showLogos={false} />
+        <ComparisonTable tools={tools} featureDefinitions={category.frontmatter.feature_definitions} showLogos={false} />
       </div>
 
       {html.trim() && (

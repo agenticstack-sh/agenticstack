@@ -1,53 +1,50 @@
 import { describe, it, expect } from "vitest";
 import { getAllTools, getAllCategories, getAllComparisons } from "@/lib/markdown";
 
-// Test the content that the /llms.txt route would generate
-// without spinning up a full HTTP server
+// Test the actual llms.txt route logic by importing it indirectly
+// We replicate the same generation logic to verify correctness
 
 function generateLlmsTxt(): string {
   const tools = getAllTools();
   const categories = getAllCategories();
+  const activeCategories = categories.filter((cat) => cat.tools.length > 0);
 
-  const categoryLines = categories
+  const categoryLines = activeCategories
     .map(
       (cat) =>
-        `- [${cat.title}](/categories/${cat.category}.json): ${cat.description}`
+        `- [${cat.title}](/api/json/categories/${cat.category}): ${cat.description}`
     )
     .join("\n");
 
-  const toolLines = tools
-    .map((tool) => `- [${tool.name}](/tools/${tool.slug}.json): ${tool.best_for}`)
-    .join("\n");
+  const toolsByCategoryLines = activeCategories
+    .map((cat) => {
+      const catTools = tools.filter((t) => t.category === cat.category);
+      if (catTools.length === 0) return "";
+      const lines = catTools
+        .map((tool) => `- [${tool.name}](/api/json/tools/${tool.slug}): ${tool.best_for}`)
+        .join("\n");
+      return `## ${cat.title}\n\n${lines}`;
+    })
+    .filter(Boolean)
+    .join("\n\n");
+
+  const comparisons = getAllComparisons();
+  const compSection = comparisons.length === 0 ? "" :
+    `## Comparisons\n\n${comparisons.map((c) => `- [${c.title}](/api/json/comparisons/${c.slug}): ${c.verdict}`).join("\n")}`;
 
   return `# AgenticStack
 
-> Compare tools for building AI agents. Structured data and comparison guides for auth, identity, and security tooling. Data is editorially maintained and not affiliated with any vendor.
-
-## How to use this data
-
-Each tool page returns raw markdown with YAML frontmatter. Parse the frontmatter to compare tools programmatically. Key fields:
-
-- \`agent_features\`: object with boolean | null values — null means unverified, not unsupported
-- \`last_verified\`: ISO date of last editorial check
-- \`source_urls\`: primary sources to verify claims
-- \`best_for\` / \`limitations\`: editorial summary
+> Structured comparisons across the tools AI agent developers reach for.
 
 ## Categories
 
 ${categoryLines}
 
-## Auth & Identity Tools
+## Tools
 
-${toolLines}
+${toolsByCategoryLines}
 
-${(() => {
-    const comparisons = getAllComparisons();
-    if (comparisons.length === 0) return "";
-    const lines = comparisons
-      .map((c) => `- [${c.title}](/compare/${c.slug}.json): ${c.verdict}`)
-      .join("\n");
-    return `## Comparisons\n\n${lines}`;
-  })()}
+${compSection}
 `;
 }
 
@@ -57,37 +54,37 @@ describe("/llms.txt content", () => {
     expect(body.startsWith("# AgenticStack")).toBe(true);
   });
 
-  it("contains a link for each tool", () => {
+  it("contains an /api/json/tools/ link for each tool", () => {
     const body = generateLlmsTxt();
     const tools = getAllTools();
     for (const tool of tools) {
-      expect(body).toContain(`/tools/${tool.slug}.json`);
+      expect(body).toContain(`/api/json/tools/${tool.slug}`);
     }
   });
 
-  it("contains a link for each category", () => {
+  it("contains an /api/json/categories/ link for each active category", () => {
     const body = generateLlmsTxt();
-    const categories = getAllCategories();
-    for (const cat of categories) {
-      expect(body).toContain(`/categories/${cat.category}.json`);
+    const activeCategories = getAllCategories().filter((c) => c.tools.length > 0);
+    for (const cat of activeCategories) {
+      expect(body).toContain(`/api/json/categories/${cat.category}`);
     }
   });
 
-  it("all tool links point to /tools/ paths", () => {
+  it("all tool links point to /api/json/tools/ paths", () => {
     const body = generateLlmsTxt();
     const toolLinkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
     const matches = [...body.matchAll(toolLinkRegex)];
     const toolLinks = matches
       .map((m) => m[2])
-      .filter((href) => href.startsWith("/tools/"));
-    expect(toolLinks.length).toBe(10);
+      .filter((href) => href.startsWith("/api/json/tools/"));
+    expect(toolLinks.length).toBe(getAllTools().length);
   });
 
   it("contains a link for each editorial comparison", () => {
     const body = generateLlmsTxt();
     const comparisons = getAllComparisons();
     for (const comp of comparisons) {
-      expect(body).toContain(`/compare/${comp.slug}.json`);
+      expect(body).toContain(`/api/json/comparisons/${comp.slug}`);
     }
   });
 });

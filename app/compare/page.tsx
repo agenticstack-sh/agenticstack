@@ -6,12 +6,16 @@ import Link from "next/link";
 import type { ToolFrontmatter } from "@/lib/types";
 import { GitCompareArrows, BookOpen } from "lucide-react";
 
+function toolName(slug: string): string {
+  try { return getToolBySlug(slug).frontmatter.name; } catch { return slug; }
+}
+
 function CompareContent({
   searchParams,
 }: {
   searchParams: { category?: string; tools?: string };
 }) {
-  const allCategories = getAllCategories().filter((c) => c.tools.length > 0);
+  const allCategories = getAllCategories();
 
   // Build picker data: categories with their tool names
   const pickerCategories = allCategories.map((cat) => {
@@ -27,7 +31,8 @@ function CompareContent({
     return { slug: cat.category, title: cat.title, tools: catTools };
   });
 
-  const activeCategory = searchParams.category ?? "";
+  const activeCategory = searchParams.category ?? "auth";
+  const activeCategoryData = allCategories.find((c) => c.category === activeCategory);
   const slugs = searchParams.tools?.split(",").filter(Boolean) ?? [];
 
   const selectedTools: ToolFrontmatter[] = slugs
@@ -82,7 +87,7 @@ function CompareContent({
       )}
 
       {selectedTools.length >= 2 ? (
-        <ComparisonColumns tools={selectedTools} />
+        <ComparisonColumns tools={selectedTools} featureDefinitions={activeCategoryData?.feature_definitions} />
       ) : activeCategory ? (
         <div
           className="rounded-lg p-12 text-center text-sm"
@@ -106,14 +111,14 @@ function CompareContent({
           Select a category to get started.
         </div>
       )}
-      {/* Comparison guides */}
-      {comparisons.length > 0 && (
+      {/* Popular comparison guides — filtered to active category */}
+      {comparisons.filter((c) => c.category === activeCategory && c.popular).length > 0 && (
         <div className="mt-16">
           <h2 className="text-sm font-medium uppercase tracking-wide mb-4" style={{ color: "var(--muted)" }}>
             Popular deep dives
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {comparisons.map((comp) => (
+            {comparisons.filter((c) => c.category === activeCategory && c.popular).map((comp) => (
               <Link
                 key={comp.slug}
                 href={`/compare/${comp.slug}`}
@@ -124,7 +129,7 @@ function CompareContent({
                 <div>
                   <div className="font-medium text-sm">{comp.title}</div>
                   <div className="text-xs mt-1" style={{ color: "var(--muted)" }}>
-                    {comp.verdict}
+                    When to pick {toolName(comp.tools[0])} vs {toolName(comp.tools[1])} →
                   </div>
                 </div>
               </Link>

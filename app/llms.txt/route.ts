@@ -12,7 +12,7 @@ export function GET() {
   const categoryLines = activeCategories
     .map(
       (cat) =>
-        `- [${cat.title}](/categories/${cat.category}.json): ${cat.description}`
+        `- [${cat.title}](/api/json/categories/${cat.category}): ${cat.description}`
     )
     .join("\n");
 
@@ -21,7 +21,7 @@ export function GET() {
       const catTools = tools.filter((t) => t.category === cat.category);
       if (catTools.length === 0) return "";
       const lines = catTools
-        .map((tool) => `- [${tool.name}](/tools/${tool.slug}.json): ${tool.best_for}`)
+        .map((tool) => `- [${tool.name}](/api/json/tools/${tool.slug}): ${tool.best_for}`)
         .join("\n");
       return `## ${cat.title}\n\n${lines}`;
     })
@@ -34,18 +34,35 @@ export function GET() {
 
 ## How to use this data
 
-Every resource is available as JSON. Append \`.json\` to any page URL to get structured data.
+All data is available as JSON via the \`/api/json/\` endpoints.
 
-- \`/categories/:slug.json\` returns the category with **all tools embedded** — one request for the full feature matrix
-- \`/tools/:slug.json\` returns a single tool's metadata
-- \`/compare/:slug.json\` returns the comparison with both tools embedded
+### Endpoints
 
-Key fields in each tool object:
+- \`GET /api/json/tools\` — all tools (supports filtering, see below)
+- \`GET /api/json/tools/:slug\` — single tool with full metadata and body
+- \`GET /api/json/categories\` — all categories
+- \`GET /api/json/categories/:slug\` — category with **all tools embedded**
+- \`GET /api/json/comparisons\` — all editorial comparisons
+- \`GET /api/json/comparisons/:slug\` — comparison with both tools embedded
+- \`GET /api/json/schema\` — API schema, valid values, and feature definitions per category
 
-- \`agent_features\`: object with boolean | null values — null means unverified, not unsupported
-- \`last_verified\`: ISO date of last editorial check
-- \`source_urls\`: primary sources to verify claims
+### Filtering tools
+
+\`GET /api/json/tools?category=auth&language=python&open_source=true\`
+
+Supported filters: \`category\`, \`language\`, \`framework\`, \`open_source\`, \`self_hosted\`, plus any \`agent_features\` key (e.g. \`?fga=true\`, \`?mcp_support=null\`).
+
+### Key fields
+
+- \`agent_features\`: object with boolean | null values — **null means unverified, not unsupported**
+- \`last_verified\`: ISO date of last editorial check — **data older than 90 days should be treated as potentially stale**
+- \`source_urls\`: primary sources to verify claims against
 - \`best_for\` / \`limitations\`: editorial summary
+- \`feature_definitions\`: per-category descriptions of what each agent_features key means
+
+### Versioning
+
+Responses include an \`X-API-Version\` header. Current version: 1.0.
 
 ## Categories
 
@@ -59,7 +76,7 @@ ${(() => {
     const comparisons = getAllComparisons();
     if (comparisons.length === 0) return "";
     const lines = comparisons
-      .map((c) => `- [${c.title}](/compare/${c.slug}.json): ${c.verdict}`)
+      .map((c) => `- [${c.title}](/api/json/comparisons/${c.slug}): ${c.verdict}`)
       .join("\n");
     return `## Comparisons\n\n${lines}`;
   })()}

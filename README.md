@@ -47,13 +47,14 @@ __tests__/      # Vitest unit, content validation, and route tests
 | Endpoint | Description |
 |---|---|
 | `GET /llms.txt` | Discovery index following the [llms.txt spec](https://llmstxt.org) |
-| `GET /api/json/tools` | All tools (supports filtering) |
-| `GET /api/json/tools/:slug` | Single tool with full frontmatter and body |
+| `GET /api/json/tools` | All tools (supports filtering, returns warnings on bad filters) |
+| `GET /api/json/tools/:slug` | Single tool with `feature_labels` and available `comparisons` |
+| `GET /api/json/tools/compare?tools=auth0,clerk` | Compare 2+ tools with editorial comparison if available |
 | `GET /api/json/categories` | All categories |
 | `GET /api/json/categories/:slug` | Category with all tools embedded |
 | `GET /api/json/comparisons` | All editorial comparisons |
 | `GET /api/json/comparisons/:slug` | Comparison with both tools embedded |
-| `GET /api/json/schema` | API schema, valid values, feature definitions per category |
+| `GET /api/json/schema` | API schema, valid values, feature aliases, and endpoint docs |
 
 ### Filtering tools
 
@@ -63,9 +64,19 @@ GET /api/json/tools?category=auth&language=python&open_source=true
 
 Supported filters: `category`, `language`, `framework`, `open_source`, `self_hosted`, plus any `agent_features` key (e.g. `?fga=true`, `?mcp_support=null`).
 
+Feature keys are category-specific. Using a key from the wrong category returns zero results with a `warnings` array explaining the mismatch.
+
+### Cross-category feature search
+
+```
+GET /api/json/tools?feature=mcp
+```
+
+Feature aliases map a common concept to the right key per category (e.g. `mcp` checks `mcp_support` for auth and `mcp_hosting` for hosting).
+
 ### Versioning
 
-All JSON responses include an `X-API-Version` header. Current version: `1.0`.
+All JSON responses include an `X-API-Version` header. Current version: `1.1`.
 
 ### Frontmatter schema
 

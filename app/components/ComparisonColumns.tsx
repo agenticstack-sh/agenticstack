@@ -1,28 +1,24 @@
 import Link from "next/link";
-import type { ToolFrontmatter, AgentFeatures } from "@/lib/types";
+import type { ToolFrontmatter, FeatureDefinitions } from "@/lib/types";
 import FeatureBadge from "./FeatureBadge";
-import { Bot, KeyRound, UserCheck, Shield, Plug, Clock, type LucideIcon } from "lucide-react";
 
 interface ComparisonColumnsProps {
   tools: ToolFrontmatter[];
+  featureDefinitions?: FeatureDefinitions;
 }
 
-const AGENT_FEATURES: { key: keyof AgentFeatures; label: string; icon: LucideIcon }[] = [
-  { key: "agent_sdk", label: "Agent SDK", icon: Bot },
-  { key: "token_delegation", label: "Token Delegation", icon: KeyRound },
-  { key: "human_in_the_loop", label: "Human-in-the-loop", icon: UserCheck },
-  { key: "fga", label: "Fine-Grained Authorization", icon: Shield },
-  { key: "mcp_support", label: "MCP Support", icon: Plug },
-  { key: "async_authorization", label: "Async Authorization", icon: Clock },
-];
+function featureLabel(key: string): string {
+  return key
+    .split("_")
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(" ");
+}
 
 function Row({
   label,
-  icon: Icon,
   children,
 }: {
   label: string;
-  icon?: LucideIcon;
   children: React.ReactNode;
 }) {
   return (
@@ -34,7 +30,6 @@ function Row({
       }}
     >
       <span className="font-medium flex items-center gap-2" style={{ color: "var(--muted)" }}>
-        {Icon && <Icon size={14} className="shrink-0" style={{ color: "var(--accent-text)" }} />}
         {label}
       </span>
       {children}
@@ -42,7 +37,9 @@ function Row({
   );
 }
 
-export default function ComparisonColumns({ tools }: ComparisonColumnsProps) {
+export default function ComparisonColumns({ tools, featureDefinitions }: ComparisonColumnsProps) {
+  const featureKeys = featureDefinitions ? Object.keys(featureDefinitions) : [];
+
   return (
     <div
       className="rounded-lg overflow-hidden"
@@ -90,12 +87,12 @@ export default function ComparisonColumns({ tools }: ComparisonColumnsProps) {
         ))}
       </div>
 
-      {/* Agent features */}
-      {AGENT_FEATURES.map((feature) => (
-        <Row key={feature.key} label={feature.label} icon={feature.icon}>
+      {/* Category-specific features */}
+      {featureKeys.map((key) => (
+        <Row key={key} label={featureLabel(key)}>
           {tools.map((tool) => (
             <div key={tool.slug} className="text-center">
-              <FeatureBadge value={tool.agent_features[feature.key]} />
+              <FeatureBadge value={tool.agent_features[key] ?? null} />
             </div>
           ))}
         </Row>

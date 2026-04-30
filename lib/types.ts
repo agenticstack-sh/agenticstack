@@ -1,11 +1,4 @@
-export interface AgentFeatures {
-  agent_sdk: boolean | null;
-  token_delegation: boolean | null;
-  human_in_the_loop: boolean | null;
-  fga: boolean | null;
-  mcp_support: boolean | null;
-  async_authorization: boolean | null;
-}
+export type AgentFeatures = Record<string, boolean | null>;
 
 export interface SourceUrls {
   changelog?: string;
@@ -35,11 +28,16 @@ export interface ToolFrontmatter {
   source_urls: SourceUrls;
 }
 
+export interface FeatureDefinitions {
+  [key: string]: string;
+}
+
 export interface CategoryFrontmatter {
   category: string;
   title: string;
   description: string;
   tools: string[];
+  feature_definitions?: FeatureDefinitions;
 }
 
 export interface ComparisonFrontmatter {
@@ -49,6 +47,7 @@ export interface ComparisonFrontmatter {
   category: string;
   last_verified: string;
   verdict: string;
+  popular?: boolean;
 }
 
 export interface ParsedContent<T> {

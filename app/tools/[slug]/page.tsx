@@ -2,21 +2,18 @@ import { getToolBySlug, getAllTools, getCategoryBySlug, renderToHtml } from "@/l
 import FeatureBadge from "@/app/components/FeatureBadge";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import type { AgentFeatures } from "@/lib/types";
 
 export function generateStaticParams() {
   const tools = getAllTools();
   return tools.map((tool) => ({ slug: tool.slug }));
 }
 
-const AGENT_FEATURES: { key: keyof AgentFeatures; label: string; description: string }[] = [
-  { key: "agent_sdk", label: "Agent SDK", description: "Dedicated SDK for agentic workflows" },
-  { key: "token_delegation", label: "Token Delegation", description: "Issue scoped tokens for downstream services" },
-  { key: "human_in_the_loop", label: "Human-in-the-loop", description: "Pause and require user approval before proceeding" },
-  { key: "fga", label: "Fine-Grained Authorization", description: "Relationship-based or attribute-based access control" },
-  { key: "mcp_support", label: "MCP Support", description: "Native support for Model Context Protocol authorization" },
-  { key: "async_authorization", label: "Async Authorization", description: "Non-blocking approval workflows" },
-];
+function featureLabel(key: string): string {
+  return key
+    .split("_")
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(" ");
+}
 
 export default async function ToolPage({
   params,
@@ -36,8 +33,11 @@ export default async function ToolPage({
   const html = await renderToHtml(body);
 
   let categoryTitle = tool.category;
+  let featureDefinitions: Record<string, string> = {};
   try {
-    categoryTitle = getCategoryBySlug(tool.category).frontmatter.title;
+    const cat = getCategoryBySlug(tool.category);
+    categoryTitle = cat.frontmatter.title;
+    featureDefinitions = cat.frontmatter.feature_definitions ?? {};
   } catch {}
 
   return (
@@ -106,7 +106,7 @@ export default async function ToolPage({
             {tool.website} ↗
           </a>
           <a
-            href={`/tools/${slug}.json`}
+            href={`/api/json/tools/${slug}`}
             className="text-xs font-mono hover:text-white transition-colors no-underline"
             style={{ color: "var(--muted)" }}
           >
@@ -140,15 +140,15 @@ export default async function ToolPage({
         className="p-5 rounded-lg mb-8"
         style={{ background: "var(--card)", border: "1px solid var(--border)" }}
       >
-        <h2 className="font-medium mb-4">Agent features</h2>
+        <h2 className="font-medium mb-4">Features</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          {AGENT_FEATURES.map(({ key, label, description }) => (
+          {Object.entries(featureDefinitions).map(([key, description]) => (
             <div key={key} className="flex items-start gap-3">
               <div className="mt-0.5 w-5 text-center">
-                <FeatureBadge value={tool.agent_features[key]} />
+                <FeatureBadge value={tool.agent_features[key] ?? null} />
               </div>
               <div>
-                <div className="text-sm font-medium">{label}</div>
+                <div className="text-sm font-medium">{featureLabel(key)}</div>
                 <div className="text-xs" style={{ color: "var(--muted)" }}>
                   {tool.agent_features[key] === null
                     ? "Unverified — check source_urls"

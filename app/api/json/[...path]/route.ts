@@ -154,9 +154,15 @@ function handleToolsList(searchParams: URLSearchParams) {
     }
   }
 
+  // Enrich each tool with feature_labels
+  const enrichedTools = tools.map((t) => ({
+    ...t,
+    feature_labels: getFeatureLabelsForTool(t),
+  }));
+
   const response: Record<string, unknown> = {
-    count: tools.length,
-    tools,
+    count: enrichedTools.length,
+    tools: enrichedTools,
   };
 
   if (warnings.length > 0) {
@@ -262,9 +268,15 @@ function handleCategory(slug: string) {
       }
     }).filter(Boolean);
 
+    const allComparisons = getAllComparisons();
+    const categoryComparisons = allComparisons
+      .filter((c) => c.category === slug)
+      .map((c) => ({ slug: c.slug, title: c.title, tools: c.tools, popular: c.popular ?? false }));
+
     return jsonResponse({
       ...frontmatter,
       tools,
+      comparisons: categoryComparisons,
       body: body.trim() || null,
     });
   } catch {

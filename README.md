@@ -103,6 +103,19 @@ Covers markdown parsing, frontmatter validation, cross-reference integrity, and 
 
 ---
 
+## Agent skills
+
+The [agenticstack-skills](https://github.com/agenticstack-sh/agenticstack-skills) repo provides Claude Code slash commands that query this API:
+
+| Skill | What it does |
+|-------|-------------|
+| `/recommend-tool` | Given your requirements, recommends the best tool with reasoning |
+| `/compare-tools` | Side-by-side comparison of 2-3 tools with editorial analysis |
+| `/search-tools` | Filter tools by category, language, framework, or feature |
+| `/explore-category` | Overview of a category with all tools and feature matrix |
+
+---
+
 ## Tech stack
 
 Next.js 15 · TypeScript · Tailwind CSS v4 · gray-matter · remark · Vitest

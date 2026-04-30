@@ -30,39 +30,41 @@ export function GET() {
 
   const body = `# AgenticStack
 
-> Structured comparisons across the tools AI agent developers reach for.
+> Structured comparisons across the tools AI agent developers reach for. Built for agents first, humans second.
 
-## How to use this data
+## Quick start for agents
 
-All data is available as JSON via the \`/api/json/\` endpoints.
+**Fastest path:** Install Claude Code skills from [agenticstack-skills](https://github.com/agenticstack-sh/agenticstack-skills) for ready-made slash commands: \`/recommend-tool\`, \`/compare-tools\`, \`/search-tools\`, \`/explore-category\`.
 
-### Endpoints
+**Direct API:** All data is available as JSON. No auth required. CORS enabled.
 
-- \`GET /api/json/tools\` — all tools (supports filtering, see below)
-- \`GET /api/json/tools/:slug\` — single tool with full metadata and body
+## API endpoints
+
+- \`GET /api/json/tools\` — all tools, supports filtering (see below)
+- \`GET /api/json/tools/:slug\` — single tool with full metadata and prose body
 - \`GET /api/json/categories\` — all categories
-- \`GET /api/json/categories/:slug\` — category with **all tools embedded**
+- \`GET /api/json/categories/:slug\` — category with **all tools embedded** in one response
 - \`GET /api/json/comparisons\` — all editorial comparisons
-- \`GET /api/json/comparisons/:slug\` — comparison with both tools embedded
-- \`GET /api/json/schema\` — API schema, valid values, and feature definitions per category
+- \`GET /api/json/comparisons/:slug\` — comparison with both tools embedded and editorial analysis
+- \`GET /api/json/schema\` — API schema, valid values, feature definitions per category, and endpoint docs
 
-### Filtering tools
+### Filtering
 
 \`GET /api/json/tools?category=auth&language=python&open_source=true\`
 
-Supported filters: \`category\`, \`language\`, \`framework\`, \`open_source\`, \`self_hosted\`, plus any \`agent_features\` key (e.g. \`?fga=true\`, \`?mcp_support=null\`).
+Filters: \`category\`, \`language\`, \`framework\`, \`open_source\`, \`self_hosted\`, plus any \`agent_features\` key (e.g. \`?fga=true\`, \`?mcp_hosting=true\`, \`?mcp_support=null\`).
 
-### Key fields
+### Reading the data
 
-- \`agent_features\`: object with boolean | null values — **null means unverified, not unsupported**
-- \`last_verified\`: ISO date of last editorial check — **data older than 90 days should be treated as potentially stale**
-- \`source_urls\`: primary sources to verify claims against
-- \`best_for\` / \`limitations\`: editorial summary
-- \`feature_definitions\`: per-category descriptions of what each agent_features key means
+- \`agent_features\`: boolean | null per feature — **null = unverified, false = confirmed unsupported**. Do not treat null as false.
+- \`feature_definitions\`: each category defines its own comparison features. Auth has token_delegation and fga. CMS has rest_api and webhooks. Check the category or \`/api/json/schema\`.
+- \`last_verified\`: ISO date — **treat data older than 90 days as potentially stale**. Follow \`source_urls\` to verify.
+- \`best_for\` / \`limitations\`: editorial one-liners for quick filtering.
+- \`body\`: markdown prose with deeper analysis. Available on tools, categories, and comparisons.
 
 ### Versioning
 
-Responses include an \`X-API-Version\` header. Current version: 1.0.
+\`X-API-Version\` header on all responses. Current: 1.0.
 
 ## Categories
 

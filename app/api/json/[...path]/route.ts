@@ -188,6 +188,10 @@ function handleSchema() {
       "GET /api/json/comparisons/:slug": "Get a comparison with both tools embedded",
       "GET /api/json/schema": "This endpoint — API schema and metadata",
     },
+    skills: {
+      repo: "https://github.com/agenticstack-sh/agenticstack-skills",
+      description: "Claude Code slash commands that wrap this API: /recommend-tool, /compare-tools, /search-tools, /explore-category",
+    },
   });
 }
 

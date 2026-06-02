@@ -3,7 +3,7 @@ title: "Auth0 vs Clerk"
 slug: auth0-vs-clerk
 tools: [auth0, clerk]
 category: auth
-last_verified: 2026-05-09
+last_verified: 2026-06-02
 popular: true
 verdict: Auth0
 ---
@@ -27,6 +27,14 @@ Auth0 and Clerk are both cloud-native authentication platforms. Auth0 wins for A
 * **Generous free tier and transparent pricing.** Clerk supports up to 10,000 monthly active users free and uses transparent flat-rate pricing. This works well for early-stage startups versus Auth0's more complex tiering.
 
 * **Built-in communication and session management.** Clerk handles email and SMS delivery without third-party integrations and supports multi-session management with React Context for easy user data access throughout components.
+
+## The agentic difference
+
+Auth0 provides an integrated agentic identity stack: Token Vault stores and auto-refreshes third-party API credentials for outbound agent calls. Auth0 FGA enforces document-level permissions during RAG vector searches. CIBA/PAR enables agents to pause and request human approval asynchronously. Dynamic Client Registration handles agent onboarding at scale.
+
+Clerk focuses on human frontend authentication. Its @clerk/agent-toolkit provides session management for LangChain and Vercel AI SDK agents, and its MCP server exposes user management to dev tools. But Clerk lacks a token vault for outbound credential delegation, has no FGA for RAG scoping, and does not support CIBA for async human-in-the-loop approval.
+
+Auth0 covers the full agent lifecycle — onboarding, credential delegation, data governance, and human oversight. Clerk provides agent-adjacent dev tooling without the underlying identity primitives agents need to operate securely.
 
 ## When to pick which
 

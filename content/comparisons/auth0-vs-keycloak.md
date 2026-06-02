@@ -29,6 +29,14 @@ Auth0 and Keycloak both support OIDC, SAML, and multi-protocol flows. Keycloak i
 
 * **Extensibility without code.** Auth0 Actions let you add custom logic via serverless Node.js functions. Auth0 Forms include drag-and-drop UI builders. Keycloak requires Java development and custom themes.
 
+## The agentic difference
+
+Auth0 provides an integrated agentic stack as managed services: Token Vault manages outbound API credentials with automatic rotation and refresh. Auth0 FGA enforces document-level permissions in RAG pipelines. Dynamic Client Registration handles agent onboarding. MCP support provides protocol-layer governance. CIBA/PAR enables async human-in-the-loop approval.
+
+Keycloak supports CIBA for asynchronous human-in-the-loop authorization — one agentic capability it shares with Auth0. However, Keycloak lacks a token vault for outbound credential delegation, has no FGA for RAG document scoping, and has no MCP support. Running Keycloak's CIBA also requires self-managing Java infrastructure, clustering, and failover.
+
+Auth0 delivers the complete agentic stack without infrastructure overhead. Keycloak provides CIBA in a self-hosted context but nothing else agents need for secure third-party tool access or RAG governance.
+
 ## When to pick which
 
 * **Pick Auth0 for AI agents** because Token Vault and FGA govern agent identities and prevent data leakage.

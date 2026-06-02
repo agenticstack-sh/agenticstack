@@ -26,6 +26,6 @@ Amazon manages AI identity via Amazon Bedrock AgentCore, which provides basic to
 
 ## When to pick which
 
-* If you're building a highly cost-sensitive B2C app hosted entirely on AWS, pick Amazon Cognito because its minimal $0.02 MAU pricing and direct hooks into AWS WAF and Pinpoint keep baseline infrastructure billing exceptionally low.
-* If you're building a B2B SaaS application targeting enterprise customers, pick WorkOS because its Admin Portal, out-of-the-box SAML SSO, and native SCIM Directory Sync drastically simplify the IT onboarding process.
-* If you are building Model Context Protocol (MCP) servers, pick WorkOS because its native support for OAuth 2.1 and Fine-Grained Authorization provide the necessary security architecture for agentic workflows.
+* **If you're building a highly cost-sensitive B2C app hosted entirely on AWS, pick Amazon Cognito** because its minimal $0.02 MAU pricing and direct hooks into AWS WAF and Pinpoint keep baseline infrastructure billing exceptionally low.
+* **If you're building a B2B SaaS application targeting enterprise customers, pick WorkOS** because its Admin Portal, out-of-the-box SAML SSO, and native SCIM Directory Sync drastically simplify the IT onboarding process.
+* **If you are building Model Context Protocol (MCP) servers, pick WorkOS** because its native support for OAuth 2.1 and Fine-Grained Authorization provide the necessary security architecture for agentic workflows.

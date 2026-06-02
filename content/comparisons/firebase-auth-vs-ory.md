@@ -27,6 +27,6 @@ Firebase operates strictly as a traditional human-centric authentication service
 
 ## When to pick which
 
-* If you're building a simple B2C app hosted entirely on Google Cloud, pick Firebase because its direct integration with Firestore and GCP services keeps backend infrastructure tightly coupled and frictionless.
-* If you require absolute control over data residency or prefer a headless, API-first identity architecture, pick Ory because its open-source microservices can be self-hosted entirely within your own infrastructure.
-* If you need deep, resource-level permissions or Google Docs-style authorization to secure RAG pipelines, pick Ory because Ory Keto is built specifically to model complex relationship-based access control (ReBAC) scenarios.
+* **If you're building a simple B2C app hosted entirely on Google Cloud, pick Firebase** because its direct integration with Firestore and GCP services keeps backend infrastructure tightly coupled and frictionless.
+* **If you require absolute control over data residency or prefer a headless, API-first identity architecture, pick Ory** because its open-source microservices can be self-hosted entirely within your own infrastructure.
+* **If you need deep, resource-level permissions or Google Docs-style authorization to secure RAG pipelines, pick Ory** because Ory Keto is built specifically to model complex relationship-based access control (ReBAC) scenarios.

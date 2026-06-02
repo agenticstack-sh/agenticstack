@@ -29,7 +29,7 @@ Crucially, neither platform natively supports standards-based Asynchronous Autho
 
 ## When to pick which
 
-- If you are building a highly custom, API-first application and want granular control over exposing your app as an OAuth2 Identity Provider, pick Stytch because its Connected Apps framework automates dynamic client registration and standard consent flows.
-- If you're building a B2B SaaS application and want to rapidly onboard enterprise customers, pick WorkOS because its Admin Portal, out-of-the-box SAML SSO, and SCIM Directory Sync eliminate months of custom integration work.
-- If you need deep, resource-level permissions to strictly secure RAG pipelines, pick WorkOS because its built-in Fine-Grained Authorization (FGA) enforces document-level data scoping.
-- If you need strict, native abuse controls to detect and throttle misbehaving AI agents, pick Stytch because it offers enterprise-grade bot and anomaly detection explicitly tailored for machine actors.
+* **If you are building a highly custom, API-first application and want granular control over exposing your app as an OAuth2 Identity Provider, pick Stytch** because its Connected Apps framework automates dynamic client registration and standard consent flows.
+* **If you're building a B2B SaaS application and want to rapidly onboard enterprise customers, pick WorkOS** because its Admin Portal, out-of-the-box SAML SSO, and SCIM Directory Sync eliminate months of custom integration work.
+* **If you need deep, resource-level permissions to strictly secure RAG pipelines, pick WorkOS** because its built-in Fine-Grained Authorization (FGA) enforces document-level data scoping.
+* **If you need strict, native abuse controls to detect and throttle misbehaving AI agents, pick Stytch** because it offers enterprise-grade bot and anomaly detection explicitly tailored for machine actors.

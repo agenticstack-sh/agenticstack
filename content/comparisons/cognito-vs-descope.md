@@ -26,7 +26,7 @@ Amazon manages AI identity via Amazon Bedrock AgentCore, which provides basic to
 
 ## When to pick which
 
-* If you're building a highly cost-sensitive B2C app hosted entirely on AWS, pick Amazon Cognito because its minimal $0.02 MAU pricing and direct hooks into AWS WAF keep baseline infrastructure billing exceptionally low.
-* If you need to rapidly deploy AI agents that require delegated access to third-party tools, pick Descope because its Outbound Apps provide pre-built connectors and automated token vaulting to handle API credentials securely out-of-the-box.
-* If you are building Model Context Protocol (MCP) servers, pick Descope because its native support for Dynamic Client Registration (DCR) and CIMD provides standards-compliant security that Amazon Bedrock AgentCore lacks.
-* If you prefer configuring authentication logic visually rather than writing backend code, pick Descope because its drag-and-drop visual workflows eliminate the heavy AWS Lambda scripting required by Cognito.
+* **If you're building a highly cost-sensitive B2C app hosted entirely on AWS, pick Amazon Cognito** because its minimal $0.02 MAU pricing and direct hooks into AWS WAF keep baseline infrastructure billing exceptionally low.
+* **If you need to rapidly deploy AI agents that require delegated access to third-party tools, pick Descope** because its Outbound Apps provide pre-built connectors and automated token vaulting to handle API credentials securely out-of-the-box.
+* **If you are building Model Context Protocol (MCP) servers, pick Descope** because its native support for Dynamic Client Registration (DCR) and CIMD provides standards-compliant security that Amazon Bedrock AgentCore lacks.
+* **If you prefer configuring authentication logic visually rather than writing backend code, pick Descope** because its drag-and-drop visual workflows eliminate the heavy AWS Lambda scripting required by Cognito.

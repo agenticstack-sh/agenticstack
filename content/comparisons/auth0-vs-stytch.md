@@ -12,7 +12,7 @@ Auth0 and Stytch are both API-first identity platforms. Stytch is designed for O
 
 * **Complete agentic stack.** Auth0 for AI Agents provides integrated governance: Token Vault stores, auto-refreshes, and delegates third-party API credentials, approval workflows enable human oversight for sensitive actions, FGA enforces document-level permissions during RAG searches, and MCP support handles agent protocol compliance.
 
-* **Enterprise security and threat protection.** Auth0 uses billions of logins to provide ML-driven anomaly detection, bot detection, and breached password detection. Stytch relies on device fingerprinting.
+* **Enterprise security and threat protection.** Auth0 provides ML-driven anomaly detection, bot detection, and breached password detection. Stytch relies on device fingerprinting.
 
 * **Unified B2B and B2C.** Stytch separates B2B and B2C products. Auth0 provides one platform for consumer identities and multi-tenant enterprise federation via Organizations.
 

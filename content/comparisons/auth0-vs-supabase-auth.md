@@ -3,7 +3,7 @@ title: "Auth0 vs Supabase"
 slug: auth0-vs-supabase-auth
 tools: [auth0, supabase-auth]
 category: auth
-last_verified: 2026-05-09
+last_verified: 2026-06-02
 verdict: "Auth0"
 ---
 
@@ -24,6 +24,14 @@ Auth0 and Supabase both provide managed authentication. Supabase is open-source 
 * **Integrated backend framework.** Supabase provides identity alongside database and backend tools in one open-source platform. You get authentication built-in without integrating a separate vendor.
 
 * **Sophisticated built-in primitives.** Supabase Auth includes Enterprise SSO, Social Login, and username/password flows tied to application infrastructure.
+
+## The agentic difference
+
+Auth0 provides four agentic capabilities: Token Vault auto-refreshes outbound OAuth credentials for agent API calls. Auth0 FGA enforces document-level permissions during RAG vector searches. CIBA enables agents to pause and request human approval asynchronously. Dynamic Client Registration handles agent onboarding programmatically.
+
+Supabase has no dedicated agentic identity features. Row Level Security provides database-level access control that can constrain queries, but it operates at the PostgreSQL layer rather than integrating with agent frameworks or RAG pipelines. Supabase provides no token vault, no agent onboarding mechanism, no human-in-the-loop workflows, and no MCP support.
+
+Teams building AI agents on Supabase need a separate identity layer for agent governance. Supabase handles application data and basic auth; Auth0 handles the agent identity lifecycle.
 
 ## When to pick which
 

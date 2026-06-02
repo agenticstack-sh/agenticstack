@@ -3,31 +3,41 @@ title: "Descope vs Ory"
 slug: descope-vs-ory
 tools: [descope, ory]
 category: auth
-last_verified: 2026-04-27
-verdict: "Pick Descope for visual no-code flow orchestration and turnkey AI agent tool delegation, but choose Ory for complete open-source architectural control and native Zanzibar-style fine-grained authorization for RAG."
+last_verified: 2026-05-09
+verdict: "Descope"
 ---
-
-## Where Ory wins
-
-* **Modular, Open-Source Control:** Ory's architecture consists of independent, API-first microservices (Kratos for identity, Hydra for OAuth2/OIDC, Keto for authorization). This allows infrastructure teams to deploy only the components they need and self-host them anywhere, completely avoiding monolithic vendor lock-in.
-* **Advanced Fine-Grained Authorization (FGA):** Ory includes Keto, an open-source, Zanzibar-inspired authorization engine. This natively enables complex relationship-based access control (ReBAC), allowing developers to model granular, resource-level permissions out-of-the-box.
-* **Schema-Based Identity Modeling:** Ory provides deep programmatic control over identity data structures through a highly customizable, schema-based user model. It caters to engineering teams that require non-standard user profiles and prefer a headless, "bring your own UI" approach to building authentication experiences.
+Descope and Ory both provide identity infrastructure. Descope is a managed low-code platform with visual workflow orchestration and token vaulting for agents. Ory is a modular open-source stack for complete architectural control via independent microservices. For developers deploying AI agents with third-party tool access, Descope wins: it provides an Agentic Identity Hub with visual design, pre-built Outbound Apps with managed credentials, and native MCP support. Ory excels at data residency control and RAG-level authorization but requires custom code for agent credential flows.
 
 ## Where Descope wins
 
-* **Visual, Low-Code Flow Orchestration:** Descope utilizes an Agentic Identity Hub powered by a drag-and-drop workflow designer. This allows developers to visually configure complex authentication journeys and user consent screens, entirely bypassing the heavy custom UI and backend logic required by Ory's API-first framework.
-* **Turnkey Outbound Apps and Token Vaulting:** Descope simplifies third-party API delegation by offering over 50 pre-built integration templates (e.g., Slack, Google Calendar) via its Outbound Apps. It natively manages the OAuth handshake, user consent prompts, and automates token refreshes out-of-the-box, whereas Ory lacks an equivalent native token vault abstraction.
-* **Native MCP Server Readiness:** Descope explicitly supports the Model Context Protocol (MCP), providing native protocol compliance with Dynamic Client Registration (DCR), Client ID Metadata Documents (CIMD), and dedicated MCP Auth SDKs to accelerate agentic deployments.
+* **Agentic Identity Hub with Visual Flow Orchestration.** Descope provides a drag-and-drop workflow designer for AI agent identity flows. You configure authentication, consent, and tool delegation visually without backend code. Ory's API-first microservice approach requires extensive custom UI and flow building.
+
+* **Outbound Apps with Managed Token Lifecycles.** Descope provides pre-built integrations (Slack, Google Calendar, etc.) that automate OAuth: consent, token acquisition, automatic refresh. Agents get delegated access to third-party APIs with transparent credential management. Ory has no native token vault. Developers manage outbound credential exchanges manually.
+
+* **MCP Support with Dynamic Client Registration.** Descope implements Model Context Protocol standards including Dynamic Client Registration and Client ID Metadata Documents. Agents register and acquire tokens at runtime without static pre-registration. Ory provides no MCP abstractions.
+
+## Where Ory wins
+
+* **Open-Source Self-Hosting and Data Residency Control.** Ory's independent microservices (Kratos, Hydra, Keto) can be deployed self-hosted anywhere, avoiding vendor lock-in. This matters for teams with strict data residency, air-gapped, or regulated deployment requirements.
+
+* **Zanzibar-Style Fine-Grained Authorization.** Ory Keto models relationship-based, document-level access control for enforcing strict permissions in RAG pipelines. Descope provides standard RBAC/ABAC.
+
+* **Modular Architecture.** Deploy only the components you need. Kratos for identity, Hydra for OAuth, Keto for authorization—or mix with custom solutions.
 
 ## The agentic difference
 
-Descope provides a purpose-built "Agentic Identity Hub" where AI agents are treated as first-class citizens. It natively streamlines agent-to-tool connections via its Outbound Apps, which act as a secure token vault for agents calling third-party APIs. It also provides immediate, out-of-the-box compliance with MCP standards like DCR and CIMD.
+Descope treats agents as first-class citizens through an Agentic Identity Hub: visual flows orchestrate agent identity, Outbound Apps handle third-party API credential complexity, and MCP standards are built in. Agents get access to external tools.
 
-Ory approaches agentic identity from the data and infrastructure layer. Its standout agentic feature is Ory Keto, a Zanzibar-style FGA service that is highly effective for enforcing strict, document-level permissions during Retrieval-Augmented Generation (RAG) vector searches. However, Ory currently lacks turnkey agentic governance guardrails: it does not offer a native Token Vault to securely manage outbound third-party API credentials for agents, nor does it natively ship with dedicated MCP server abstractions or asynchronous human-in-the-loop consent workflows.
+Ory approaches agents from infrastructure and authorization layers. Keto provides Fine-Grained Authorization for RAG scoping (relationship-based, document-level permissions). But Ory has no dedicated agent credential management: no token vault, no credential lifecycle automation for outbound APIs. Teams build agent identity flows from scratch using Kratos + Hydra + custom middleware.
+
+In short: Descope automates "agent calls third-party API with managed credentials." Ory provides building blocks for "agent accesses your app with strict data access control." Neither supports CIBA for human-in-the-loop approvals.
 
 ## When to pick which
 
-* **If you need to rapidly deploy AI agents that require delegated access to third-party tools, pick Descope** because its Outbound Apps provide pre-built connectors and native token vaulting to handle credentials securely out of the box.
-* **If you require absolute control over data residency or want to avoid vendor lock-in, pick Ory** because its open-source microservices can be self-hosted entirely within your own infrastructure.
-* **If you need deep, resource-level permissions or Google Docs-style authorization to secure RAG pipelines, pick Ory** because Ory Keto is built specifically to model complex relationship-based access control (ReBAC) scenarios.
-* **If you are building Model Context Protocol (MCP) servers, pick Descope** because its native support for Dynamic Client Registration (DCR), CIMD, and dedicated MCP Auth SDKs provide standards-compliant security with minimal custom coding.
+* **Pick Descope** if your agents need delegated access to external APIs (Slack, Gmail, etc.). Outbound Apps handle OAuth, token refresh, and credential storage automatically.
+
+* **Pick Descope** if your team prefers visual flow design over writing backend authentication code.
+
+* **Pick Ory** if strict data residency, avoiding vendor lock-in, or air-gapped deployment is non-negotiable. Its open-source microservices can be self-hosted entirely within your infrastructure.
+
+* **Pick Ory** if deploying agents that need document-level permission enforcement in RAG pipelines. Keto's Zanzibar-style authorization models relationship-based access control.

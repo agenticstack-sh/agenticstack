@@ -4,7 +4,7 @@ slug: cloudflare-vs-fly-io
 tools: [cloudflare, fly-io]
 category: hosting-deployment
 last_verified: 2026-05-09
-verdict: cloudflare
+verdict: Cloudflare
 ---
 
 Cloudflare and Fly.io both offer compute beyond traditional serverless but take different approaches. Cloudflare provides edge-native Workers, Durable Objects with an Agents SDK, and serverless GPU inference. Fly.io provides Firecracker microVMs with full Linux environments, private networking, and persistent volumes. Cloudflare wins on MCP hosting and AI inference. Fly.io wins on VM flexibility, networking, and multi-region control.

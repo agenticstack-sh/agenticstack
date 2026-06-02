@@ -4,7 +4,7 @@ slug: sanity-vs-wordpress
 tools: [sanity, wordpress]
 category: cms
 last_verified: 2026-05-09
-verdict: sanity
+verdict: Sanity
 ---
 
 WordPress is a publishing platform with REST API added later. Sanity was designed for programmatic access from the start. The gap spans every agentic dimension. WordPress self-hosting and GPL licensing are real, but less important for agents.

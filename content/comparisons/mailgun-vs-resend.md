@@ -11,13 +11,13 @@ Resend and Mailgun both ship official MCP servers and both support inbound email
 
 ## Where Resend wins
 
-**Svix webhook infrastructure with idempotency-key headers.** Resend delivers webhook events via Svix with an `idempotency-key` header on every delivery, a documented 6-attempt retry schedule with exponential backoff, and HMAC-SHA256 signature verification. Mailgun webhooks support HMAC signing and have documented retry behavior for failed deliveries, but do not provide `idempotency-key` headers. For agent pipelines that process bounce, complaint, or delivery events, idempotency guarantees prevent double-processing when the agent endpoint retries or the delivery infrastructure fires the same event more than once.
+* **Svix webhook infrastructure with idempotency-key headers.** Resend delivers webhook events via Svix with an `idempotency-key` header on every delivery, a documented 6-attempt retry schedule with exponential backoff, and HMAC-SHA256 signature verification. Mailgun webhooks support HMAC signing and have documented retry behavior for failed deliveries, but do not provide `idempotency-key` headers. For agent pipelines that process bounce, complaint, or delivery events, idempotency guarantees prevent double-processing when the agent endpoint retries or the delivery infrastructure fires the same event more than once.
 
 ## Where Mailgun wins
 
-**Inbound Routes with filter expressions.** Mailgun Routes filter inbound email at the provider using regex and header match expressions before routing to an agent endpoint. A filter like `match_recipient("agent\\+(.*)@yourdomain.com")` extracts embedded routing parameters from the To address and forwards only matching messages to the handler. Agents receive pre-filtered, relevant messages rather than processing every incoming email. Resend has no documented inbound email processing capability—inbound email intake requires an external layer.
+* **Inbound Routes with filter expressions.** Mailgun Routes filter inbound email at the provider using regex and header match expressions before routing to an agent endpoint. A filter like `match_recipient("agent\\+(.*)@yourdomain.com")` extracts embedded routing parameters from the To address and forwards only matching messages to the handler. Agents receive pre-filtered, relevant messages rather than processing every incoming email. Resend has no documented inbound email processing capability—inbound email intake requires an external layer.
 
-**Domain Sending Keys for minimal-privilege agent credentials.** Mailgun Domain Sending Keys are explicitly per-domain, send-only credentials. An agent is issued a key that can only send from a specific domain and cannot read logs, modify Routes, access suppression lists, or perform account management. Resend's API keys offer a "Sending Access" type with optional domain restriction, which is a comparable construct, but Mailgun's Domain Sending Keys are a named, first-class concept with documented separation from full API keys.
+* **Domain Sending Keys for minimal-privilege agent credentials.** Mailgun Domain Sending Keys are explicitly per-domain, send-only credentials. An agent is issued a key that can only send from a specific domain and cannot read logs, modify Routes, access suppression lists, or perform account management. Resend's API keys offer a "Sending Access" type with optional domain restriction, which is a comparable construct, but Mailgun's Domain Sending Keys are a named, first-class concept with documented separation from full API keys.
 
 ## The agentic difference
 
@@ -27,6 +27,6 @@ Mailgun's inbound Routes solve a real problem for agents that receive email: pre
 
 ## When to pick which
 
-**Pick Resend** when outbound webhook reliability with `idempotency-key` deduplication is the primary pipeline requirement, or when the agent does not need inbound email processing.
+* **Pick Resend** when outbound webhook reliability with `idempotency-key` deduplication is the primary pipeline requirement, or when the agent does not need inbound email processing.
 
-**Pick Mailgun** when inbound email routing with filter expressions is required—Routes provide pre-delivery filtering that reduces agent-side routing logic—or when Domain Sending Keys as an explicit per-domain send-only credential type are a security requirement.
+* **Pick Mailgun** when inbound email routing with filter expressions is required—Routes provide pre-delivery filtering that reduces agent-side routing logic—or when Domain Sending Keys as an explicit per-domain send-only credential type are a security requirement.

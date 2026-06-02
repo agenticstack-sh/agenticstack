@@ -27,7 +27,7 @@ Firebase, in contrast, operates strictly as a traditional human-centric authenti
 
 ## When to pick which
 
-* If you're building a simple B2C app hosted entirely on Google Cloud, pick Firebase because its direct integration with Firestore and GCP services keeps backend infrastructure tightly coupled and frictionless.
-* If you need to rapidly deploy AI agents that require delegated access to third-party tools, pick Descope because its Outbound Apps provide pre-built connectors and native token vaulting to handle credentials securely.
-* If you are building Model Context Protocol (MCP) servers, pick Descope because its native support for Dynamic Client Registration (DCR), CIMD, and dedicated MCP Auth SDKs provide standards-compliant security with minimal custom coding.
-* If you prefer configuring authentication logic visually rather than writing and maintaining backend code, pick Descope because its drag-and-drop workflows eliminate deep custom logic requirements.
+* **If you're building a simple B2C app hosted entirely on Google Cloud, pick Firebase** because its direct integration with Firestore and GCP services keeps backend infrastructure tightly coupled and frictionless.
+* **If you need to rapidly deploy AI agents that require delegated access to third-party tools, pick Descope** because its Outbound Apps provide pre-built connectors and native token vaulting to handle credentials securely.
+* **If you are building Model Context Protocol (MCP) servers, pick Descope** because its native support for Dynamic Client Registration (DCR), CIMD, and dedicated MCP Auth SDKs provide standards-compliant security with minimal custom coding.
+* **If you prefer configuring authentication logic visually rather than writing and maintaining backend code, pick Descope** because its drag-and-drop workflows eliminate deep custom logic requirements.

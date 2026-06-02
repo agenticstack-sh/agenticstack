@@ -3,33 +3,40 @@ title: "Amazon Cognito vs Stytch"
 slug: cognito-vs-stytch
 tools: [cognito, stytch]
 category: auth
-last_verified: 2026-04-28
-verdict: "Pick Amazon Cognito for a low-cost, basic B2C identity utility tightly integrated into the AWS ecosystem, but choose Stytch for a highly flexible, API-first approach with deep passwordless capabilities and turnkey features to expose your app as an OAuth Identity Provider."
+last_verified: 2026-05-09
+verdict: "Stytch"
 ---
+
+For developers building AI agents, Cognito and Stytch follow different deployment models. Stytch is managed where agents provision themselves through Connected Apps with runtime Dynamic Client Registration, scoped token delegation, machine-actor abuse detection, and M2M flows across cloud platforms. Cognito is AWS-native with low per-MAU pricing and IAM integration but requires manual agent provisioning, provides no Dynamic Client Registration, and lacks agent abuse detection. Stytch wins for managed agent provisioning with abuse detection. Cognito wins for AWS-native, cost-sensitive B2C applications.
 
 ## Where Stytch wins
 
-* **Developer-First "App as IdP" Capabilities:** Stytch offers an API-first architecture designed to rapidly expose secure APIs with fine-grained scopes. Its "Connected Apps" feature easily turns any application into an OAuth2 Identity Provider (IdP), automating dynamic client registration and consent so external third-party integrations or AI agents can securely connect via standard OAuth flows. Amazon Cognito lacks native support for Dynamic Client Registration (DCR).
-* **Deep Passwordless Focus:** Passwordless authentication is Stytch's original niche and a core strength of its platform. It is highly adept at implementing magic links, OTPs, and passkeys via headless APIs for highly customized user experiences. Amazon Cognito limits productized MFA to SMS, Email, and TOTP, requiring developers to write and maintain custom AWS Lambda functions for advanced passwordless setups.
-* **Explicit Agent Abuse Controls:** Stytch provides specific abuse detection and throttling mechanisms explicitly tailored to identifying and mitigating misbehaving AI agents and machine-to-machine (M2M) token abuse.
+* **Agent Provisioning via Connected Apps and Dynamic Client Registration.** Connected Apps turns your application into an OAuth identity provider with automatic Dynamic Client Registration for agents and third-party tools. Agents register at runtime, receive scoped tokens, and connect securely without pre-registration. Cognito provides no native Dynamic Client Registration. Agent onboarding requires manual registration and custom integration.
+
+* **Agent Abuse Detection and Throttling.** Stytch detects and throttles machine-actor traffic through controls for AI workload patterns. Cognito relies on AWS WAF integration but provides no native machine-actor-specific detection layer.
+
+* **Passwordless Primitives Out-of-the-Box.** Stytch includes Magic Links, SMS/WhatsApp OTP, Email OTP, Passkeys, and WebAuthn ready to use. Cognito's passwordless options are more basic.
 
 ## Where Amazon Cognito wins
 
-* **Ultra-Low Cost for Basic B2C:** Cognito serves as an exceptionally inexpensive utility for budget-constrained consumer projects. It offers a free tier for the first 10,000 monthly active users (MAUs) and charges roughly $0.02 per MAU thereafter without requiring extra add-ons.
-* **Native AWS Ecosystem Integration:** For teams fully invested in AWS, Cognito integrates directly into the AWS stack, allowing seamless connections with Amazon Pinpoint for marketing analytics, AWS WAF for web application firewall protection, and the AWS Amplify developer framework.
-* **Native Token Vaulting for AI (via AgentCore):** Amazon manages AI identity via Amazon Bedrock AgentCore, which includes a native token vault for securely storing and managing credentials for outbound third-party API communications. Stytch strictly provides an OAuth provider capability and lacks an advanced token vault abstraction, forcing developers to build and manage outbound token exchange and rotation logic themselves.
+* **Low Cost for Basic B2C.** Cognito is cost-effective for simple consumer applications. You get a free tier for the first 10,000 monthly active users and pay roughly $0.015 per MAU afterward without extra add-ons.
+
+* **Native AWS Ecosystem Integration.** Cognito integrates directly into AWS. You connect to Amazon Pinpoint for marketing analytics, AWS WAF for web application firewall protection, and AWS Amplify for front-end development.
+
+* **AWS Ecosystem for Agent Scenarios.** Amazon's ecosystem integrates with agent services within AWS. Stytch lacks a dedicated token vault for managing third-party credentials used by agents.
 
 ## The agentic difference
 
-Stytch leans heavily into standardizing dynamic agent onboarding via its Connected Apps. It provides robust M2M token support and aligns closely with OAuth 2.1 and Dynamic Client Registration (DCR), enabling automated client registration and consent for API-heavy integrations. However, it completely lacks a dedicated Token Vault for managing outbound API credentials and does not natively support Fine-Grained Authorization (FGA) for data scoping in Retrieval-Augmented Generation (RAG) pipelines.
+Stytch focuses on dynamic agent onboarding via Connected Apps. It provides M2M token support, aligns with OAuth 2.1 and Dynamic Client Registration, and includes agent abuse detection and throttling for machine actors. Stytch lacks a token vault for managing third-party credentials and offers no Fine-Grained Authorization for RAG pipelines.
 
-Amazon addresses agent identity through Amazon Bedrock AgentCore, which provides basic token vaulting for outbound APIs. However, AgentCore lacks Dynamic Client Registration (DCR), forcing developers to rely on static AWS IAM provisioning, which slows down dynamic agent ecosystems. Furthermore, AgentCore's authorization approach is resource-centric—relying on AWS IAM condition keys, resource tags, and S3 Access Grants—rather than providing true document-level FGA.
-
-Crucially, neither platform natively supports standards-based Asynchronous Authorization (CIBA) for background human-in-the-loop approval workflows.
+Amazon's agent integration requires static AWS IAM provisioning rather than Dynamic Client Registration, which slows dynamic agent onboarding. AWS's authorization is resource-centric via IAM tags and S3 Access Grants rather than agent-centric. Neither platform supports CIBA for asynchronous human-in-the-loop authorization.
 
 ## When to pick which
 
-* **If you're building a highly cost-sensitive basic B2C app hosted entirely on AWS, pick Amazon Cognito** because its minimal $0.02 MAU pricing and direct hooks into AWS WAF keep baseline infrastructure billing exceptionally low.
-* **If you are building a highly custom, API-first application and want granular control over exposing your app as an OAuth2 Identity Provider for external tool integrations, pick Stytch** because its Connected Apps framework automates dynamic client registration and standard consent flows.
-* **If your primary requirement is building a deeply custom passwordless authentication journey from scratch using headless APIs, pick Stytch** because it excels in API-based passwordless primitives.
-* **If you are building AI agents entirely within the AWS Bedrock ecosystem and need to manage outbound API credentials, pick Amazon Cognito (via AgentCore)** because it provides a native token vault that Stytch lacks.
+* **Pick Stytch** if agents need runtime OAuth provisioning with abuse detection. Connected Apps provides standards-compliant Dynamic Client Registration that Cognito cannot match.
+
+* **Pick Stytch** when you build passwordless-first user flows with Magic Links, OTP, and Passkeys. Stytch's passwordless depth provides better user experience than Cognito's basic options.
+
+* **Pick Cognito** if you're building a cost-sensitive B2C application entirely on AWS where minimal overhead and per-MAU pricing matter. $0.015 per MAU makes it cost-competitive at scale.
+
+* **Pick Cognito** if you're deeply integrated with AWS services (WAF, Pinpoint, Amplify) and want native ecosystem integration without cross-cloud management.

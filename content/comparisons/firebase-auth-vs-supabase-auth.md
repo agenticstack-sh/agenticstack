@@ -29,6 +29,6 @@ Firebase is similarly focused on traditional user authentication. It lacks nativ
 
 ## When to pick which
 
-* If you're building a new application from scratch and need a complete open-source data layer, pick Supabase because its built-in authentication primitives securely tie directly into its database and backend services.
-* If you're building a simple B2C app hosted entirely on Google Cloud, pick Firebase because its deep integration into the Google ecosystem provides a frictionless backend-as-a-service experience.
-* If you anticipate needing enterprise SSO or MFA later but want to start simple within GCP, pick Firebase because you can upgrade to Google Cloud Identity Platform to unlock SAML/OIDC without migrating off Google's infrastructure.
+* **If you're building a new application from scratch and need a complete open-source data layer, pick Supabase** because its built-in authentication primitives securely tie directly into its database and backend services.
+* **If you're building a simple B2C app hosted entirely on Google Cloud, pick Firebase** because its deep integration into the Google ecosystem provides a frictionless backend-as-a-service experience.
+* **If you anticipate needing enterprise SSO or MFA later but want to start simple within GCP, pick Firebase** because you can upgrade to Google Cloud Identity Platform to unlock SAML/OIDC without migrating off Google's infrastructure.

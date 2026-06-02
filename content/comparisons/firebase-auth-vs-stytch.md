@@ -28,7 +28,7 @@ Crucially, neither platform natively supports standards-based Asynchronous Autho
 
 ## When to pick which
 
-- If you're building a simple B2C app hosted entirely on Google Cloud, pick Firebase because its direct integration with GCP services keeps backend infrastructure tightly coupled and frictionless.
-- If your primary requirement is building a deeply custom passwordless authentication journey from scratch using headless APIs, pick Stytch because it excels in API-based passwordless primitives.
-- If you are building a highly custom, API-first application and want granular control over exposing your app as an OAuth2 Identity Provider for external tool integrations, pick Stytch because its Connected Apps framework automates dynamic client registration and standard consent flows.
-- If you need strict, native abuse controls to detect and throttle misbehaving AI agents, pick Stytch because it offers enterprise-grade bot and anomaly detection explicitly tailored for machine actors.
+* **If you're building a simple B2C app hosted entirely on Google Cloud, pick Firebase** because its direct integration with GCP services keeps backend infrastructure tightly coupled and frictionless.
+* **If your primary requirement is building a deeply custom passwordless authentication journey from scratch using headless APIs, pick Stytch** because it excels in API-based passwordless primitives.
+* **If you are building a highly custom, API-first application and want granular control over exposing your app as an OAuth2 Identity Provider for external tool integrations, pick Stytch** because its Connected Apps framework automates dynamic client registration and standard consent flows.
+* **If you need strict, native abuse controls to detect and throttle misbehaving AI agents, pick Stytch** because it offers enterprise-grade bot and anomaly detection explicitly tailored for machine actors.

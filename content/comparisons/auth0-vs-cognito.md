@@ -3,7 +3,7 @@ title: "Auth0 vs Amazon Cognito"
 slug: auth0-vs-cognito
 tools: [auth0, cognito]
 category: auth
-last_verified: 2026-04-27
+last_verified: 2026-05-09
 popular: true
 verdict: "Auth0"
 ---

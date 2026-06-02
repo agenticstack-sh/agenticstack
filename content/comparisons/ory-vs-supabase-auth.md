@@ -28,7 +28,7 @@ Supabase provides basic identity capabilities as a framework feature, but it ope
 
 ## When to pick which
 
-* If you are building a new application and want an open-source framework where basic identity, Enterprise SSO, and Social Login are natively built-in, pick Supabase.
-* If you prefer a headless, API-first identity architecture where you have full control to build your own user interfaces and highly customized identity schemas, pick Ory.
-* If you need deep, resource-level permissions or Zanzibar-style authorization to strictly secure data access, pick Ory because Ory Keto is built specifically to model complex relationship-based access control (ReBAC) scenarios.
-* If you want to avoid the steep learning curve, technical expertise, and operational complexity required to assemble and configure individual identity microservices (like Kratos and Hydra), pick Supabase for its more integrated framework approach.
+* **Pick Supabase** if you are building a new application and want an open-source framework where basic identity, Enterprise SSO, and Social Login are natively built-in.
+* **Pick Ory** if you prefer a headless, API-first identity architecture where you have full control to build your own user interfaces and highly customized identity schemas.
+* **If you need deep, resource-level permissions or Zanzibar-style authorization to strictly secure data access, pick Ory** because Ory Keto is built specifically to model complex relationship-based access control (ReBAC) scenarios.
+* **If you want to avoid the steep learning curve, technical expertise, and operational complexity required to assemble and configure individual identity microservices (like Kratos and Hydra), pick Supabase** for its more integrated framework approach.

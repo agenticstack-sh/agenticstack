@@ -4,7 +4,7 @@ slug: payload-vs-wordpress
 tools: [payload, wordpress]
 category: headless-cms
 last_verified: 2026-05-09
-verdict: payload
+verdict: Payload
 ---
 
 Payload and WordPress are both open-source and self-hostable. Payload is TypeScript-first with auto-generated REST and GraphQL. WordPress is PHP-first with REST only, no native GraphQL. Payload wins on API design, content modeling, and access control.

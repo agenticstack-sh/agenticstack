@@ -4,7 +4,7 @@ slug: railway-vs-vercel
 tools: [railway, vercel]
 category: hosting-deployment
 last_verified: 2026-05-09
-verdict: railway
+verdict: Railway
 ---
 
 Railway and Vercel serve different deployment models. Railway provides persistent Docker containers with private networking and managed databases. Vercel provides serverless functions with Fluid Compute concurrency, an AI SDK, and a model provider marketplace. Railway wins on execution model, multi-service architecture, and persistent state. Vercel wins on AI developer experience for stateless agents that call LLMs.

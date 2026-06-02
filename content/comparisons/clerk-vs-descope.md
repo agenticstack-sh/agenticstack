@@ -27,6 +27,6 @@ Clerk, by contrast, currently focuses almost exclusively on human frontend authe
 
 ## When to pick which
 
-* If you're building a fast-moving React or Next.js consumer application, pick Clerk because its framework-native SDKs and drop-in UI components offer the fastest time-to-market for frontend implementation.
-* If you need to rapidly deploy AI agents that require access to third-party APIs, pick Descope because its Outbound Apps provide pre-built integrations and token vaulting immediately out of the box.
-* If you are building Model Context Protocol (MCP) servers, pick Descope because its native support for DCR, CIMD, and dedicated MCP Auth SDKs provide standards-compliant security with minimal custom coding.
+* **If you're building a fast-moving React or Next.js consumer application, pick Clerk** because its framework-native SDKs and drop-in UI components offer the fastest time-to-market for frontend implementation.
+* **If you need to rapidly deploy AI agents that require access to third-party APIs, pick Descope** because its Outbound Apps provide pre-built integrations and token vaulting immediately out of the box.
+* **If you are building Model Context Protocol (MCP) servers, pick Descope** because its native support for DCR, CIMD, and dedicated MCP Auth SDKs provide standards-compliant security with minimal custom coding.

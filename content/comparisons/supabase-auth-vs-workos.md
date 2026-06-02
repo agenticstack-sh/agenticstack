@@ -29,7 +29,7 @@ Crucially, neither platform natively supports standards-based Asynchronous Autho
 
 ## When to pick which
 
-* If you're building a B2B SaaS application and want to rapidly onboard enterprise customers, pick WorkOS because its Admin Portal, out-of-the-box SAML SSO, and SCIM Directory Sync eliminate months of custom integration work.
-* If you're building a new application from scratch and need a complete open-source data layer, pick Supabase because its built-in authentication primitives securely tie directly into its PostgreSQL database and Row Level Security (RLS) policies.
-* If you are deploying autonomous AI agents via the Model Context Protocol (MCP), pick WorkOS because its native Cloudflare integrations and FGA policies provide a much stronger baseline for agentic workflows.
-* If you require absolute control over data residency or want to avoid vendor lock-in entirely, pick Supabase because its open-source backend components can be self-hosted entirely within your own infrastructure.
+* **If you're building a B2B SaaS application and want to rapidly onboard enterprise customers, pick WorkOS** because its Admin Portal, out-of-the-box SAML SSO, and SCIM Directory Sync eliminate months of custom integration work.
+* **If you're building a new application from scratch and need a complete open-source data layer, pick Supabase** because its built-in authentication primitives securely tie directly into its PostgreSQL database and Row Level Security (RLS) policies.
+* **If you are deploying autonomous AI agents via the Model Context Protocol (MCP), pick WorkOS** because its native Cloudflare integrations and FGA policies provide a much stronger baseline for agentic workflows.
+* **If you require absolute control over data residency or want to avoid vendor lock-in entirely, pick Supabase** because its open-source backend components can be self-hosted entirely within your own infrastructure.

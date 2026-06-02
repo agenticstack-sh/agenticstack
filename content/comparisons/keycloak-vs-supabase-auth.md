@@ -29,6 +29,6 @@ Supabase operates as a traditional human-centric authentication service tied to 
 
 ## When to pick which
 
-* If you're building a new application from scratch and need a complete open-source data layer, pick Supabase because its built-in authentication primitives securely tie directly into its database and backend services.
-* If you have strict air-gapped data residency requirements and a dedicated DevOps team to manage complex Kubernetes deployments and database clustering, pick Keycloak because its open-source license allows you to self-host the identity provider entirely within your own infrastructure.
-* If you want to avoid heavy infrastructure management and scaling burdens entirely, pick Supabase's managed service, completely eliminating the heavy Kubernetes, Infinispan clustering, and Java maintenance overhead required to operate Keycloak effectively.
+* **If you're building a new application from scratch and need a complete open-source data layer, pick Supabase** because its built-in authentication primitives securely tie directly into its database and backend services.
+* **If you have strict air-gapped data residency requirements and a dedicated DevOps team to manage complex Kubernetes deployments and database clustering, pick Keycloak** because its open-source license allows you to self-host the identity provider entirely within your own infrastructure.
+* **If you want to avoid heavy infrastructure management and scaling burdens entirely, pick Supabase**, completely eliminating the heavy Kubernetes, Infinispan clustering, and Java maintenance overhead required to operate Keycloak effectively.

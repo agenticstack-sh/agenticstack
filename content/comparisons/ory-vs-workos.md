@@ -27,7 +27,7 @@ Ory approaches agentic identity at the authorization and infrastructure layer. I
 
 ## When to pick which
 
-* If you're building a B2B SaaS application and want to rapidly onboard enterprise customers, pick WorkOS because its Admin Portal, out-of-the-box SAML SSO, and SCIM Directory Sync eliminate months of custom integration work.
-* If you require absolute control over data residency or want to avoid vendor lock-in entirely, pick Ory because its open-source microservices can be self-hosted directly within your own infrastructure.
-* If you prefer a headless, API-first identity architecture where you have full control to build highly customized user interfaces and non-standard identity schemas from scratch, pick Ory.
-* If you are deploying autonomous AI agents via the Model Context Protocol (MCP), pick WorkOS because its native Cloudflare integrations and built-in AuthKit provide a much stronger baseline for agentic authentication workflows.
+* **If you're building a B2B SaaS application and want to rapidly onboard enterprise customers, pick WorkOS** because its Admin Portal, out-of-the-box SAML SSO, and SCIM Directory Sync eliminate months of custom integration work.
+* **If you require absolute control over data residency or want to avoid vendor lock-in entirely, pick Ory** because its open-source microservices can be self-hosted directly within your own infrastructure.
+* **Pick Ory** if you prefer a headless, API-first identity architecture where you have full control to build highly customized user interfaces and non-standard identity schemas from scratch.
+* **If you are deploying autonomous AI agents via the Model Context Protocol (MCP), pick WorkOS** because its native Cloudflare integrations and built-in AuthKit provide a much stronger baseline for agentic authentication workflows.

@@ -4,7 +4,7 @@ slug: netlify-vs-vercel
 tools: [netlify, vercel]
 category: hosting-deployment
 last_verified: 2026-05-09
-verdict: vercel
+verdict: Vercel
 ---
 
 Netlify and Vercel are both serverless-first platforms with no persistent compute, no Docker support, and no private networking. Neither provides the infrastructure primitives most agent architectures need. The comparison is between two platforms with similar constraints, where Vercel wins on function duration, AI tooling, and concurrency model.

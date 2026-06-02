@@ -3,7 +3,7 @@ title: "Auth0 vs Amazon Cognito"
 slug: auth0-vs-cognito
 tools: [auth0, cognito]
 category: auth
-last_verified: 2026-05-09
+last_verified: 2026-06-02
 popular: true
 verdict: "Auth0"
 ---
@@ -28,6 +28,14 @@ Auth0 and Amazon Cognito both provide managed authentication. Cognito is a regio
 * **Extensibility without infrastructure overhead.** Auth0 provides Auth0 Forms and serverless Actions for customization. A Marketplace offers pre-built integrations. Cognito requires manual AWS Lambda deployment for custom flows.
 
 * **Built-in advanced security.** Auth0 includes AI-driven bot detection, breached password detection, and adaptive MFA. Cognito requires custom AWS WAF integrations for similar protection.
+
+## The agentic difference
+
+Auth0 provides an integrated agentic stack: Token Vault manages and auto-refreshes outbound OAuth credentials for third-party API calls. Auth0 FGA enforces document-level permissions in RAG pipelines. CIBA/PAR enables async human approval without active sessions. Dynamic Client Registration lets agents onboard programmatically.
+
+Cognito provides AgentCore Identity for credential management within AWS Bedrock agents using IAM roles. This works for AWS-native agent frameworks but is locked to the AWS ecosystem. Cognito lacks Dynamic Client Registration, has no token vault for third-party APIs outside AWS, has no FGA for RAG document scoping, and does not support CIBA.
+
+For agents operating across multiple cloud providers or calling non-AWS APIs, Auth0's platform-agnostic approach covers the full lifecycle. For agents running entirely within AWS Bedrock, Cognito's AgentCore integration is simpler but narrower.
 
 ## When to pick which
 

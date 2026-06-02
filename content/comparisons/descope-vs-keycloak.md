@@ -27,6 +27,6 @@ Keycloak, by contrast, operates as a traditional human-centric authorization ser
 
 ## When to pick which
 
-* If you need to rapidly deploy AI agents that require delegated access to third-party tools, pick Descope because its Outbound Apps provide pre-built connectors and native token vaulting to handle credentials securely out of the box.
-* If you have strict air-gapped data residency requirements and a dedicated DevOps team to manage database clustering and failovers, pick Keycloak because its open-source license allows you to self-host the identity provider entirely within your own infrastructure.
-* If you prefer configuring authentication logic and consent screens visually, pick Descope because its drag-and-drop workflows eliminate the deep custom Java and theming logic required by Keycloak.
+* **If you need to rapidly deploy AI agents that require delegated access to third-party tools, pick Descope** because its Outbound Apps provide pre-built connectors and native token vaulting to handle credentials securely out of the box.
+* **If you have strict air-gapped data residency requirements and a dedicated DevOps team to manage database clustering and failovers, pick Keycloak** because its open-source license allows you to self-host the identity provider entirely within your own infrastructure.
+* **If you prefer configuring authentication logic and consent screens visually, pick Descope** because its drag-and-drop workflows eliminate the deep custom Java and theming logic required by Keycloak.

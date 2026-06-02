@@ -5,7 +5,7 @@ tools: [resend, sendgrid]
 category: email
 popular: true
 last_verified: 2026-05-09
-verdict: resend
+verdict: Resend
 ---
 
 Resend and SendGrid both offer transactional email via REST and webhooks. Resend wins on MCP server and webhook reliability. SendGrid wins on inbound email processing and credential scoping.

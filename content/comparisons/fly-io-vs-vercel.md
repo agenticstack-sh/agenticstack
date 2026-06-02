@@ -4,7 +4,7 @@ slug: fly-io-vs-vercel
 tools: [fly-io, vercel]
 category: hosting-deployment
 last_verified: 2026-05-09
-verdict: fly-io
+verdict: Fly-io
 ---
 
 Fly.io and Vercel occupy opposite ends of the hosting spectrum for agent deployments. Fly.io provides Firecracker microVMs with persistent processes, private networking, and infrastructure-level control. Vercel provides serverless functions with Fluid Compute concurrency, an AI SDK, and a model provider marketplace. Fly.io wins on execution model, persistent compute, and multi-service networking. Vercel wins on AI developer experience for stateless LLM-calling agents.

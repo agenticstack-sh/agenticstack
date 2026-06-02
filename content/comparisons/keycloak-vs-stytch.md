@@ -29,7 +29,7 @@ Crucially, neither platform natively supports standards-based Asynchronous Autho
 
 ## When to pick which
 
-- If you are building a highly custom, API-first application and want granular control over exposing your app as an OAuth2 Identity Provider for external tool integrations, pick Stytch because its Connected Apps framework automates dynamic client registration and standard consent flows.
-- If you need a complete, self-hosted open-source identity monolith with out-of-the-box protocol support for complex legacy enterprise integrations (SAML, LDAP, Active Directory), pick Keycloak.
-- If your primary requirement is building a deeply custom passwordless authentication journey from scratch using headless APIs, pick Stytch because it excels in API-based passwordless primitives.
-- If you need to deploy an identity provider in a highly regulated, air-gapped environment independent of cloud SaaS vendors and have the DevOps expertise to manage Kubernetes and database clustering, pick Keycloak.
+* **If you are building a highly custom, API-first application and want granular control over exposing your app as an OAuth2 Identity Provider for external tool integrations, pick Stytch** because its Connected Apps framework automates dynamic client registration and standard consent flows.
+* **Pick Keycloak** if you need a complete, self-hosted open-source identity monolith with out-of-the-box protocol support for complex legacy enterprise integrations (SAML, LDAP, Active Directory).
+* **If your primary requirement is building a deeply custom passwordless authentication journey from scratch using headless APIs, pick Stytch** because it excels in API-based passwordless primitives.
+* **Pick Keycloak** if you need to deploy an identity provider in a highly regulated, air-gapped environment independent of cloud SaaS vendors and have the DevOps expertise to manage Kubernetes and database clustering.

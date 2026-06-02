@@ -4,7 +4,7 @@ slug: grafana-vs-langsmith
 tools: [grafana, langsmith]
 category: observability
 last_verified: 2026-05-09
-verdict: langsmith
+verdict: LangSmith
 ---
 
 Grafana and LangSmith serve different observability roles. LangSmith is built for LLM application tracing, evaluation, and prompt engineering. Grafana is a general-purpose observability platform with no LLM-specific features. LangSmith wins on all three agentic dimensions.

@@ -24,5 +24,5 @@ Neither Supabase nor Clerk is purpose-built for comprehensive AI agent identity 
 
 ## When to pick which
 
-* If you're building a fast-moving React or Next.js consumer application, pick Clerk because its drop-in UI components and edge-optimized middleware provide the fastest time-to-market for frontend implementation.
-* If you're building a new application from scratch and need a complete open-source data layer, pick Supabase because its built-in authentication primitives securely tie directly into its database and backend services.
+* **If you're building a fast-moving React or Next.js consumer application, pick Clerk** because its drop-in UI components and edge-optimized middleware provide the fastest time-to-market for frontend implementation.
+* **If you're building a new application from scratch and need a complete open-source data layer, pick Supabase** because its built-in authentication primitives securely tie directly into its database and backend services.

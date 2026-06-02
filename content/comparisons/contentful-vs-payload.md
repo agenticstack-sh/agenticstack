@@ -4,7 +4,7 @@ slug: contentful-vs-payload
 tools: [contentful, payload]
 category: headless-cms
 last_verified: 2026-05-09
-verdict: contentful
+verdict: Contentful
 ---
 
 Contentful and Payload both ship REST and GraphQL APIs. Contentful wins on MCP support, outbound webhooks, and SDKs for multiple languages. Payload wins on self-hosting, code-first schema, and in-process hooks.

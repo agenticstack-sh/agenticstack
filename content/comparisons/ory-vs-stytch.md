@@ -29,7 +29,7 @@ Crucially, neither platform natively supports standards-based Asynchronous Autho
 
 ## When to pick which
 
-- If you are building a highly custom, API-first application and want granular control over exposing your app as an OAuth2 Identity Provider for external tool integrations, pick Stytch because its Connected Apps framework automates dynamic client registration and standard consent flows.
-- If you require deep, resource-level permissions or Zanzibar-style authorization to strictly secure data access or RAG pipelines, pick Ory because Ory Keto is built specifically to model complex relationship-based access control (ReBAC) scenarios.
-- If you need strict, native abuse controls to detect and throttle misbehaving AI agents, pick Stytch because it offers enterprise-grade bot and anomaly detection explicitly tailored for machine actors.
-- If you want to avoid proprietary SaaS vendor lock-in entirely, pick Ory because its open-source microservices can be completely self-hosted within your own infrastructure.
+* **If you are building a highly custom, API-first application and want granular control over exposing your app as an OAuth2 Identity Provider for external tool integrations, pick Stytch** because its Connected Apps framework automates dynamic client registration and standard consent flows.
+* **If you require deep, resource-level permissions or Zanzibar-style authorization to strictly secure data access or RAG pipelines, pick Ory** because Ory Keto is built specifically to model complex relationship-based access control (ReBAC) scenarios.
+* **If you need strict, native abuse controls to detect and throttle misbehaving AI agents, pick Stytch** because it offers enterprise-grade bot and anomaly detection explicitly tailored for machine actors.
+* **If you want to avoid proprietary SaaS vendor lock-in entirely, pick Ory** because its open-source microservices can be completely self-hosted within your own infrastructure.

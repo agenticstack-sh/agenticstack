@@ -4,7 +4,7 @@ slug: aws-ses-vs-resend
 tools: [aws-ses, resend]
 category: email
 last_verified: 2026-05-09
-verdict: resend
+verdict: Resend
 ---
 
 Resend and AWS SES represent opposite ends of the managed-vs.-infrastructure spectrum. Resend ships an official MCP server and Svix-backed webhooks. AWS SES has no MCP server and routes events through SNS. AWS SES provides the most granular credential scoping via IAM and data residency within an AWS region. The verdict depends on whether tool-call surface or infrastructure ownership matters more.

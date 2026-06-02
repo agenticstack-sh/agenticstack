@@ -25,6 +25,6 @@ Neither platform provides a comprehensive, enterprise-ready identity governance 
 
 ## When to pick which
 
-* If you're building a modern React or Next.js application, pick Clerk because its pre-built UI components and edge-optimized middleware provide the fastest time-to-market for frontend implementation.
-* If you're building a simple B2C app hosted entirely on Google Cloud, pick Firebase because its direct integration with Firestore and GCP services keeps backend infrastructure tightly coupled.
-* If you need to support multi-tenant B2B functionality, pick Clerk because its native Organizations feature handles tenant isolation and user roles automatically, whereas Firebase requires building custom workarounds on top of its tenant abstraction.
+* **If you're building a modern React or Next.js application, pick Clerk** because its pre-built UI components and edge-optimized middleware provide the fastest time-to-market for frontend implementation.
+* **If you're building a simple B2C app hosted entirely on Google Cloud, pick Firebase** because its direct integration with Firestore and GCP services keeps backend infrastructure tightly coupled.
+* **If you need to support multi-tenant B2B functionality, pick Clerk** because its native Organizations feature handles tenant isolation and user roles automatically, whereas Firebase requires building custom workarounds on top of its tenant abstraction.

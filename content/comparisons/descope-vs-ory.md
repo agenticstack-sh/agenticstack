@@ -27,7 +27,7 @@ Ory approaches agentic identity from the data and infrastructure layer. Its stan
 
 ## When to pick which
 
-* If you need to rapidly deploy AI agents that require delegated access to third-party tools, pick Descope because its Outbound Apps provide pre-built connectors and native token vaulting to handle credentials securely out of the box.
-* If you require absolute control over data residency or want to avoid vendor lock-in, pick Ory because its open-source microservices can be self-hosted entirely within your own infrastructure.
-* If you need deep, resource-level permissions or Google Docs-style authorization to secure RAG pipelines, pick Ory because Ory Keto is built specifically to model complex relationship-based access control (ReBAC) scenarios.
-* If you are building Model Context Protocol (MCP) servers, pick Descope because its native support for Dynamic Client Registration (DCR), CIMD, and dedicated MCP Auth SDKs provide standards-compliant security with minimal custom coding.
+* **If you need to rapidly deploy AI agents that require delegated access to third-party tools, pick Descope** because its Outbound Apps provide pre-built connectors and native token vaulting to handle credentials securely out of the box.
+* **If you require absolute control over data residency or want to avoid vendor lock-in, pick Ory** because its open-source microservices can be self-hosted entirely within your own infrastructure.
+* **If you need deep, resource-level permissions or Google Docs-style authorization to secure RAG pipelines, pick Ory** because Ory Keto is built specifically to model complex relationship-based access control (ReBAC) scenarios.
+* **If you are building Model Context Protocol (MCP) servers, pick Descope** because its native support for Dynamic Client Registration (DCR), CIMD, and dedicated MCP Auth SDKs provide standards-compliant security with minimal custom coding.

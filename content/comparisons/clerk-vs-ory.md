@@ -25,6 +25,6 @@ Both platforms currently require developers to build significant scaffolding for
 
 ## When to pick which
 
-* If you're building a fast-moving React or Next.js app, pick Clerk because its framework-native SDKs and drop-in UI components provide a production-ready authentication flow in minutes.
-* If you need absolute control over data residency or want to avoid vendor lock-in, pick Ory because its open-source microservices can be self-hosted anywhere.
-* If you require deep, resource-level permissions or Google Docs-style authorization, pick Ory because Ory Keto is built specifically to model complex ReBAC scenarios.
+* **If you're building a fast-moving React or Next.js app, pick Clerk** because its framework-native SDKs and drop-in UI components provide a production-ready authentication flow in minutes.
+* **If you need absolute control over data residency or want to avoid vendor lock-in, pick Ory** because its open-source microservices can be self-hosted anywhere.
+* **If you require deep, resource-level permissions or Google Docs-style authorization, pick Ory** because Ory Keto is built specifically to model complex ReBAC scenarios.

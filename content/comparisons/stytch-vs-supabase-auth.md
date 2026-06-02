@@ -29,7 +29,7 @@ Crucially, neither platform natively supports standards-based Asynchronous Autho
 
 ## When to pick which
 
-- If you are building a highly custom, API-first application and want granular control over exposing your app as an OAuth2 Identity Provider for external tool integrations, pick Stytch because its Connected Apps framework automates dynamic client registration and standard consent flows.
-- If you're building a new application from scratch and need a complete open-source data layer, pick Supabase because its built-in authentication primitives securely tie directly into its PostgreSQL database and Row Level Security (RLS) policies.
-- If your primary requirement is building a deeply custom passwordless authentication journey from scratch using headless APIs, pick Stytch because it excels in API-based passwordless primitives.
-- If you want to avoid locking your application's data architecture to a proprietary cloud SaaS vendor, pick Supabase because its open-source backend offers greater architectural control and database portability.
+* **If you are building a highly custom, API-first application and want granular control over exposing your app as an OAuth2 Identity Provider for external tool integrations, pick Stytch** because its Connected Apps framework automates dynamic client registration and standard consent flows.
+* *If you're building a new application from scratch and need a complete open-source data layer, pick Supabase** because its built-in authentication primitives securely tie directly into its PostgreSQL database and Row Level Security (RLS) policies.
+* **If your primary requirement is building a deeply custom passwordless authentication journey from scratch using headless APIs, pick Stytch** because it excels in API-based passwordless primitives.
+* **If you want to avoid locking your application's data architecture to a proprietary cloud SaaS vendor, pick Supabase** because its open-source backend offers greater architectural control and database portability.

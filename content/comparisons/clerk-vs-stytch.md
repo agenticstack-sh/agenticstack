@@ -29,7 +29,7 @@ Crucially, neither platform natively supports standards-based Asynchronous Autho
 
 ## When to pick which
 
-* If you're building a fast-moving React or Next.js application, pick Clerk because its drop-in UI components and edge-optimized SDKs offer the fastest time-to-market.
-* If you are building a highly custom, API-first application and want granular control over exposing your app as an OAuth2 Identity Provider for external tool integrations, pick Stytch because its Connected Apps framework automates client registration and standard consent flows.
-* If you need to rapidly deploy multi-tenant B2B SaaS features without managing disjointed product lines, pick Clerk because its unified Organizations feature handles tenant isolation and roles automatically out-of-the-box.
-* If your primary requirement is building a deeply custom passwordless authentication journey from scratch using headless APIs, pick Stytch because it excels in API-based passwordless primitives.
+* **If you're building a fast-moving React or Next.js application, pick Clerk** because its drop-in UI components and edge-optimized SDKs offer the fastest time-to-market.
+* **If you are building a highly custom, API-first application and want granular control over exposing your app as an OAuth2 Identity Provider for external tool integrations, pick Stytch** because its Connected Apps framework automates client registration and standard consent flows.
+* **If you need to rapidly deploy multi-tenant B2B SaaS features without managing disjointed product lines, pick Clerk** because its unified Organizations feature handles tenant isolation and roles automatically out-of-the-box.
+* **If your primary requirement is building a deeply custom passwordless authentication journey from scratch using headless APIs, pick Stytch** because it excels in API-based passwordless primitives.

@@ -4,7 +4,7 @@ slug: mailgun-vs-resend
 tools: [mailgun, resend]
 category: email
 last_verified: 2026-05-09
-verdict: resend
+verdict: Resend
 ---
 
 Resend and Mailgun both ship official MCP servers and both support inbound email. Resend wins on webhook reliability. Mailgun wins on inbound routing and minimal-privilege credentials.

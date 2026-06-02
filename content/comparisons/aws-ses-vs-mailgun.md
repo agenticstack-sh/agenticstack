@@ -31,6 +31,6 @@ AWS SES has no MCP server and routes all events through SNS, adding infrastructu
 
 ## When to pick which
 
-**Pick Mailgun** when the agent requires MCP tool-call surface without building a custom adapter, when delivery events must reach the agent via direct HTTP without SNS infrastructure, or when inbound email routing with provider-side filter expressions is needed.
+* **Pick Mailgun** when the agent requires MCP tool-call surface without building a custom adapter, when delivery events must reach the agent via direct HTTP without SNS infrastructure, or when inbound email routing with provider-side filter expressions is needed.
 
-**Pick AWS SES** when the agent pipeline runs in AWS and requires IAM-level credential scoping per sender identity and configuration set—including condition-level constraints that Domain Sending Keys cannot express—or when the workload must satisfy HIPAA, FedRAMP, or SOC 2 compliance requirements within the AWS compliance boundary.
+* **Pick AWS SES** when the agent pipeline runs in AWS and requires IAM-level credential scoping per sender identity and configuration set—including condition-level constraints that Domain Sending Keys cannot express—or when the workload must satisfy HIPAA, FedRAMP, or SOC 2 compliance requirements within the AWS compliance boundary.

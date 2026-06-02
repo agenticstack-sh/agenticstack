@@ -4,7 +4,7 @@ slug: fly-io-vs-netlify
 tools: [fly-io, netlify]
 category: hosting-deployment
 last_verified: 2026-05-09
-verdict: fly-io
+verdict: Fly.io
 ---
 
 Fly.io and Netlify represent different compute models. Fly.io provides persistent Firecracker microVMs with private networking, persistent volumes, and infrastructure control. Netlify provides stateless serverless functions with a 15-minute background ceiling and no persistent compute. Fly.io wins on three agentic dimensions. Netlify wins on frontend deployment simplicity.

@@ -3,30 +3,43 @@ title: "Descope vs Keycloak"
 slug: descope-vs-keycloak
 tools: [descope, keycloak]
 category: auth
-last_verified: 2026-04-27
-verdict: "Pick Descope for visual, no-code authentication flows and out-of-the-box AI agent governance, but choose Keycloak if you require a free, self-hosted open-source identity provider and have the dedicated DevOps expertise to maintain it."
+last_verified: 2026-05-09
+verdict: "Descope"
 ---
-
-## Where Keycloak wins
-
-* **Open-Source and Self-Hosted Control:** Keycloak is a venerable open-source tool backed by RedHat that allows for deployment on any local system, private cloud, or highly regulated, air-gapped environment. This provides infrastructure teams with absolute control over data residency and deployment architecture.
-* **No Upfront Software Licensing Costs:** As free open-source software, Keycloak avoids the monthly active user (MAU) pricing tiers and vendor subscription fees of SaaS identity platforms, making its baseline software cost virtually zero.
-* **Deep Customization via Code:** For teams with strong Java and Kubernetes expertise, Keycloak allows for deep protocol-level customization of the authentication engine by writing and deploying custom Java Service Provider Interfaces (SPIs).
+Descope and Keycloak both provide identity infrastructure. Descope is a managed low-code platform with visual workflow orchestration and native agent capabilities. Keycloak is free, open-source, and designed for self-hosted deployment with deep protocol customization. For developers deploying AI agents with third-party tool access, Descope wins: it provides an Agentic Identity Hub with visual design, pre-built Outbound Apps with managed credentials, native MCP support, and zero ops overhead. Keycloak excels at self-hosting and data residency control but requires custom code for all agent credential flows.
 
 ## Where Descope wins
 
-* **Visual, Low-Code Flow Orchestration:** Descope utilizes an Agentic Identity Hub powered by a drag-and-drop workflow designer, allowing developers to visually configure complex authentication journeys and user consent screens. Customizing Keycloak flows and login pages requires extensive Java development and complex theming overhead.
-* **Turnkey Outbound Apps and Token Vaulting:** Descope simplifies third-party API delegation by offering over 50 pre-built integration templates (e.g., Slack, Google Calendar) via its Outbound Apps. It natively manages the OAuth handshake, user consent prompts, and automates token refreshes out-of-the-box, whereas Keycloak lacks an equivalent native token vault abstraction.
-* **Zero Infrastructure Maintenance:** Descope is a fully managed cloud service. Deploying and maintaining Keycloak requires a dedicated DevOps team to manage database clustering (Infinispan), failovers, Kubernetes configurations, and manual patching to avoid downtime.
+* **Agentic Identity Hub with Visual Flow Orchestration.** Descope provides a drag-and-drop workflow designer for AI agent identity flows. You configure authentication, consent, and tool delegation visually without backend code. Keycloak flow customization requires extensive Java development and complex theming.
+
+* **Outbound Apps with Managed Token Lifecycles.** Descope provides pre-built integrations (Slack, Google Calendar, etc.) that automate OAuth: consent, token acquisition, automatic refresh. Agents get delegated access to third-party APIs with transparent credential management. Keycloak has no token vault. Developers manage outbound credential exchanges manually.
+
+* **MCP Support with Dynamic Client Registration.** Descope implements Model Context Protocol standards. Agents register and acquire tokens at runtime. Keycloak provides no MCP abstractions.
+
+* **Zero Infrastructure Overhead.** Descope is fully managed cloud. Keycloak requires a dedicated DevOps team for database clustering (Infinispan), failover management, Kubernetes configuration, and patches.
+
+## Where Keycloak wins
+
+* **Open-Source Self-Hosting.** Keycloak can be deployed self-hosted anywhere: private cloud, on-premise, air-gapped. This matters for strict data residency, regulated environments, or avoiding vendor lock-in.
+
+* **No Software Costs.** Keycloak is free open-source. Descope charges per monthly active user.
+
+* **Deep Protocol Customization.** Java teams can implement custom Service Provider Interfaces for deep protocol-level modifications: custom workflows, event listeners, flow logic.
 
 ## The agentic difference
 
-Descope provides a purpose-built "Agentic Identity Hub" where AI agents are treated as first-class citizens. It natively supports the Model Context Protocol (MCP) out-of-the-box, providing protocol compliance with Dynamic Client Registration (DCR), Client ID Metadata Documents (CIMD), and dedicated MCP Auth SDKs. Descope's Outbound Apps serve as a secure token vault for agents calling third-party APIs, handling token lifecycles and step-up consent prompts automatically.
+Descope treats agents as first-class citizens: visual Agentic Identity Hub orchestrates agent flows, Outbound Apps handle third-party API credential complexity, MCP standards are built in. Agents get access to external tools without code.
 
-Keycloak, by contrast, operates as a traditional human-centric authorization server. It does not ship with official MCP server governance tools, lacks a native Token Vault for managing outbound third-party API credentials for agents, and requires developers to custom-build complex agentic workflows and safety nets from scratch.
+Keycloak is human-centric by design. It provides no MCP abstractions, no token vault for managing outbound API credentials, no agent-specific governance. Teams custom-build all agent identity flows from scratch using Keycloak's APIs. Keycloak does support CIBA as a protocol primitive (for async human approvals), but neither platform provides dedicated agent credential management.
+
+In short: Descope automates "agent calls third-party API with managed credentials." Keycloak provides raw protocol primitives. Teams build everything else custom.
 
 ## When to pick which
 
-* **If you need to rapidly deploy AI agents that require delegated access to third-party tools, pick Descope** because its Outbound Apps provide pre-built connectors and native token vaulting to handle credentials securely out of the box.
-* **If you have strict air-gapped data residency requirements and a dedicated DevOps team to manage database clustering and failovers, pick Keycloak** because its open-source license allows you to self-host the identity provider entirely within your own infrastructure.
-* **If you prefer configuring authentication logic and consent screens visually, pick Descope** because its drag-and-drop workflows eliminate the deep custom Java and theming logic required by Keycloak.
+* **Pick Descope** if your agents need delegated access to external APIs (Slack, Gmail, etc.). Outbound Apps handle OAuth, token refresh, and credential storage automatically.
+
+* **Pick Descope** if your team prefers visual flow design over writing backend authentication code.
+
+* **Pick Keycloak** if strict data residency, self-hosting, or avoiding vendor lock-in is non-negotiable. It can be deployed entirely within your infrastructure.
+
+* **Pick Keycloak** if your team has Java/Kubernetes expertise and needs deep protocol-level customization via custom SPIs.

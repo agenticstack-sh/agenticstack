@@ -26,7 +26,7 @@ Supabase provides basic identity primitives tied to its database framework, but 
 
 ## When to pick which
 
-* If you're building a new application from scratch and need a complete open-source data layer, pick Supabase because its built-in authentication primitives securely tie directly into its database and backend services.
-* If you need to rapidly deploy AI agents that require delegated access to third-party tools, pick Descope because its Outbound Apps provide pre-built connectors and native token vaulting to handle credentials securely out of the box.
-* If you are building Model Context Protocol (MCP) servers, pick Descope because its native support for Dynamic Client Registration (DCR), CIMD, and dedicated MCP Auth SDKs provide standards-compliant security with minimal custom coding.
-* If you prefer configuring authentication logic visually rather than writing and maintaining backend code, pick Descope because its drag-and-drop workflows eliminate deep custom logic requirements.
+* **If you're building a new application from scratch and need a complete open-source data layer, pick Supabase** because its built-in authentication primitives securely tie directly into its database and backend services.
+* **If you need to rapidly deploy AI agents that require delegated access to third-party tools, pick Descope** because its Outbound Apps provide pre-built connectors and native token vaulting to handle credentials securely out of the box.
+* **If you are building Model Context Protocol (MCP) servers, pick Descope** because its native support for Dynamic Client Registration (DCR), CIMD, and dedicated MCP Auth SDKs provide standards-compliant security with minimal custom coding.
+* **If you prefer configuring authentication logic visually rather than writing and maintaining backend code, pick Descope** because its drag-and-drop workflows eliminate deep custom logic requirements.

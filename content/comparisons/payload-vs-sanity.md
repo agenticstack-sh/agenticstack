@@ -35,4 +35,4 @@ Payload has no documented agentic integration surface. Its in-process hooks are 
 
 * **Pick Payload** when the data layer must be self-hosted due to data residency, compliance, or cost requirements. Also pick Payload when tightly coupled server-side processing logic—hooks that run synchronously within the request lifecycle—is preferable to external compute, or when the schema and CMS should live as first-class code in a monorepo alongside the application.
 
-* **Pick Payload over Sanity** when the organization needs full ownership of the persistence layer and the engineering team is comfortable building agentic integration infrastructure rather than consuming a ready-made surface.
+* **Pick Payload** when the organization needs full ownership of the persistence layer and the engineering team is comfortable building agentic integration infrastructure rather than consuming a ready-made surface.

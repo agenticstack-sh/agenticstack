@@ -3,7 +3,7 @@ title: "Auth0 vs WorkOS"
 slug: auth0-vs-workos
 tools: [auth0, workos]
 category: auth
-last_verified: 2026-04-27
+last_verified: 2026-06-02
 verdict: "Auth0"
 ---
 Auth0 and WorkOS both serve enterprise identity. WorkOS is middleware for B2B SSO and directory sync; Auth0 is a full CIAM platform for B2B and B2C. Auth0 wins for AI agents with Token Vault, CIBA, and token governance. WorkOS wins on speed to enterprise readiness and per-connection pricing.
@@ -27,6 +27,14 @@ Auth0 and WorkOS both serve enterprise identity. WorkOS is middleware for B2B SS
 * **Advanced security and threat protection.** Auth0 includes ML-based bot detection, adaptive MFA, and breached password detection. WorkOS relies on basic device fingerprinting and third-party checks.
 
 * **Cost-efficient scaling for PLG.** For Product-Led Growth companies with many enterprise customers, WorkOS per-connection pricing escalates rapidly. Auth0's MAU-based pricing scales better at high volumes.
+
+## The agentic difference
+
+Auth0 provides an integrated agentic stack: Token Vault manages outbound API credentials with automatic refresh and rotation. Auth0 FGA enforces document-level permissions in RAG pipelines. CIBA/PAR enables agents to pause for async human approval. Dynamic Client Registration handles agent onboarding.
+
+WorkOS provides three agentic capabilities: Fine-Grained Authorization for relationship-based access control in RAG scoping. MCP Auth via AuthKit for protocol-layer agent connections. An encrypted vault for credential storage. However, WorkOS's vault lacks automated token refresh and rotation — it stores credentials but does not manage their lifecycle.
+
+Both platforms provide FGA for RAG. Auth0's differentiator is the complete credential lifecycle (storage, refresh, rotation, delegation) and CIBA for human-in-the-loop approval. WorkOS's differentiator is simpler startup pricing and faster enterprise SSO onboarding alongside its agentic primitives.
 
 ## When to pick which
 

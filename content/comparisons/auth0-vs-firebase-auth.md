@@ -3,7 +3,7 @@ title: "Auth0 vs Firebase"
 slug: auth0-vs-firebase-auth
 tools: [auth0, firebase-auth]
 category: auth
-last_verified: 2026-05-09
+last_verified: 2026-06-02
 verdict: "Auth0"
 ---
 Auth0 and Firebase both offer managed authentication. Firebase Auth is part of a GCP backend, while Auth0 is a dedicated CIAM platform. Auth0 wins for AI agents with Token Vault, FGA for RAG, CIBA for approvals, and MCP support. Firebase wins for GCP-native apps and simple consumer projects.
@@ -27,6 +27,12 @@ Auth0 and Firebase both offer managed authentication. Firebase Auth is part of a
 * **Low initial cost for basic B2C.** Firebase Auth is accessible for simple consumer apps without upfront identity costs.
 
 * **Upgrade path via Identity Platform.** Organizations in GCP can upgrade to Google Cloud Identity Platform for multi-tenancy and SAML/OIDC support while staying in Google Cloud.
+
+## The agentic difference
+
+Auth0 provides four agentic capabilities: Token Vault stores and auto-refreshes outbound API credentials so agents act on user behalf without exposing secrets. Auth0 FGA enforces document-level access during RAG vector searches. CIBA enables agents to pause execution and request human approval asynchronously. Dynamic Client Registration handles agent onboarding at scale.
+
+Firebase has no agentic identity capabilities. It provides no token vault, no agent onboarding mechanism, no RAG scoping, and no human-in-the-loop workflows. Firebase Auth handles human user authentication only. Teams building AI agents on GCP must integrate a separate identity layer for agent governance.
 
 ## When to pick which
 

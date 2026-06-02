@@ -29,7 +29,7 @@ Crucially, neither platform natively supports standards-based Asynchronous Autho
 
 ## When to pick which
 
-- If you're building a highly cost-sensitive basic B2C app hosted entirely on AWS, pick Amazon Cognito because its minimal $0.02 MAU pricing and direct hooks into AWS WAF keep baseline infrastructure billing exceptionally low.
-- If you are building a highly custom, API-first application and want granular control over exposing your app as an OAuth2 Identity Provider for external tool integrations, pick Stytch because its Connected Apps framework automates dynamic client registration and standard consent flows.
-- If your primary requirement is building a deeply custom passwordless authentication journey from scratch using headless APIs, pick Stytch because it excels in API-based passwordless primitives.
-- If you are building AI agents entirely within the AWS Bedrock ecosystem and need to manage outbound API credentials, pick Amazon Cognito (via AgentCore) because it provides a native token vault that Stytch lacks.
+* **If you're building a highly cost-sensitive basic B2C app hosted entirely on AWS, pick Amazon Cognito** because its minimal $0.02 MAU pricing and direct hooks into AWS WAF keep baseline infrastructure billing exceptionally low.
+* **If you are building a highly custom, API-first application and want granular control over exposing your app as an OAuth2 Identity Provider for external tool integrations, pick Stytch** because its Connected Apps framework automates dynamic client registration and standard consent flows.
+* **If your primary requirement is building a deeply custom passwordless authentication journey from scratch using headless APIs, pick Stytch** because it excels in API-based passwordless primitives.
+* **If you are building AI agents entirely within the AWS Bedrock ecosystem and need to manage outbound API credentials, pick Amazon Cognito (via AgentCore)** because it provides a native token vault that Stytch lacks.

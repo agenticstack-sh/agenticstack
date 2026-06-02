@@ -4,7 +4,7 @@ slug: grafana-vs-helicone
 tools: [grafana, helicone]
 category: observability
 last_verified: 2026-05-09
-verdict: helicone
+verdict: Helicone
 ---
 
 Grafana and Helicone approach agent observability from opposite directions. Helicone is an AI-specific proxy that automatically logs LLM requests with cost tracking and session grouping. Grafana is a general-purpose observability platform that can ingest LLM data via OpenTelemetry. It has no LLM-specific features. Helicone wins on agent-relevant observability out of the box. Grafana wins on self-hosting and infrastructure monitoring.

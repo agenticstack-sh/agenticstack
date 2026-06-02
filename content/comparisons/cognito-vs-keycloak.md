@@ -29,6 +29,6 @@ Keycloak operates strictly as a traditional human-centric authorization server. 
 
 ## When to pick which
 
-* If you have strict air-gapped data residency requirements and a dedicated DevOps team to manage database clustering and failovers, pick Keycloak because its open-source license allows you to self-host the identity provider entirely within your own infrastructure.
-* If you're building a highly cost-sensitive B2C app hosted entirely on AWS, pick Amazon Cognito because its minimal $0.02 MAU pricing and direct hooks into AWS WAF and Pinpoint keep baseline infrastructure billing exceptionally low.
-* If you want to avoid infrastructure management and scaling burdens entirely, pick Amazon Cognito because it is a fully managed cloud service, completely eliminating the heavy Kubernetes and Java maintenance overhead required by Keycloak.
+* **If you have strict air-gapped data residency requirements and a dedicated DevOps team to manage database clustering and failovers, pick Keycloak** because its open-source license allows you to self-host the identity provider entirely within your own infrastructure.
+* **If you're building a highly cost-sensitive B2C app hosted entirely on AWS, pick Amazon Cognito** because its minimal $0.02 MAU pricing and direct hooks into AWS WAF and Pinpoint keep baseline infrastructure billing exceptionally low.
+* **If you want to avoid infrastructure management and scaling burdens entirely, pick Amazon Cognito** because it is a fully managed cloud service, completely eliminating the heavy Kubernetes and Java maintenance overhead required by Keycloak.

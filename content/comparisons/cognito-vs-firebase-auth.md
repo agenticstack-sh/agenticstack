@@ -26,5 +26,5 @@ Firebase operates strictly as a traditional human-centric authentication service
 
 ## When to pick which
 
-* If you're building a highly cost-sensitive B2C app hosted entirely on AWS, pick Amazon Cognito because its minimal $0.02 MAU pricing and direct hooks into AWS WAF keep baseline infrastructure billing exceptionally low.
-* If you're building a simple consumer application tightly integrated with Google Cloud, pick Firebase because its solid developer tooling and upgradable path to Google Cloud Identity Platform avoid the heavy custom AWS Lambda scripting required by Cognito.
+* **If you're building a highly cost-sensitive B2C app hosted entirely on AWS, pick Amazon Cognito** because its minimal $0.02 MAU pricing and direct hooks into AWS WAF keep baseline infrastructure billing exceptionally low.
+* **If you're building a simple consumer application tightly integrated with Google Cloud, pick Firebase** because its solid developer tooling and upgradable path to Google Cloud Identity Platform avoid the heavy custom AWS Lambda scripting required by Cognito.

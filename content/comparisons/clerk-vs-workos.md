@@ -26,6 +26,6 @@ WorkOS provides significantly more mature infrastructure for Model Context Proto
 
 ## When to pick which
 
-* If you're building a B2C application or a fast-moving React/Next.js project, pick Clerk because its drop-in UI components and modern session handling offer the fastest path to launch.
-* If you need to sell to large enterprises, pick WorkOS because its out-of-the-box SAML SSO, native SCIM Directory Sync, and self-serve Admin Portal are built specifically to pass enterprise IT reviews.
-* If you're building Model Context Protocol (MCP) servers or need fine-grained agent authorization, pick WorkOS because its full OAuth 2.1 support, DCR, and native FGA provide the necessary security architecture for agentic workflows.
+* **If you're building a B2C application or a fast-moving React/Next.js project, pick Clerk** because its drop-in UI components and modern session handling offer the fastest path to launch.
+* **If you need to sell to large enterprises, pick WorkOS** because its out-of-the-box SAML SSO, native SCIM Directory Sync, and self-serve Admin Portal are built specifically to pass enterprise IT reviews.
+* **If you're building Model Context Protocol (MCP) servers or need fine-grained agent authorization, pick WorkOS** because its full OAuth 2.1 support, DCR, and native FGA provide the necessary security architecture for agentic workflows.

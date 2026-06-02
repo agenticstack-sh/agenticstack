@@ -4,7 +4,7 @@ slug: payload-vs-strapi
 tools: [payload, strapi]
 category: headless-cms
 last_verified: 2026-05-09
-verdict: strapi
+verdict: Strapi
 ---
 
 Payload and Strapi both generate REST and GraphQL APIs from code. Strapi wins on outbound webhooks and token scoping. Payload wins on schema ownership and in-process hooks.

@@ -4,7 +4,7 @@ slug: aws-ses-vs-mailgun
 tools: [aws-ses, mailgun]
 category: email
 last_verified: 2026-05-09
-verdict: mailgun
+verdict: Mailgun
 ---
 
 Mailgun and AWS SES diverge on every agentic dimension. Mailgun ships an official MCP server and delivers events directly to HTTP endpoints. AWS SES has no MCP server and routes events through SNS. AWS SES provides the most granular credential model via IAM and operates within the AWS compliance boundary. Pick Mailgun for tool-call surface and minimal infrastructure. Pick AWS SES for IAM-level scoping or regulated-data compliance.

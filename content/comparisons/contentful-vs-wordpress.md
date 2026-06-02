@@ -2,37 +2,37 @@
 title: "Contentful vs WordPress"
 slug: contentful-vs-wordpress
 tools: [contentful, wordpress]
-category: cms
-last_verified: 2026-04-28
+category: headless-cms
+last_verified: 2026-05-09
 verdict: contentful
 ---
 
-WordPress was built as a publishing platform first; its REST API was added later. Contentful was designed from the start as a headless API. That design difference surfaces across every dimension that matters for agent-driven workflows: MCP support, webhooks, content API structure, and token security. WordPress's advantages—self-hosting flexibility and open-source licensing—are real but are not agent-relevant for net-new builds.
+WordPress was built for publishing; its REST API came later. Contentful was designed as headless from the start. That difference shows on every agentic dimension: MCP support, webhooks, API design, and token security. WordPress self-hosting is real but not relevant for new agent projects.
 
 ## Where Contentful wins
 
-* **Purpose-built delivery and management APIs.** Contentful separates concerns across four APIs: the Content Delivery API (read, CDN-backed), the Content Management API (write), the Content Preview API (unpublished drafts), and the Images API (transformations). The GraphQL API generates a schema automatically from the content model with no deploy step—agent queries stay valid after content model updates. WordPress exposes a single REST API at `/wp-json/wp/v2/` for both reads and writes; GraphQL requires a third-party plugin.
+* **Four dedicated APIs.** Contentful separates Delivery API (read, CDN), Management API (write), Preview API (drafts), and Images API (transforms). GraphQL schema auto-generates with no deploy—agent queries stay valid after content updates. WordPress has one REST API at `/wp-json/wp/v2/` for reads and writes. GraphQL needs a third-party plugin.
 
-* **Hosted MCP server and first-party SDK coverage.** Contentful's App Framework documentation describes a supported MCP server at `mcp.contentful.com/mcp` (Beta, OAuth) plus a local open-source option, making it available as a tool for any MCP-compatible agent without custom integration. Maintained SDKs cover JavaScript, Python, PHP, Ruby, Java, .NET, Android, and iOS. WordPress has no documented MCP server; client SDKs are community-maintained.
+* **MCP server and maintained SDKs.** Contentful's MCP server at `mcp.contentful.com/mcp` (Beta, OAuth) plus local open-source option. Agents use it as a tool without custom code. Maintained SDKs for JavaScript, Python, PHP, Ruby, Java, .NET, Android, iOS. WordPress has no documented MCP server; SDKs are community-maintained.
 
-* **Outgoing webhooks with retry.** Contentful's webhook system fires on content events with documented retry behavior and configurable payload transforms. WordPress core has no outgoing webhook mechanism—its internal hook system is server-side PHP extensibility only. For any agent that needs to react to content changes, WordPress pushes that integration surface out of the platform and onto the engineering team.
+* **Outgoing webhooks with retry.** Contentful fires webhooks on content events with documented retry and payload transforms. WordPress core has no outgoing webhooks—its hook system is server-side PHP only. Agents that react to content changes require custom layers outside the platform.
 
-* **Content-scoped API tokens.** Contentful's token model separates read-only delivery (CDA), write access (CMA), and preview (CPA), allowing the principle of least privilege at the API boundary. WordPress Application Passwords grant full user-level permissions with no mechanism to restrict a credential to specific post types or operations.
+* **Token scoped by API type.** Contentful tokens separate read (CDA), write (CMA), and preview (CPA) at the API boundary, enforcing least privilege. WordPress Application Passwords grant full user permissions with no way to restrict to post types or operations.
 
 ## Where WordPress wins
 
-* **Self-hosted on any infrastructure with no vendor dependency.** WordPress is GPL-licensed and runs on any host that supports PHP 8.3+ and MySQL/MariaDB—shared hosting, VPS, or on-premises—with no API call limits, seat fees, or mandatory SaaS backend. Contentful is cloud-only. For agent deployments with data residency requirements or infrastructure ownership constraints, WordPress's self-hosted model removes those blockers. WordPress.org software is free; the cost floor is infrastructure alone.
+* **Self-hosted, GPL-licensed, no vendor lock-in.** WordPress runs on any PHP 8.3+ and MySQL/MariaDB host: shared, VPS, or on-premises. No API limits, seat fees, or mandatory SaaS backend. Contentful is cloud-only. For agent deployments needing data residency or ownership, WordPress self-hosting removes this blocker. WordPress software is free; only infrastructure costs.
 
 ## The agentic difference
 
-WordPress has no documented surface for agentic integration. There is no MCP server, no outgoing webhook in core, and no content-scoped API token—Application Passwords grant full permissions of the associated user account with no way to restrict a credential to specific post types or operations. An agent integrating with WordPress must either accept broad user-level permissions or build a custom permissions layer.
+WordPress has no documented agentic integration. No MCP server, no outgoing webhooks in core, no content-scoped tokens. Application Passwords grant full user permissions with no way to scope to post types or operations. Agents accept broad permissions or build custom layers.
 
-Contentful's MCP server means an agent can treat Contentful content as a tool call. Separate delivery and management API keys enforce the principle of least privilege at the API boundary without custom code. The combination makes Contentful a lower-effort, lower-risk target for agent pipelines than WordPress.
+Contentful's MCP server lets agents call content as tool calls. Separate delivery and management tokens enforce least privilege at the API boundary without custom code. This makes Contentful a simpler, lower-risk target for agents than WordPress.
 
 ## When to pick which
 
-* **Pick Contentful** when the project is greenfield and the primary interface to content is an agent or API client. The MCP server, separate delivery and management APIs, and first-party SDKs reduce the integration work to near zero for common agentic patterns.
+* **Pick Contentful** when the project is new and agents or API clients are the primary content interface. MCP server, separate APIs, and maintained SDKs cut integration work to near zero for agentic patterns.
 
-* **Pick WordPress** when the project already runs on WordPress and the headless layer is additive—existing content, authors, plugins, and editorial workflows stay in place with no migration. Also pick WordPress when data residency or GPL licensing is a hard infrastructure requirement for the agent deployment.
+* **Pick WordPress** when you already run WordPress and just need to expose content to agents—existing content, authors, plugins, and workflows stay unchanged.
 
-* **Pick contentful** as a net-new headless CMS for agent use cases. Wordpress's absence of native webhooks, an MCP server, and content-scoped tokens means building each of those integration layers from scratch. That work belongs in the platform, not the application.
+* **Skip WordPress** for new headless CMS projects for agents. Building webhooks, MCP servers, and content-scoped tokens from scratch belongs in the platform, not your application.

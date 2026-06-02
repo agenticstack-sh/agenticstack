@@ -28,6 +28,6 @@ Keycloak also operates as a traditional authorization server. It acts as an MCP 
 
 ## When to pick which
 
-* If you're building a simple B2C app hosted entirely on Google Cloud, pick Firebase because its deep integration into the Google ecosystem provides a frictionless backend-as-a-service experience.
-* If you want to avoid infrastructure management and scaling burdens entirely, pick Firebase because it is a fully managed cloud service, completely eliminating the heavy Kubernetes, Infinispan clustering, and Java maintenance overhead required by Keycloak.
-* If you have strict air-gapped data residency requirements and a dedicated DevOps team to maintain operations, pick Keycloak because its open-source license allows you to self-host the identity provider entirely within your own infrastructure.
+* **If you're building a simple B2C app hosted entirely on Google Cloud, pick Firebase** because its deep integration into the Google ecosystem provides a frictionless backend-as-a-service experience.
+* **If you want to avoid infrastructure management and scaling burdens entirely, pick Firebase** because it is a fully managed cloud service, completely eliminating the heavy Kubernetes, Infinispan clustering, and Java maintenance overhead required by Keycloak.
+* **If you have strict air-gapped data residency requirements and a dedicated DevOps team to maintain operations, pick Keycloak** because its open-source license allows you to self-host the identity provider entirely within your own infrastructure.

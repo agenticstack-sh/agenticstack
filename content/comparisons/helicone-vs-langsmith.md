@@ -4,7 +4,7 @@ slug: helicone-vs-langsmith
 tools: [helicone, langsmith]
 category: observability
 last_verified: 2026-05-09
-verdict: langsmith
+verdict: LangSmith
 ---
 
 Helicone and LangSmith serve different depths of agent observability. LangSmith provides deep run-tree tracing, evaluation pipelines, prompt engineering, and dataset management. Helicone provides proxy-based request logging with cost tracking and gateway features. LangSmith wins on all three dimensions. Helicone wins on zero-code integration and cost analytics.

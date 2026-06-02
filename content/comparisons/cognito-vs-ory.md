@@ -29,6 +29,6 @@ Amazon manages AI identity via Amazon Bedrock AgentCore, which provides basic to
 
 ## When to pick which
 
-* If you're building a highly cost-sensitive B2C app hosted entirely on AWS, pick Amazon Cognito because its minimal $0.02 MAU pricing and direct hooks into AWS WAF keep baseline infrastructure billing exceptionally low.
-* If you need deep, resource-level permissions or Google Docs-style authorization to secure RAG pipelines, pick Ory because Ory Keto is built specifically to model complex relationship-based access control (ReBAC) scenarios.
-* If you require absolute control over data residency or prefer a headless, API-first identity architecture, pick Ory because its open-source microservices can be self-hosted and customized entirely within your own infrastructure.
+* **If you're building a highly cost-sensitive B2C app hosted entirely on AWS, pick Amazon Cognito** because its minimal $0.02 MAU pricing and direct hooks into AWS WAF keep baseline infrastructure billing exceptionally low.
+* **If you need deep, resource-level permissions or Google Docs-style authorization to secure RAG pipelines, pick Ory** because Ory Keto is built specifically to model complex relationship-based access control (ReBAC) scenarios.
+* **If you require absolute control over data residency or prefer a headless, API-first identity architecture, pick Ory** because its open-source microservices can be self-hosted and customized entirely within your own infrastructure.

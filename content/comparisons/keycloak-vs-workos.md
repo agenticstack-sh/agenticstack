@@ -27,7 +27,7 @@ Keycloak operates strictly as a traditional human-centric authorization server. 
 
 ## When to pick which
 
-* If you're building a B2B SaaS application and want to rapidly onboard enterprise customers, pick WorkOS because its Admin Portal and out-of-the-box SCIM Directory Sync simplify the IT setup process without requiring custom developer intervention.
-* If you have strict air-gapped data residency requirements or want absolute control over your deployment architecture, pick Keycloak because its open-source license allows you to self-host the identity provider entirely within your own infrastructure.
-* If you are a rapidly scaling B2B SaaS with hundreds of enterprise clients, evaluate Keycloak (or another alternative) carefully, as WorkOS's $125 per-connection fee for SSO and SCIM can lead to massive and unpredictable monthly bills.
-* If you are deploying autonomous AI agents via the Model Context Protocol (MCP), pick WorkOS because its native OAuth 2.1 support and Cloudflare integrations provide a much stronger baseline for agentic workflows than Keycloak's traditional architecture.
+* **If you're building a B2B SaaS application and want to rapidly onboard enterprise customers, pick WorkOS** because its Admin Portal and out-of-the-box SCIM Directory Sync simplify the IT setup process without requiring custom developer intervention.
+* **If you have strict air-gapped data residency requirements or want absolute control over your deployment architecture, pick Keycloak** because its open-source license allows you to self-host the identity provider entirely within your own infrastructure.
+* **If you are a rapidly scaling B2B SaaS with hundreds of enterprise clients, pick Keycloak** as WorkOS's $125 per-connection fee for SSO and SCIM can lead to massive and unpredictable monthly bills.
+* **If you are deploying autonomous AI agents via the Model Context Protocol (MCP), pick WorkOS** because its native OAuth 2.1 support and Cloudflare integrations provide a much stronger baseline for agentic workflows than Keycloak's traditional architecture.

@@ -27,6 +27,6 @@ Crucially, neither platform natively supports standards-based Asynchronous Autho
 
 ## When to pick which
 
-* If you're building a B2B SaaS application targeting enterprise customers, pick WorkOS because its Admin Portal and native SCIM Directory Sync drastically simplify the IT onboarding process.
-* If you need to rapidly deploy AI agents that require delegated access to third-party tools, pick Descope because its Outbound Apps provide pre-built connectors and native token vaulting to handle credentials securely.
-* If you prefer configuring authentication logic visually rather than writing and maintaining backend code, pick Descope because its drag-and-drop workflows eliminate deep custom logic requirements.
+* **If you're building a B2B SaaS application targeting enterprise customers, pick WorkOS** because its Admin Portal and native SCIM Directory Sync drastically simplify the IT onboarding process.
+* **If you need to rapidly deploy AI agents that require delegated access to third-party tools, pick Descope** because its Outbound Apps provide pre-built connectors and native token vaulting to handle credentials securely.
+* **If you prefer configuring authentication logic visually rather than writing and maintaining backend code, pick Descope** because its drag-and-drop workflows eliminate deep custom logic requirements.

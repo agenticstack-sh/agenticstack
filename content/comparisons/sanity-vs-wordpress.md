@@ -3,7 +3,7 @@ title: "Sanity vs WordPress"
 slug: sanity-vs-wordpress
 tools: [sanity, wordpress]
 category: cms
-last_verified: 2026-08-09
+last_verified: 2026-05-09
 verdict: sanity
 ---
 

@@ -25,6 +25,6 @@ Neither platform is deeply optimized for advanced AI agent governance. Clerk foc
 
 ## When to pick which
 
-* If you're building a modern React or Next.js application, pick Clerk because its drop-in components and fully managed infrastructure eliminate the need to write and maintain custom authentication backend code.
-* If you have strict on-premises data residency requirements or a zero-budget software mandate, pick Keycloak because its open-source license allows you to self-host the identity provider entirely within your own infrastructure.
-* If you lack a dedicated DevOps team to manage database clustering, failovers, and version upgrades, pick Clerk because maintaining Keycloak's high availability requires significant operational expertise and hidden costs.
+* **If you're building a modern React or Next.js application, pick Clerk** because its drop-in components and fully managed infrastructure eliminate the need to write and maintain custom authentication backend code.
+* **If you have strict on-premises data residency requirements or a zero-budget software mandate, pick Keycloak** because its open-source license allows you to self-host the identity provider entirely within your own infrastructure.
+* **If you lack a dedicated DevOps team to manage database clustering, failovers, and version upgrades, pick Clerk** because maintaining Keycloak's high availability requires significant operational expertise and hidden costs.

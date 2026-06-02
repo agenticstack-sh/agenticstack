@@ -25,5 +25,5 @@ Supabase operates strictly as a traditional human-centric authentication service
 
 ## When to pick which
 
-- If you're building a new application from scratch and need a complete open-source data layer, pick Supabase because its built-in authentication primitives securely tie directly into its database and backend services.
-- If you're building a highly cost-sensitive, basic B2C application hosted entirely on AWS, pick Amazon Cognito because its minimal $0.02 MAU pricing and direct hooks into AWS WAF keep baseline infrastructure billing exceptionally low.
+* **If you're building a new application from scratch and need a complete open-source data layer, pick Supabase** because its built-in authentication primitives securely tie directly into its database and backend services.
+* **If you're building a highly cost-sensitive, basic B2C application hosted entirely on AWS, pick Amazon Cognito** because its minimal $0.02 MAU pricing and direct hooks into AWS WAF keep baseline infrastructure billing exceptionally low.

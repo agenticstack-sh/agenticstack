@@ -3,28 +3,46 @@ title: "Clerk vs Keycloak"
 slug: clerk-vs-keycloak
 tools: [clerk, keycloak]
 category: auth
-last_verified: 2026-04-27
-verdict: "Pick Clerk for rapidly building modern React or Next.js applications with minimal backend overhead, but choose Keycloak if you require a free, self-hosted open-source identity provider and have the DevOps expertise to manage it."
+last_verified: 2026-05-09
+verdict: "Keycloak"
 ---
+
+For developers building AI agents, Clerk and Keycloak make opposite tradeoffs. Clerk prioritizes managed React/Next.js development over protocol depth. Keycloak provides protocol control and self-hosting for advanced agent governance. Keycloak wins for agents in regulated environments needing CIBA, self-hosted control, and no per-agent licensing. Clerk is better for React/Next.js products where auth UI and managed infrastructure matter most.
 
 ## Where Keycloak wins
 
-* **Open-Source and Self-Hosted Control:** Keycloak is a venerable open-source tool backed by RedHat that allows for deployment on any local system, private cloud, or air-gapped environment.
-* **No Upfront Licensing Costs:** As free software, Keycloak avoids the monthly active user (MAU) pricing tiers of SaaS vendors, making its baseline software cost virtually free, though costs are shifted to infrastructure hosting and DevOps maintenance.
-* **Deep Customization via Code:** It supports extensive protocol-level customization and deep integration for teams with strong Java, Spring, and Kubernetes expertise.
+* **CIBA for Asynchronous Agent Approvals.** Keycloak's CIBA support (since v13) is the only option for agent approval without blocking. An agent initiates a request, continues processing, and polls for approval. Critical for long-running AI tasks needing human governance checkpoints.
+
+* **Self-Hosted Deployment with Air-Gap Support.** Keycloak runs in your infrastructure, including air-gapped environments. For agents processing classified data or operating in regulated industries, self-hosting eliminates vendor dependency.
+
+* **No Per-Agent Licensing.** Keycloak's open-source license has no per-user, per-MAU, or per-machine-identity fees. Agent-heavy architectures scale with infrastructure costs only.
+
+* **Protocol Customization via Java SPI.** Keycloak's Service Provider Interface layer enables custom authentication flows, token enrichment, and event handling at the protocol level. You can build agent-aware authorization logic into the token issuance pipeline.
 
 ## Where Clerk wins
 
-* **Superior Developer Experience for Modern Frameworks:** Clerk provides pre-built, drop-in UI components for Next.js and React that handle complete sign-up, sign-in, and profile management instantly. Customizing Keycloak login pages requires complex theming and Java development that slows down developers.
-* **Zero Infrastructure Maintenance:** Clerk is a fully managed global SaaS service offering session validation under 1 millisecond and stateless edge-optimized tokens. Keycloak requires a dedicated DevOps team to manage databases, containerization, security patches, and high-availability clustering (Infinispan), meaning upgrades can cause downtime if not handled perfectly.
-* **Out-of-the-Box B2B Primitives:** Clerk includes opinionated B2B primitives and organization management directly in its SDKs. Keycloak is not natively designed for true B2B multi-tenancy, meaning each business customer often needs their own separate deployment, which drastically drives up the total cost of ownership.
+* **React/Next.js Drop-In Components.** If your agent's user interface is built on React or Next.js, Clerk's pre-built components eliminate auth UI engineering entirely. Keycloak requires building or heavily customizing login pages.
+
+* **Managed Edge Performance.** Clerk validates sessions at the CDN edge in sub-millisecond time. Keycloak's centralized deployment adds latency based on geographic distance.
+
+* **Zero Operations Overhead.** Clerk is fully managed. No database scaling, no clustering, no upgrade downtime. Keycloak requires DevOps expertise for production high-availability.
+
+* **ML-Based Threat Detection.** Clerk's ML-driven detection identifies and blocks suspicious patterns. Keycloak relies on rate limiting and custom implementations.
 
 ## The agentic difference
 
-Neither platform is deeply optimized for advanced AI agent governance. Clerk focuses on "AI Authentication" with ML-based anti-abuse protections and sub-millisecond authentication for fast apps, but it lacks full lifecycle identity or fine-grained authorization for machine agents. Keycloak operates as a traditional authorization server and relies heavily on external third-party integrations (like HIBP or WAFs) for advanced threat detection. Keycloak lacks a native Token Vault for managing third-party agent credentials and does not offer dedicated asynchronous human-in-the-loop workflows or native RAG-aware data scoping. For teams building autonomous AI agents, both tools will require significant custom engineering.
+Keycloak's CIBA enables asynchronous agent approvals. Keycloak supports CIBA (Client-Initiated Backchannel Authentication) since v13 — a protocol primitive where agents initiate requests, continue executing, and poll for approval asynchronously. For agents needing human-in-the-loop governance (e.g., "agent requests approval before accessing sensitive data"), CIBA enables non-blocking workflows. The agent doesn't pause waiting for human confirmation. Clerk has no CIBA support. It lacks any mechanism for asynchronous agent-to-human authorization without blocking.
+
+Clerk's bot protection targets consumer auth endpoints, not agents. Clerk's `@clerk/agent-toolkit` and ML-based detection prevent abuse of human auth endpoints. They don't handle agent-specific authorization patterns like delegated API access or machine-identity governance. Keycloak's Java SPI extensibility lets you build custom agent policies but requires development.
+
+Neither platform offers token vaults or FGA. Both Keycloak and Clerk lack vaults for managing third-party API credentials issued to agents. Neither provides Fine-Grained Authorization for RAG pipeline document scoping.
 
 ## When to pick which
 
-* **If you're building a modern React or Next.js application, pick Clerk** because its drop-in components and fully managed infrastructure eliminate the need to write and maintain custom authentication backend code.
-* **If you have strict on-premises data residency requirements or a zero-budget software mandate, pick Keycloak** because its open-source license allows you to self-host the identity provider entirely within your own infrastructure.
-* **If you lack a dedicated DevOps team to manage database clustering, failovers, and version upgrades, pick Clerk** because maintaining Keycloak's high availability requires significant operational expertise and hidden costs.
+* **Pick Keycloak** when building agent systems with asynchronous human-in-the-loop governance. CIBA lets agents request approval, continue work, and poll for response without blocking.
+
+* **Pick Keycloak** when data residency, air-gapped environments, or classified workloads are requirements. Self-hosting keeps the auth stack under your control.
+
+* **Pick Clerk** when your primary auth experience is a React or Next.js frontend for humans. Drop-in components eliminate auth engineering overhead.
+
+* **Pick Clerk** when you want zero infrastructure operations and prefer fully managed, SaaS-based identity infrastructure.

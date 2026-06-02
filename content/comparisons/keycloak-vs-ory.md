@@ -32,7 +32,7 @@ Crucially, neither platform natively supports standards-based Asynchronous Autho
 
 ## When to pick which
 
-* If you need a complete, self-hosted open-source identity monolith with out-of-the-box protocol support for complex legacy enterprise integrations (SAML, LDAP), pick Keycloak,.
-* If you prefer a headless, API-first identity architecture where you have full control to build your own user interfaces from scratch, pick Ory,.
-* If you need deep, resource-level permissions to secure RAG pipelines, pick Ory because Ory Keto is built specifically to model complex relationship-based access control (ReBAC) scenarios.
-* If you have a dedicated DevOps team to manage complex database clustering (Infinispan) and Java maintenance but want to avoid the operational complexity of stitching together individual identity microservices, pick Keycloak,,.
+* **Pick Keycloak** if you need a complete, self-hosted open-source identity monolith with out-of-the-box protocol support for complex legacy enterprise integrations (SAML, LDAP).
+* **Pick Ory** if you prefer a headless, API-first identity architecture where you have full control to build your own user interfaces from scratch.
+* **If you need deep, resource-level permissions to secure RAG pipelines, pick Ory** because Ory Keto is built specifically to model complex relationship-based access control (ReBAC) scenarios.
+* **Pick Keycloak** if you have a dedicated DevOps team to manage complex database clustering (Infinispan) and Java maintenance but want to avoid the operational complexity of stitching together individual identity microservices.

@@ -3,7 +3,7 @@ title: "Auth0 vs Ory"
 slug: auth0-vs-ory
 tools: [auth0, ory]
 category: auth
-last_verified: 2026-05-09
+last_verified: 2026-06-02
 verdict: "Auth0"
 ---
 
@@ -28,6 +28,14 @@ Auth0 and Ory are both capable identity platforms. Ory is modular open-source mi
 * **Deployment flexibility.** Ory supports self-hosted open-source, enterprise licenses, or managed SaaS on Ory Network for strict data residency requirements.
 
 * **User schema control.** Ory provides customizable user schemas and session management with full control over identity data structures.
+
+## The agentic difference
+
+Auth0 provides the complete agentic stack as managed services: Token Vault stores and auto-refreshes outbound OAuth credentials. Auth0 FGA enforces document-level permissions in RAG pipelines. CIBA/PAR enables agents to request human approval asynchronously. Dynamic Client Registration handles agent onboarding.
+
+Ory provides Zanzibar-style FGA via Keto for relationship-based access control in RAG document scoping — comparable to Auth0 FGA in authorization model. Hydra handles M2M OAuth2 flows for machine-to-machine communication. However, Ory lacks a token vault for outbound credential lifecycle management, has no MCP support, and does not provide CIBA for async human approval.
+
+Auth0 delivers all capabilities integrated and managed. Ory provides strong FGA via Keto but requires self-hosting, assembling separate microservices, and building the remaining agent infrastructure yourself.
 
 ## When to pick which
 

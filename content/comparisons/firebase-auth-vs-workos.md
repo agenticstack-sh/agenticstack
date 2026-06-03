@@ -3,29 +3,38 @@ title: "Firebase Auth vs WorkOS"
 slug: firebase-auth-vs-workos
 tools: [firebase-auth, workos]
 category: auth
-last_verified: 2026-04-27
-verdict: "Pick Firebase for simple consumer applications tightly coupled to the Google Cloud ecosystem, but choose WorkOS for purpose-built B2B SaaS requiring robust enterprise SSO, SCIM provisioning, and native MCP support."
+last_verified: 2026-05-09
+verdict: "WorkOS"
 ---
+
+Firebase Authentication and WorkOS both provide identity infrastructure for modern applications, but Firebase is Google's managed B2C authentication service tightly integrated with GCP while WorkOS is an enterprise identity platform with an Admin Portal, SCIM provisioning across major enterprise directories, Fine-Grained Authorization, and MCP server support. WorkOS wins on enterprise B2B multi-tenancy, self-serve SSO provisioning, and agentic FGA capabilities; Firebase wins on native GCP ecosystem integration and an accessible B2C baseline with an upgradable enterprise path.
 
 ## Where WorkOS wins
 
-* **Enterprise B2B Readiness and SCIM:** WorkOS is purpose-built for B2B SaaS integration, offering robust SAML/OIDC SSO alongside native SCIM Directory Sync (with support for providers like Okta, Azure AD, Google Workspace, and Workday) out-of-the-box. Firebase requires an upgrade to Identity Platform and custom code to support basic developer-managed tenants and SAML/OIDC federation.
-* **Self-Serve Admin Portal:** WorkOS provides a built-in Admin Portal that allows enterprise IT teams to self-serve their own SAML SSO and SCIM Directory Sync configurations via generated setup links. This drastically reduces developer involvement and shortens customer onboarding times.
-* **Zanzibar-style Fine-Grained Authorization:** Through its acquisition of Warrant, WorkOS offers a Fine-Grained Authorization (FGA) service that allows developers to model complex, resource-level permissions and relationship-based access control natively within the platform. Firebase lacks a native centralized authorization policy engine.
+* **Enterprise SSO and SCIM Self-Serve via Admin Portal.** WorkOS ships a hosted Admin Portal that allows enterprise customers to self-configure SAML and OIDC SSO connections and manage SCIM directory sync with Okta, Azure AD, Google Workspace, Workday, and other major providers without requiring engineering involvement on each deal. Firebase Authentication requires upgrading to Google Cloud Identity Platform for SAML and OIDC support, and provides no equivalent self-serve provisioning portal.
 
-## Where Firebase Auth wins
+* **Fine-Grained Authorization.** WorkOS provides a FGA engine, enabling teams to model document-level, resource-level, and relationship-based access control policies. Firebase Authentication provides no equivalent FGA primitive; its security rules are scoped to Firestore collections rather than offering a portable authorization layer.
 
-* **Native Google Cloud Ecosystem Integration:** Firebase Auth natively integrates with Google Cloud Platform (GCP) services like Firestore, Cloud Functions, and API Gateway. It provides a cohesive backend-as-a-service experience for developers building primarily within the Google ecosystem.
-* **Accessible Baseline for Basic B2C:** Standard Firebase Auth serves as a highly accessible, low-friction utility with a strong developer following for simple consumer applications. It works well for projects that do not immediately require enterprise-grade B2B features, though upgrading to Google Cloud Identity Platform is required to unlock SAML/OIDC and basic MFA.
+* **Free Up to One Million MAUs with AuthKit.** WorkOS offers its AuthKit user management product free for up to one million monthly active users, making it accessible for growing B2B SaaS products before enterprise seat pricing applies. Firebase Authentication's free tier is generous for B2C but does not include equivalent enterprise SSO or multi-tenancy primitives at any price tier without an Identity Platform upgrade.
+
+## Where Firebase wins
+
+* **Native GCP Ecosystem Integration.** Firebase Authentication integrates directly with the Google Cloud Platform stack, connecting with Firestore, Cloud Functions, Cloud Storage, and Google Analytics for Firebase without requiring custom bridge integrations. Teams already operating within GCP benefit from a unified billing model, shared IAM primitives, and native event-driven triggers.
+
+* **Accessible B2C Baseline with Zero Infrastructure Overhead.** Firebase Authentication requires no servers to provision or maintain and scales automatically as a managed Google service. Its simplified SDK-based integration and generous free tier make it an accessible starting point for consumer applications that do not yet require enterprise identity features.
+
+* **Upgradable Enterprise Path via Identity Platform.** Firebase Authentication can be upgraded to Google Cloud Identity Platform, unlocking SAML and OIDC federated identity, multi-factor authentication, and tenant management. This upgrade path allows teams to start with Firebase and grow into enterprise identity capabilities while remaining within the Google Cloud ecosystem.
 
 ## The agentic difference
 
-WorkOS aligns closely with the Model Context Protocol (MCP), offering direct integrations with Cloudflare MCP flows, native OAuth 2.1 support, and leveraging its FGA to enforce resource-level, contextual rules for AI agents. However, WorkOS treats its vault primarily as an encrypted key store without automated token refresh abstractions for outbound APIs, and it lacks native Asynchronous Authorization (CIBA) or human-in-the-loop approval workflows, forcing developers to build these critical safety nets from scratch.
+WorkOS supports agentic infrastructure. Its MCP server support enables AI agents to authenticate against WorkOS-protected APIs using OAuth 2.1 flows. Its FGA engine enforces document-level permissions during Retrieval-Augmented Generation vector searches, preventing agents from accessing documents outside their authorized scope. WorkOS also provides an encrypted key store for managing sensitive credentials. However, the vault does not support automated token refresh for outbound third-party APIs.
 
-Firebase operates strictly as a traditional human-centric authentication service. It lacks specific abstractions for MCP servers, does not offer a native token vault or delegation framework for outbound third-party API credentials, and provides no dedicated AI agent lifecycle management, asynchronous human-in-the-loop workflows, or RAG-aware data scoping.
+Firebase Authentication operates as a traditional, human-centric authentication service. It lacks abstractions for MCP servers, provides no token vault or delegation framework for outbound agent credentials, offers no AI agent lifecycle management layer, and supports no RAG-aware data scoping. Neither platform supports CIBA for asynchronous human-in-the-loop authorization workflows.
 
 ## When to pick which
 
-* If you're building a simple B2C app hosted entirely on Google Cloud, pick Firebase because its direct integration with Firestore and GCP services keeps backend infrastructure tightly coupled and frictionless.
-* If you're building a B2B SaaS application targeting enterprise customers, pick WorkOS because its Admin Portal, out-of-the-box SAML SSO, and native SCIM Directory Sync drastically simplify the IT onboarding process.
-* If you are building Model Context Protocol (MCP) servers, pick WorkOS because its native support for OAuth 2.1 and Fine-Grained Authorization provide the necessary security architecture for agentic workflows.
+* **Pick WorkOS** when building a B2B SaaS application that requires enterprise SSO and SCIM provisioning across major identity providers, because its Admin Portal enables customer self-service without requiring engineering involvement on each enterprise onboarding.
+
+* **Pick WorkOS** when building AI agent workflows that require document-level authorization during RAG queries, because its FGA engine provides the relationship-based access control primitives needed to enforce granular agent permissions.
+
+* **Pick Firebase** when building a new application on Google Cloud Platform that requires tight integration with Firestore, Cloud Functions, or GCP's event-driven infrastructure, because its native GCP bindings provide a unified data and authentication layer without custom bridge integrations.

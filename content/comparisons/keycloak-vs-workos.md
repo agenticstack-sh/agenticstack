@@ -3,31 +3,38 @@ title: "Keycloak vs WorkOS"
 slug: keycloak-vs-workos
 tools: [keycloak, workos]
 category: auth
-last_verified: 2026-04-27
-verdict: "Pick WorkOS for rapid, developer-friendly B2B SaaS enterprise SSO and SCIM integration, but choose Keycloak if you require absolute infrastructure control, a self-hosted open-source identity provider, and have the dedicated DevOps expertise to maintain it."
+last_verified: 2026-05-09
+verdict: "WorkOS"
 ---
+
+Keycloak and WorkOS both provide identity infrastructure for modern applications, but Keycloak is a Red Hat-backed open-source identity and access management server designed for complete self-hosted control while WorkOS is a developer-first B2B identity platform with a self-service Admin Portal for enterprise SSO and SCIM provisioning, Fine-Grained Authorization, and free usage up to one million MAUs. WorkOS wins on enterprise B2B go-to-market velocity, self-service Admin Portal, native FGA for RAG pipelines, and zero MAU cost up to one million users; Keycloak wins on open-source self-hosting including air-gapped deployments, no per-connection SSO or SCIM fees, and deep Java SPI customization for complex legacy integrations.
 
 ## Where WorkOS wins
 
-* **Enterprise B2B Readiness and Admin Portal:** WorkOS is purpose-built for B2B SaaS, offering turnkey enterprise Single Sign-On (SAML/OIDC) and native SCIM Directory Sync. It features a fully hosted Admin Portal that allows enterprise IT teams to self-serve their own configurations via setup links, drastically reducing developer involvement. Keycloak fundamentally lacks multi-tenant B2B organization constructs out of the box, meaning each customer typically needs their own deployment managed by your team.
-* **Zero Infrastructure Maintenance:** As a fully managed cloud service, WorkOS eliminates heavy DevOps burdens. Deploying Keycloak requires a dedicated team to manage complex Kubernetes configurations, database clustering (Infinispan), and manual patching. Furthermore, Keycloak does not natively support zero-downtime upgrades, meaning version changes can result in lost session data.
-* **Startup-Friendly Base Pricing:** WorkOS provides basic user management and its AuthKit UI completely free for up to 1 million monthly active users (MAUs). Keycloak avoids licensing costs but shifts the expense to significant hidden deployment, hosting, and maintenance operations.
+* **Enterprise B2B Identity with Self-Service Admin Portal.** WorkOS provides a self-service Admin Portal that allows enterprise customers to configure and manage their own SSO and SCIM integrations without engineering support. Keycloak requires custom UI development or significant configuration effort to expose equivalent self-service identity management capabilities to enterprise customers.
+
+* **Fine-Grained Authorization.** WorkOS includes a FGA engine, enabling relationship-based access control at the resource level for complex authorization scenarios including securing RAG pipeline retrieval. Keycloak provides no equivalent FGA primitive; its authorization capabilities rely on role-based policies within its realm model rather than portable relationship-based authorization.
+
+* **Free Up to One Million MAUs with AuthKit.** WorkOS AuthKit provides free authentication for up to one million MAUs. When you factor in infrastructure, maintenance, and engineering time, Keycloak's total cost of ownership exceeds what WorkOS offers.
 
 ## Where Keycloak wins
 
-* **Open-Source and Self-Hosted Control:** As a free, open-source solution originally developed under Red Hat, Keycloak can be deployed on any local system, private cloud, or highly regulated air-gapped environment. This grants infrastructure teams absolute control over data residency and deployment architecture without vendor lock-in.
-* **Avoiding Per-Connection Enterprise Fees:** WorkOS charges a flat $125 per month for each enterprise SSO connection and an additional $125 per month for each SCIM Directory Sync connection. For B2B SaaS platforms scaling to hundreds of enterprise customers, this per-connection pricing scales linearly and becomes exponentially expensive. Keycloak has no per-connection SaaS fees, making it potentially more cost-effective at massive B2B scale if infrastructure costs are tightly controlled.
-* **Deep Customization via Code:** For engineering teams with strong Java expertise, Keycloak allows for deep protocol-level customization of the authentication engine by writing and deploying custom Java Service Provider Interfaces (SPIs). WorkOS relies on a more rigid, API-driven approach that prioritizes rapid implementation over deep, backend customizability.
+* **Open-Source Self-Hosted with Air-Gap Support.** Keycloak can be deployed entirely within organization-controlled infrastructure, including air-gapped environments with no outbound internet access. WorkOS is a cloud-only service with no self-hosting option, making it unsuitable for organizations with strict data residency requirements or classified environment constraints.
+
+* **No Per-Connection SSO or SCIM Fees.** Keycloak's open-source model lets you connect unlimited enterprise SSO and SCIM integrations without per-connection licensing fees. WorkOS charges per SSO connection and SCIM directory sync, making Keycloak more cost-effective if you need many enterprise identity integrations.
+
+* **Deep Java SPI Customization.** Keycloak exposes an extensive Java Service Provider Interface layer enabling deep customization of authentication flows, user federation, token enrichment, and event handling. WorkOS does not provide an equivalent low-level extension model, limiting customization to its standard configuration surface for teams with complex legacy integration requirements.
 
 ## The agentic difference
 
-WorkOS aligns closely with the Model Context Protocol (MCP), offering direct integrations with Cloudflare MCP flows and native OAuth 2.1 support. It leverages its Fine-Grained Authorization (FGA) to enforce strict, document-level permissions during Retrieval-Augmented Generation (RAG) vector searches. However, WorkOS treats its Vault primarily as an encrypted key store without automated token refresh abstractions for outbound APIs, and it lacks native Asynchronous Authorization (CIBA) for background human-in-the-loop workflows.
+WorkOS provides agentic identity capabilities through its FGA engine, which enables strict resource-level permissions for securing RAG pipeline document retrieval. Its OAuth 2.1 support and MCP integration provide a standards-aligned foundation for machine-to-machine token flows and agent onboarding. WorkOS's encrypted key store provides basic credential management, though without automatic token refresh capabilities.
 
-Keycloak operates strictly as a traditional human-centric authorization server. It acts as an MCP Authorization Server only by wrapping its existing APIs and lacks official, native MCP server abstractions or a native Token Vault for outbound third-party API credentials. Neither platform provides out-of-the-box CIBA for background asynchronous approvals, leaving critical safety and compliance gaps for autonomous agents.
+Keycloak lacks dedicated agentic primitives. It has no outbound token vault for managing third-party API credentials used by AI agents. MCP server support requires wrapping Keycloak's existing OAuth2 and OIDC APIs rather than using built-in agentic abstractions. Keycloak provides no Fine-Grained Authorization engine for RAG pipeline scoping. Neither platform supports CIBA for asynchronous human-in-the-loop authorization workflows.
 
 ## When to pick which
 
-* If you're building a B2B SaaS application and want to rapidly onboard enterprise customers, pick WorkOS because its Admin Portal and out-of-the-box SCIM Directory Sync simplify the IT setup process without requiring custom developer intervention.
-* If you have strict air-gapped data residency requirements or want absolute control over your deployment architecture, pick Keycloak because its open-source license allows you to self-host the identity provider entirely within your own infrastructure.
-* If you are a rapidly scaling B2B SaaS with hundreds of enterprise clients, evaluate Keycloak (or another alternative) carefully, as WorkOS's $125 per-connection fee for SSO and SCIM can lead to massive and unpredictable monthly bills.
-* If you are deploying autonomous AI agents via the Model Context Protocol (MCP), pick WorkOS because its native OAuth 2.1 support and Cloudflare integrations provide a much stronger baseline for agentic workflows than Keycloak's traditional architecture.
+* **Pick WorkOS** when building a B2B SaaS product that needs to close enterprise deals requiring SSO and SCIM provisioning, because its self-service Admin Portal enables enterprise customers to self-configure integrations without engineering support and its free tier covers the first million MAUs.
+
+* **Pick WorkOS** when deploying AI agents that need resource-level access control for RAG pipelines, because its FGA engine provides relationship-based authorization for securing document-level retrieval.
+
+* **Pick Keycloak** when requiring complete open-source control and freedom from per-connection SSO or SCIM fees, because its self-hosted deployment model can run entirely within organization-controlled infrastructure at no per-user or per-connection licensing cost.

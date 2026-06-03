@@ -3,32 +3,38 @@ title: "Amazon Cognito vs Ory"
 slug: cognito-vs-ory
 tools: [cognito, ory]
 category: auth
-last_verified: 2026-04-27
-verdict: "Pick Amazon Cognito for ultra-low-cost, basic B2C authentication tightly coupled to AWS, but choose Ory for complete open-source architectural control and native Zanzibar-style fine-grained authorization."
+last_verified: 2026-05-09
+verdict: "Ory"
 ---
+
+For developers building AI agents, Amazon Cognito and Ory follow different deployment models. Amazon Cognito is a fully managed AWS utility with low per-MAU pricing and native AWS integration, but lacks Fine-Grained Authorization for RAG, uses static IAM provisioning instead of Dynamic Client Registration, and locks resource scoping to AWS. Ory is a modular, open-source identity stack with Keto, a Zanzibar-inspired Fine-Grained Authorization engine for document-level permissions in RAG pipelines, plus standards-compliant OAuth2 and OIDC for M2M flows. Ory wins for self-hosted FGA and agent-centric infrastructure; Cognito wins for zero infrastructure overhead and low B2C cost.
 
 ## Where Ory wins
 
-* **Modular, Open-Source Control:** Ory's architecture consists of independent, API-first microservices (Kratos for identity, Hydra for OAuth2/OIDC, Keto for permissions, and Oathkeeper for proxy). This allows infrastructure teams to deploy only the components they need and self-host them anywhere, completely avoiding monolithic vendor lock-in.
-* **Advanced Fine-Grained Authorization (FGA):** Ory includes Keto, an open-source, Zanzibar-inspired authorization engine. This natively enables complex relationship-based access control (ReBAC), allowing developers to model granular, resource-level permissions out-of-the-box.
-* **Schema-Based Identity Modeling:** Ory provides deep programmatic control over identity data structures through a highly customizable, schema-based user model. In contrast, Amazon Cognito's profile metadata schema is rigid and cannot be changed after initial setup.
+* **Modular, Open-Source Microservices.** Ory's architecture consists of independent, API-first microservices — Kratos for identity management, Hydra for OAuth2 and OIDC, Keto for permissions, and Oathkeeper for proxy. You deploy only what you need and self-host anywhere. Amazon Cognito is a monolithic managed service with no self-hosting option and suits organizations that don't require data residency control or freedom from vendor lock-in.
+
+* **Zanzibar-Style Fine-Grained Authorization.** Ory includes Keto, an open-source authorization engine that enables complex relationship-based access control. You model granular, resource-level permissions without additional work. Amazon Cognito provides only basic group-based access control with a limit of 10,000 groups per user pool.
+
+* **Schema-Based Identity Modeling.** Ory provides deep programmatic control over identity data structures through a customizable, schema-based user model. You can build non-standard user profiles and a headless, bring-your-own-UI authentication experience.
 
 ## Where Amazon Cognito wins
 
-* **Ultra-Low Cost for Basic B2C:** Cognito serves as a highly inexpensive utility for simple consumer authentication, offering a free tier for the first 10,000 monthly active users (MAUs) and charging roughly $0.02 per MAU thereafter.
-* **Native AWS Ecosystem Integration:** For teams fully invested in AWS, Cognito integrates directly with Amazon Pinpoint for marketing analytics, AWS WAF for web application firewall protection, and AWS Amplify.
-* **Zero Infrastructure Assembly:** Amazon Cognito is a fully managed cloud utility. Deploying Ory requires a steeper learning curve and the technical expertise to assemble, configure, and orchestrate individual microservices, which demands more setup for teams less comfortable with managing infrastructure.
+* **Zero Infrastructure Assembly.** Cognito is a fully managed AWS service requiring no servers to provision, patch, or scale. Running Ory in production requires assembling and operating multiple microservices with high-availability clustering, database management, and version coordination.
+
+* **Low Cost for Basic B2C.** For simple consumer applications, Cognito's free tier for the first 10,000 MAUs and roughly $0.015 per MAU thereafter costs less than running a properly scaled Ory deployment.
+
+* **Native AWS Ecosystem Integration.** Cognito integrates directly into the AWS stack and connects with Amazon Pinpoint, AWS WAF, and AWS Amplify without custom bridge integrations.
 
 ## The agentic difference
 
-Neither platform provides a comprehensive, turnkey governance suite specifically tailored for autonomous AI agents, such as native Asynchronous Authorization (CIBA) for background human-in-the-loop workflows.
+Ory approaches agentic identity from the infrastructure layer by using Ory Keto — its Zanzibar-style Fine-Grained Authorization service — to enforce document-level permissions during Retrieval-Augmented Generation vector searches. However, Ory lacks a dedicated outbound token vault for managing third-party API credentials and provides no native token lifecycle management abstractions for AI agents.
 
-Ory approaches agentic identity from the data authorization layer. Its standout feature is Ory Keto, a Zanzibar-style FGA service that effectively enforces strict, document-level permissions during Retrieval-Augmented Generation (RAG) vector searches. However, Ory lacks a native token vault for managing outbound third-party API credentials.
-
-Amazon manages AI identity via Amazon Bedrock AgentCore, which provides basic token vaulting for outbound APIs but lacks full CIAM depth. Crucially, AgentCore does not support Dynamic Client Registration (DCR), forcing developers to rely on static AWS IAM provisioning, which slows down dynamic agent ecosystems. Furthermore, AgentCore's metadata approach is resource-centric (relying on AWS IAM tags and S3 Access Grants) rather than agent-centric, locking data scoping entirely into the AWS ecosystem.
+AWS IAM manages AI identity within AWS and offers credential management for outbound APIs, but it does not support Dynamic Client Registration and forces you to rely on static provisioning. Its metadata approach is resource-centric — relying on AWS IAM tags and S3 Access Grants — rather than agent-centric. Neither platform supports CIBA for asynchronous human-in-the-loop authorization workflows.
 
 ## When to pick which
 
-* If you're building a highly cost-sensitive B2C app hosted entirely on AWS, pick Amazon Cognito because its minimal $0.02 MAU pricing and direct hooks into AWS WAF keep baseline infrastructure billing exceptionally low.
-* If you need deep, resource-level permissions or Google Docs-style authorization to secure RAG pipelines, pick Ory because Ory Keto is built specifically to model complex relationship-based access control (ReBAC) scenarios.
-* If you require absolute control over data residency or prefer a headless, API-first identity architecture, pick Ory because its open-source microservices can be self-hosted and customized entirely within your own infrastructure.
+* **Pick Ory** if you build AI agents or RAG pipelines requiring document-level permission enforcement. Ory Keto uses Zanzibar-style relationship-based access control that Cognito cannot provide.
+
+* **Pick Ory** if you need complete open-source architectural control and freedom from vendor lock-in. You deploy self-hosted microservices entirely within your infrastructure.
+
+* **Pick Amazon Cognito** if you build a cost-sensitive B2C application on AWS where infrastructure management is minimal. Its fully managed model and $0.015 per MAU pricing reduce the DevOps overhead that running Ory requires.

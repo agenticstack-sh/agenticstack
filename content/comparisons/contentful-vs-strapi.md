@@ -2,39 +2,39 @@
 title: "Contentful vs Strapi"
 slug: contentful-vs-strapi
 tools: [contentful, strapi]
-category: cms
-last_verified: 2026-04-28
-verdict: contentful
+category: headless-cms
+last_verified: 2026-05-09
+verdict: Contentful
 ---
 
-Contentful and Strapi both generate REST and GraphQL APIs from content models, but they diverge on MCP support, webhook reliability, and hosting model. Contentful leads on the dimensions that drive agent-ready architectures—MCP tooling and SDK breadth for multi-runtime pipelines. Strapi leads on data ownership and credential scoping for agent deployments with compliance or infrastructure requirements.
+Contentful and Strapi both generate REST and GraphQL APIs. Contentful wins on MCP support, webhook reliability, and multi-language SDKs. Strapi wins on self-hosting and token scoping.
 
 ## Where Contentful wins
 
-**Hosted MCP server.** Contentful's App Framework documentation describes a supported MCP server at `mcp.contentful.com/mcp` (Beta, OAuth) plus a local open-source option. Any MCP-compatible agent can treat Contentful as a ready-made tool with no custom wiring. Strapi documents "Strapi AI" for content managers and developers but provides no MCP server.
+* **MCP server included.** Contentful's App Framework includes an MCP server at `mcp.contentful.com/mcp` (Beta, OAuth) plus a local open-source option. Agents use Contentful without custom wiring. Strapi documents "Strapi AI" for content teams but offers no MCP server.
 
-**Documented webhook reliability.** Contentful's webhook system includes documented retry behavior. Strapi's webhook documentation explicitly states no built-in retry logic—developers are responsible for implementing retry and delivery logging. For agent workflows that depend on guaranteed event delivery, an undocumented retry surface is a meaningful gap.
+* **Webhook retry is documented.** Contentful retries webhooks with clear behavior. Strapi explicitly says no built-in retry—developers must implement retry and logging. For agents that depend on guaranteed delivery, this is a gap.
 
-**Wide SDK coverage for non-JavaScript agent runtimes.** Contentful ships maintained SDKs for JavaScript, Python, PHP, Ruby, Java, .NET, Android, and iOS. Agent pipelines built in Python, Java, or .NET have a maintained SDK without writing a custom HTTP layer. Strapi's documented SDK is JavaScript-only.
+* **Maintained SDKs for Python, Java, .NET.** Contentful maintains SDKs for JavaScript, Python, PHP, Ruby, Java, .NET, Android, and iOS. Python and Java teams get maintained SDKs. Strapi documents JavaScript only.
 
 ## Where Strapi wins
 
-**Self-hosted open source for data residency and compliance.** Strapi is MIT-licensed and runs on any infrastructure—bare metal, AWS, Azure, DigitalOcean, or Docker. The data layer is fully owned, with no mandatory SaaS backend or API call limits. Contentful is cloud-only. For agent deployments where data residency or infrastructure ownership is a hard requirement, Strapi's self-hosted model removes the constraint.
+* **Self-hosted, MIT-licensed.** Strapi runs on any infrastructure: bare metal, AWS, Azure, DigitalOcean, Docker. You own the data layer. No mandatory SaaS backend or API limits. Contentful is cloud-only. For agent deployments needing data residency or ownership, Strapi removes this constraint.
 
-**Scoped API tokens per content type and operation.** Strapi's custom API tokens allow per-content-type, per-endpoint permission control configured through the admin panel. Token expiry is configurable at 7, 30, or 90 days, or unlimited. This supports the principle of least privilege: an agent credential can be restricted to exactly the content types and operations it needs. Contentful's tokens are scoped to roles (read-only CDA, full CMA, preview CPA) without per-content-type restriction within a single token.
+* **Tokens scoped per content type and operation.** Strapi tokens restrict access to specific content types and operations via the admin panel. Set expiry to 7, 30, 90 days, or unlimited. Agents get exactly the permissions they need. Contentful tokens use role-level scoping (read, write, preview) without per-content-type limits in a single token.
 
 ## The agentic difference
 
-Contentful's hosted MCP server is the decisive factor for agent toolchains. An agent that speaks MCP can read, write, and manage Contentful content without a custom adapter—the protocol layer is already built. Strapi requires either a custom MCP server implementation or direct REST/GraphQL integration, which adds integration surface that the agent team must own and maintain.
+Contentful's MCP server is the deciding factor. Agents speak MCP and read, write, and manage content without custom code. Strapi requires a custom MCP adapter or direct REST/GraphQL integration—more surface area your team owns.
 
-Strapi's webhook model is a gap for reactive agent architectures. Without platform-level retry guarantees, an agent that triggers on content events must implement its own delivery assurance, or accept that events may be dropped silently on downstream failure. Contentful's retry window (1 minute) is narrow, but it is documented and platform-managed.
+Strapi webhooks lack platform retry guarantees. Agents that trigger on content events must build delivery assurance themselves, or accept silent failures. Contentful retries for 1 minute, documented and platform-managed.
 
-For agents that need to write content, both platforms expose full mutation APIs. Neither has a documented equivalent to Sanity's Agent Actions for LLM-native content operations.
+Both expose full mutation APIs for writes. Neither has an Agent Actions equivalent.
 
 ## When to pick which
 
-**Pick Contentful** when the agent stack is MCP-first and the CMS needs to present as a ready-made tool without custom wiring. Also pick Contentful when the pipeline runs in Python, Java, or another non-JavaScript runtime where a maintained SDK reduces integration surface.
+* **Pick Contentful** when agents must use MCP without custom adapters. Also pick Contentful for Python, Java, or .NET teams needing maintained SDKs.
 
-**Pick Strapi** when infrastructure ownership is a hard requirement—data residency, on-premises deployment, or compliance constraints that preclude a cloud-only CMS. Also pick Strapi when agent credentials must be scoped to specific content types and operations for security requirements that Contentful's role-level tokens do not satisfy.
+* **Pick Strapi** when you need self-hosted infrastructure, data ownership, or on-premises deployment. Also pick Strapi when agent tokens must scope to specific content types.
 
-**Pick Strapi over Contentful** if the project is already self-hosted on a specific infrastructure environment where Contentful's cloud-only architecture is a hard constraint.
+* **Pick Strapi over Contentful** if your project is already self-hosted where Contentful's cloud-only model is a blocker.

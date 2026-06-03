@@ -3,31 +3,41 @@ title: "Firebase Auth vs Keycloak"
 slug: firebase-auth-vs-keycloak
 tools: [firebase-auth, keycloak]
 category: auth
-last_verified: 2026-04-27
-verdict: "Pick Firebase for a fully managed, developer-friendly B2C authentication baseline within the Google Cloud ecosystem, but choose Keycloak if you require complete infrastructure control, a self-hosted open-source identity provider, and have the dedicated DevOps expertise to maintain it."
+last_verified: 2026-05-09
+verdict: "Keycloak"
 ---
+For developers building AI agents, Keycloak wins decisively. It provides CIBA for asynchronous approvals and protocol extensibility. Firebase is purely a human B2C authentication service with zero agent governance capabilities. Firebase has no agent abstractions, no token management for machine identities, and no extensibility for agent workflows. Choose Keycloak for any agent system needing protocol depth, human-in-the-loop governance, or on-premises deployment. Firebase is unsuitable for agent-centric architectures.
 
 ## Where Keycloak wins
 
-* **Open-Source and Self-Hosted Control:** As a free, open-source solution, Keycloak can be deployed on any local system, private cloud, or highly regulated air-gapped environment. This gives infrastructure teams absolute control over data residency and deployment architecture without the monthly active user (MAU) SaaS licensing fees charged by commercial vendors.
-* **Deep Customization via Code:** For teams with strong Java and Kubernetes expertise, Keycloak allows for deep protocol-level customization of the authentication engine. Developers can write and deploy custom Java Service Provider Interfaces (SPIs) to modify workflows, themes, and event listeners.
+* **CIBA for Asynchronous Agent-to-Human Authorization.** Keycloak's native CIBA (since v13) is irreplaceable for regulated agent workflows requiring human approval. Agents initiate requests, continue processing, and poll for confirmation — essential for healthcare, finance, and defense agent deployments.
 
-## Where Firebase Auth wins
+* **Self-Hosted Deployment with Air-Gap Support.** Keycloak runs entirely in your infrastructure, including air-gapped, classified environments. For regulated industries requiring on-premises deployment, self-hosting is mandatory.
 
-* **Zero Infrastructure Maintenance:** Standard Firebase Auth and the Google Cloud Identity Platform are fully managed cloud utilities. Deploying and maintaining Keycloak requires a dedicated DevOps team to manage complex database clustering (Infinispan), failovers, Kubernetes configurations, and manual patching. Upgrading Keycloak or Infinispan versions can lead to dropped sessions or downtime if not handled perfectly, as neither natively supports zero-downtime upgrades.
-* **Native Google Cloud Ecosystem Integration:** Firebase Auth is deeply integrated into the Google Cloud stack, making it a frictionless choice for developers building primarily within the Google Cloud ecosystem.
-* **Upgradable Baseline for B2C:** Standard Firebase Auth serves as a highly accessible utility with solid developer tooling for simple consumer applications. For organizations needing enterprise features, it offers an upgrade path to Google Cloud Identity Platform to unlock SAML/OIDC federation and basic MFA (SMS/TOTP) while keeping billing centralized within Google Cloud.
+* **Protocol Extensibility via Java SPI.** Custom authentication flows, token enrichment, and agent-aware policies can be implemented directly in token issuance pipelines. Firebase offers no extension points.
+
+* **No Per-Agent Licensing.** Open-source with zero per-MAU or per-machine-identity fees. Agent-heavy deployments scale cost-linearly with infrastructure only.
+
+## Where Firebase wins
+
+* **Zero Infrastructure Maintenance.** Fully managed by Google; no operational overhead. Keycloak requires dedicated DevOps for production deployments.
+
+* **GCP-Native Integration.** Direct integration with Firestore, Cloud Functions, Cloud Storage, and Google Analytics. Keycloak requires manual integration.
+
+* **Consumer-Focused Ease.** Firebase's documentation and UI are consumer-friendly. Keycloak requires Java/Kubernetes expertise.
 
 ## The agentic difference
 
-Neither platform provides a comprehensive, out-of-the-box governance suite specifically tailored for autonomous AI agents.
+Keycloak's CIBA provides protocol-level agent approval support. Firebase has none. Keycloak supports CIBA (Client-Initiated Backchannel Authentication) since v13 — enabling asynchronous agent-to-human authorization. Agents request approval, continue executing, and poll for response without blocking. Firebase has zero agentic capabilities: no CIBA, no agent governance abstractions, no extensibility for machine identity workflows.
 
-Firebase operates strictly as a traditional human-centric authentication service. It lacks specific abstractions for Model Context Protocol (MCP) servers, provides no native token vault for managing outbound third-party API credentials, and has no dedicated agent lifecycle management or fine-grained authorization (FGA) tailored for Retrieval-Augmented Generation (RAG).
+Keycloak is extensible via Java SPI. Firebase is a black box. Keycloak's Service Provider Interface layer allows custom agent policies, token handling, and event logic. Firebase has no extension points. You cannot implement agent-specific governance. Both lack token vaults or FGA natively. Keycloak enables custom implementations through SPI. Firebase does not.
 
-Keycloak also operates as a traditional authorization server. It acts as an MCP Authorization Server only by wrapping its existing APIs and lacks official, native MCP server abstractions or a native Token Vault for outbound third-party API credentials. Furthermore, neither platform natively supports standards-based Asynchronous Authorization (CIBA) for background human-in-the-loop approval workflows.
+Firebase's B2C focus completely misaligns with agent requirements. Firebase is optimized for consumer and SaaS human sign-ups. It provides no primitives for machine identity governance, no asynchronous approval workflows, and no extensibility for agent patterns.
 
 ## When to pick which
 
-* If you're building a simple B2C app hosted entirely on Google Cloud, pick Firebase because its deep integration into the Google ecosystem provides a frictionless backend-as-a-service experience.
-* If you want to avoid infrastructure management and scaling burdens entirely, pick Firebase because it is a fully managed cloud service, completely eliminating the heavy Kubernetes, Infinispan clustering, and Java maintenance overhead required by Keycloak.
-* If you have strict air-gapped data residency requirements and a dedicated DevOps team to maintain operations, pick Keycloak because its open-source license allows you to self-host the identity provider entirely within your own infrastructure.
+* **Pick Keycloak** when building agent systems that require human-in-the-loop governance, because CIBA is the only protocol-level support for asynchronous agent approval workflows.
+
+* **Pick Keycloak** when agents operate in regulated industries or require on-premises deployment, because self-hosting gives you complete control over the auth stack.
+
+* **Pick Firebase** only if your agents are entirely autonomous (no human approval required), operate natively on GCP, and you have no machine identity governance needs. Otherwise, Firebase is a poor fit for agent-centric architectures.

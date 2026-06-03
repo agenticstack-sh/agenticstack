@@ -3,32 +3,42 @@ title: "Keycloak vs Supabase Auth"
 slug: keycloak-vs-supabase-auth
 tools: [keycloak, supabase-auth]
 category: auth
-last_verified: 2026-04-27
-verdict: "Pick Supabase if you are building an application from scratch and need an integrated backend-as-a-service with built-in authentication, but choose Keycloak if you require a dedicated, self-hosted open-source identity provider and have the DevOps expertise to manage complex infrastructure."
+last_verified: 2026-05-09
+verdict: "Keycloak"
 ---
 
-## Where Supabase Auth wins
-
-* **Integrated Open-Source Backend:** Supabase operates as a modern developer framework and backend-as-a-service, providing identity natively alongside its database and other backend building blocks. This allows developers to build entire applications with authentication built-in from day one, without needing to orchestrate connections with a separate, standalone identity provider.
-* **Zero Infrastructure Maintenance (via Managed Cloud):** While Supabase can be self-hosted, its fully managed cloud offering eliminates the heavy DevOps burden required to run Keycloak. Deploying Keycloak demands dedicated technical expertise to manage complex Kubernetes configurations, database clustering (Infinispan), and manual patching. Furthermore, Keycloak upgrades do not natively support zero-downtime deployments, meaning session data can be lost during maintenance.
-* **Built-In Primitives:** Despite being a broader framework rather than a standalone identity product, Supabase Auth natively includes support for Enterprise SSO, Social Login, and standard Username and Password flows directly tied to the application's underlying infrastructure.
+For developers building AI agents, Keycloak wins on CIBA support for asynchronous agent approvals. Supabase is a backend-as-a-service offering no agentic primitives. Choose Keycloak if you need asynchronous human-in-the-loop authorization for agent actions, self-hosted or air-gapped deployment, and standalone IAM infrastructure. Choose Supabase only for full-stack applications where agents are purely autonomous and require no separate identity governance.
 
 ## Where Keycloak wins
 
-* **Standalone, Open-Source Control:** As a free, dedicated open-source IAM solution backed by RedHat, Keycloak can be deployed on any local system, private cloud, or highly regulated air-gapped environment. This gives infrastructure teams absolute control over data residency and deployment architecture without being tied to a specific database backend.
-* **No Upfront Software Licensing Costs:** Keycloak avoids the monthly active user (MAU) pricing tiers of commercial SaaS identity platforms, making its baseline software cost virtually zero. However, organizations must account for the hidden operational costs of hosting, database maintenance, and DevOps support.
-* **Deep Customization via Code:** For engineering teams with strong Java expertise, Keycloak allows for deep protocol-level customization of the authentication engine by writing and deploying custom Java Service Provider Interfaces (SPIs) to modify workflows and themes.
+* **CIBA for Asynchronous Agent Approval Workflows.** Keycloak's CIBA (since v13) lets agents initiate authorization requests, keep executing tasks, and poll for approval without blocking. For regulated agent deployments requiring human governance checkpoints before sensitive data access, CIBA is a core protocol primitive. No middleware needed.
+
+* **Self-Hosted Deployment with Air-Gap Support.** Keycloak runs entirely in your infrastructure, including air-gapped environments with no outbound internet access. For regulated agent deployments requiring on-premises control or classified data processing, self-hosting eliminates vendor dependency and enables strict data residency compliance.
+
+* **No Per-Agent Licensing.** Keycloak's open-source license carries no per-user, per-MAU, or per-machine-identity fees. Agent-heavy architectures scale with infrastructure costs only.
+
+* **Java SPI Customization for Agent-Aware Policies.** Keycloak's Service Provider Interface layer enables custom authentication flows, token enrichment, and agent-aware authorization policies directly in the token issuance pipeline. You can build domain-specific agent governance logic without external middleware.
+
+## Where Supabase wins
+
+* **Integrated Backend Framework with Zero Infrastructure.** Supabase operates as an open-source backend-as-a-service, providing identity natively alongside PostgreSQL, Realtime subscriptions, and Storage. For full-stack applications where authentication is secondary to database and API infrastructure, Supabase eliminates the operational complexity of running Keycloak as a standalone service.
+
+* **Database-Native Row-Level Security.** Supabase Auth integrates directly with PostgreSQL's Row-Level Security system, enabling fine-grained access control tied to authenticated identities. For applications where authorization policy lives in the database layer, Supabase provides a tightly coupled security model. Keycloak's authorization operates at the application layer through realm-level role assignments.
+
+* **Managed Cloud Option.** Supabase's cloud service provides zero infrastructure overhead. No Java runtimes, clustering, or upgrades to manage. Keycloak requires dedicated DevOps for production high-availability deployments.
 
 ## The agentic difference
 
-Neither platform provides a comprehensive, out-of-the-box governance suite specifically tailored for autonomous AI agents.
+Keycloak's CIBA enables asynchronous agent-to-human authorization. Keycloak supports CIBA (Client-Initiated Backchannel Authentication) since v13. Agents initiate authorization requests, keep executing tasks, and poll for user approval asynchronously. For regulated agent workflows requiring human-in-the-loop checkpoints, CIBA enables non-blocking execution. Supabase has no equivalent mechanism; approvals must be modeled through custom application logic or external services.
 
-Keycloak operates strictly as a traditional human-centric authorization server. It acts as a Model Context Protocol (MCP) Authorization Server only by wrapping its existing APIs, lacking official, native MCP server abstractions or an AI-tailored agent toolkit. Furthermore, Keycloak lacks a native Token Vault for securely managing outbound third-party API credentials and does not offer native GenAI workflow policies for Retrieval-Augmented Generation (RAG).
+Supabase's RLS is database-centric, not agent-centric. Supabase's Row-Level Security restricts database row access at the PostgreSQL layer based on authenticated identities. This is data-layer authorization tied to human users or simple role assignments. RLS does not support agent-aware governance, delegated third-party API access, or machine identity credential management. Keycloak's Java SPI extensibility allows custom agent-aware policies; Supabase does not.
 
-Supabase operates as a traditional human-centric authentication service tied to its database. It lacks specific abstractions for MCP servers, does not offer a native token vault or delegation framework for outbound third-party API credentials, and provides no dedicated AI agent lifecycle management or document-level Fine-Grained Authorization (FGA) tailored for complex RAG pipelines. Crucially, neither platform natively supports standards-based Asynchronous Authorization (CIBA) for background human-in-the-loop workflows.
+Neither supports token vaults, FGA, or DCR. Both platforms lack dedicated vaults for managing third-party API credentials issued to agents. Neither provides Fine-Grained Authorization for RAG pipeline scoping. Neither supports Dynamic Client Registration as an agentic primitive. Keycloak's SPI layer allows custom implementations; Supabase's managed API surface does not.
 
 ## When to pick which
 
-* If you're building a new application from scratch and need a complete open-source data layer, pick Supabase because its built-in authentication primitives securely tie directly into its database and backend services.
-* If you have strict air-gapped data residency requirements and a dedicated DevOps team to manage complex Kubernetes deployments and database clustering, pick Keycloak because its open-source license allows you to self-host the identity provider entirely within your own infrastructure.
-* If you want to avoid heavy infrastructure management and scaling burdens entirely, pick Supabase's managed service, completely eliminating the heavy Kubernetes, Infinispan clustering, and Java maintenance overhead required to operate Keycloak effectively.
+* **Pick Keycloak** when building agent systems requiring asynchronous human-in-the-loop authorization. CIBA's native support lets agents request approval, keep working, and poll for authorization without blocking execution.
+
+* **Pick Keycloak** when agents operate in regulated environments requiring on-premises or air-gapped deployment. Self-hosting keeps the entire auth stack under your organizational control.
+
+* **Pick Supabase** when building a new full-stack application where authentication is tightly coupled to your database and you want zero infrastructure operations overhead.

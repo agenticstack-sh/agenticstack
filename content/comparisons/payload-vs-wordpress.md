@@ -2,37 +2,37 @@
 title: "Payload vs WordPress"
 slug: payload-vs-wordpress
 tools: [payload, wordpress]
-category: cms
-last_verified: 2026-04-28
-verdict: payload
+category: headless-cms
+last_verified: 2026-05-09
+verdict: Payload
 ---
 
-Payload and WordPress are both open-source and self-hostable, but they diverge sharply on API design, content modeling, and access control. Payload is TypeScript-first with auto-generated REST and GraphQL; WordPress is PHP-first with REST only and no native GraphQL. The gap favors Payload on every high-weight dimension except AI/MCP support, where neither platform has a documented native offering.
+Payload and WordPress are both open-source and self-hostable. Payload is TypeScript-first with auto-generated REST and GraphQL. WordPress is PHP-first with REST only, no native GraphQL. Payload wins on API design, content modeling, and access control.
 
 ## Where Payload wins
 
-**Auto-generated REST and GraphQL.** Payload generates a full REST API and a complete GraphQL API automatically from its TypeScript collection and global schemas. The REST API supports CRUD operations with query parameters for depth, joins, locale, sorting, filtering, and pagination. The GraphQL API mirrors the content model with custom queries and mutations, a built-in development playground, and query complexity limiting. A TypeScript SDK (`@payloadcms/sdk`) is available for typed client access. WordPress exposes a REST API at `/wp-json/wp/v2/` for core content types; GraphQL is not part of WordPress core and requires a third-party plugin.
+* **REST and GraphQL auto-generated.** Payload auto-generates full REST and GraphQL APIs from TypeScript collection schemas. REST supports CRUD with depth, joins, locale, sorting, filtering, pagination. GraphQL mirrors the content model with queries, mutations, dev playground, and complexity limits. Typed SDK `@payloadcms/sdk` available. WordPress exposes REST at `/wp-json/wp/v2/` for core types only. GraphQL needs a third-party plugin.
 
-**Code-first TypeScript schema and content modeling.** Payload schemas are TypeScript files committed alongside application code—version-controlled, type-checked, and composable without a GUI. The system supports blocks (field groups with distinct layouts), conditional field logic, drafts, version history, and localization defined at the schema level. WordPress's content modeling relies on `register_post_type` and `register_meta` in PHP; structured field groups require a third-party plugin like ACF. There is no content type builder in WordPress core that produces a version-controlled schema file.
+* **Code-first TypeScript schema.** Payload schemas are TypeScript files in version control alongside code. Type-checked, composable without a GUI. Built-in blocks (field groups), conditional fields, drafts, version history, and localization. WordPress content models use PHP `register_post_type` and `register_meta`; structured fields need a third-party plugin like ACF. No WordPress core schema file builder.
 
-**Operation-scoped access control and API keys.** Payload's access control is scoped per operation (`create`, `read`, `update`, `delete`) at the collection, global, and field level—all defined in code alongside the schema. API keys can be enabled on any auth-enabled collection and are designed specifically for third-party service integration, separate from the cookie and JWT auth used for end users. WordPress's Application Passwords are tied to a full user account with no mechanism to restrict a credential to specific post types or operations.
+* **Operation-scoped access control and API keys.** Payload scopes access per operation (`create`, `read`, `update`, `delete`) at collection, global, and field level, all defined in code alongside schema. API keys work on auth-enabled collections for third-party integration, separate from cookie and JWT auth. WordPress Application Passwords tie to a full user with no post-type or operation restriction.
 
 ## Where WordPress wins
 
-**Existing WordPress installation.** For projects already running WordPress, the headless layer is additive—existing content, media, authors, and editorial workflows stay in place with no migration required. The REST API exposes that content to agent consumers without rebuilding the content model. This migration cost justification does not extend to net-new projects.
+* **Existing WordPress installation.** For projects already on WordPress, the headless layer adds on top—existing content, media, authors, and workflows stay unchanged. REST API exposes content to agents without rebuilding the model. This cost benefit doesn't apply to new projects.
 
 ## The agentic difference
 
-Neither platform has a documented native MCP server, so neither presents as a ready-made tool for MCP-compatible agents.
+Neither has a documented native MCP server, so neither is a ready-made agent tool.
 
-Payload's advantage for agent workflows is its in-process hook system and API design. Lifecycle hooks (`beforeChange`, `afterChange`, `beforeRead`, `afterRead`, `beforeDelete`, `afterDelete`) execute at the collection, global, and field level and are defined in code alongside the schema. An agent integrating with Payload can write to the REST or GraphQL API with operation-scoped access control enforced at the schema level without custom middleware. The Jobs Queue provides background task execution for offloading processing work, though it requires external cron triggers rather than native event-driven invocation.
+Payload's in-process hooks and API design help agent workflows. Lifecycle hooks (`beforeChange`, `afterChange`, `beforeRead`, `afterRead`, `beforeDelete`, `afterDelete`) run at collection, global, and field level in code alongside schema. Agents write to REST or GraphQL with operation-scoped control enforced at schema level, no custom middleware. Jobs Queue handles background work but needs external cron, not event-driven triggers.
 
-WordPress offers REST read and write access but with Application Passwords that carry full user-level permissions—there is no documented mechanism to scope a credential to a specific post type or operation. Reactive patterns require a plugin for outgoing webhooks and custom infrastructure for retry logic. Neither capability is available in WordPress core.
+WordPress offers REST read/write with Application Passwords that grant full user permissions. No post-type or operation scoping. Reactive patterns need plugin webhooks plus custom retry logic. WordPress core has neither.
 
 ## When to pick which
 
-**Pick Payload** for net-new projects where an agent or API client is the primary interface to content. TypeScript-first schema, operation-scoped access control, and auto-generated GraphQL reduce integration surface compared to WordPress's REST-only core with plugin-dependent extensibility.
+* **Pick Payload** for new projects where agents or API clients are the primary content interface. TypeScript-first schema, operation-scoped control, and auto-generated GraphQL cut integration surface versus WordPress REST-only core with plugin-dependent extensibility.
 
-**Pick WordPress** when the project already runs on WordPress and the headless layer is additive—existing content, authors, and editorial workflows stay in place with no migration required.
+* **Pick WordPress** when you already run WordPress and just need to expose content to agents—existing content, authors, and workflows stay unchanged.
 
-**Do not pick WordPress as a net-new headless CMS for agent use cases.** The absence of native outgoing webhooks, GraphQL in core, and content-scoped credentials means rebuilding those integration layers outside the platform. Payload addresses two of those three gaps natively.
+* **Skip WordPress** for new headless CMS projects for agents. Building webhooks, GraphQL, and content-scoped tokens belongs in the platform. Payload addresses two of those three natively.

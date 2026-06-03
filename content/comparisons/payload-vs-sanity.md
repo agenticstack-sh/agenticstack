@@ -2,37 +2,37 @@
 title: "Payload vs Sanity"
 slug: payload-vs-sanity
 tools: [payload, sanity]
-category: cms
-last_verified: 2026-04-28
-verdict: sanity
+category: headless-cms
+last_verified: 2026-05-09
+verdict: Sanity
 ---
 
-Payload and Sanity are both code-first, TypeScript-native headless CMSes, but they diverge on hosting model, event architecture, and agent integration surface. Sanity wins on all three high-weight dimensions—content API depth, webhook sophistication, and AI/MCP support. Payload wins on hosting ownership and data residency.
+Payload and Sanity are both code-first TypeScript CMSes. Sanity wins on hosting model, event architecture, and agent integration. Payload wins on hosting ownership and data residency.
 
 ## Where Sanity wins
 
-**MCP server, Agent Actions, and Agent Context.** Sanity ships a supported MCP server enabling AI agents to interact with the workspace through the Model Context Protocol. Agent Actions expose generate, transform, and translate as HTTP-callable operations that write directly to the Content Lake. Agent Context adds schema-aware querying with semantic search so agents can follow references and navigate the content graph without manual wiring. Payload has no documented MCP server, AI provider integration, or AI operation surface.
+* **MCP server, Agent Actions, and Agent Context.** Sanity ships an MCP server for AI agents using the Model Context Protocol. Agent Actions expose generate, transform, and translate as HTTP calls that write to the Content Lake. Agent Context provides read-only schema-aware queries with semantic search—agents follow references and navigate the content graph without manual setup. Payload has no documented MCP server, AI integrations, or AI operation surface.
 
-**GROQ webhooks with delta projections and 30-minute retry.** Sanity webhook filters are written in GROQ, including the delta namespace with `before()` and `after()` functions for change-aware subscriptions. Projections define the exact payload shape, and the retry window runs up to 30 minutes with exponential backoff and per-delivery `idempotency-key` headers. Payload's hook system is in-process code only—hooks run inside the Payload server and do not dispatch outbound HTTP requests to external URLs. External event-driven pipelines require custom implementation.
+* **GROQ webhooks with delta filters and retry.** Sanity webhook filters use GROQ syntax, including delta functions `before()` and `after()` for change-aware subscriptions. Projections define payload shape. Sanity retries webhooks twice with 30-second intervals, with `idempotency-key` headers per delivery. Payload hooks run inside the server only—no outbound HTTP. External event-driven pipelines need custom code.
 
-**GROQ query language with reference traversal.** GROQ supports `->` reference traversal, array traversal, projections, and delta functions in a single query that works consistently across the HTTP API, GraphQL resolution, and webhook filters. Payload's REST API supports `depth`, `select`, `sort`, and `where` parameters; its GraphQL API auto-generates CRUD queries and mutations. Neither exposes a query language with join traversal or delta semantics equivalent to GROQ.
+* **GROQ query language.** GROQ supports `->` reference traversal, array traversal, projections, and delta functions in one query. Works across REST API, GraphQL, and webhook filters. Payload REST supports `depth`, `select`, `sort`, `where`; GraphQL auto-generates CRUD. Neither exposes join traversal or delta semantics like GROQ.
 
 ## Where Payload wins
 
-**Self-hosted open source for data residency and compliance.** Payload is MIT-licensed and runs on your own infrastructure, Cloudflare Workers + R2 + D1, or Vercel + Neon + Vercel Blob with one-click deployment templates. There is no mandatory SaaS backend. Sanity's Content Lake is always cloud-hosted—only the Studio is open-source. For agent deployments with data residency requirements or infrastructure ownership constraints, Payload removes those blockers where Sanity cannot.
+* **Self-hosted, MIT-licensed.** Payload runs on your infrastructure, Cloudflare Workers + R2 + D1, or Vercel + Neon with one-click setup. No mandatory SaaS backend. Sanity's Content Lake is always cloud-hosted—only the Studio is open-source. For agent deployments needing data residency or ownership, Payload removes blockers where Sanity cannot.
 
-**In-process hooks at collection, global, and field level.** Payload's before/after hooks execute server-side for every operation (read, create, update, delete) at the collection, global, and individual field level. Hooks receive the full request context, can be async to block the operation until resolved, and run with access to the Payload API instance. This enables tightly coupled server-side processing logic—validation, transformation, side effects—co-located with the schema definition without external infrastructure. Sanity's equivalent server-side logic requires Sanity Functions or external compute.
+* **In-process hooks at all levels.** Payload before/after hooks run server-side on every operation (read, create, update, delete) at collection, global, and field level. Hooks get full request context, can be async to block operations, and access the Payload API instance. Server-side logic—validation, transformation, side effects—lives co-located with the schema without external infrastructure. Sanity requires Sanity Functions or external compute.
 
 ## The agentic difference
 
-Sanity's agentic surface is documented and ready to use. The MCP server makes Sanity a drop-in tool for MCP-compatible agents. Agent Actions provide callable content operations (generate, transform, translate) against live content. Agent Context enables schema-aware querying with semantic search. GROQ delta projections in webhooks let agents subscribe to precise field-level changes with reliable delivery and idempotency.
+Sanity's agentic surface is documented and ready. MCP server is a drop-in tool for MCP agents. Agent Actions provide callable content operations that write to the Content Lake. Agent Context enables schema-aware queries with semantic search. GROQ delta filters in webhooks let agents subscribe to field-level changes with reliable delivery and idempotency.
 
-Payload has no documented agentic integration surface. Its in-process hooks are powerful for server-side logic co-located with the CMS, but they do not expose a mechanism for external agents to subscribe to content events or invoke AI operations. Building an agentic pipeline on top of Payload requires implementing the MCP adapter, outbound event dispatch, and retry guarantees from scratch.
+Payload has no documented agentic integration surface. In-process hooks work for server-side logic co-located with the CMS, but don't expose a way for external agents to subscribe to events or invoke AI operations. Building an agent pipeline on Payload requires custom MCP adapter, outbound event dispatch, and retry guarantees from scratch.
 
 ## When to pick which
 
-**Pick Sanity** when the workflow requires agents to read, write, or transform content—the MCP server, Agent Actions, and Agent Context provide a complete documented surface without custom wiring. Also pick Sanity when webhook reliability matters for event-driven pipelines: GROQ delta filters and 30-minute retry with idempotency reduce the infrastructure needed to build reliable integrations.
+* **Pick Sanity** when agents must read, write, or transform content. MCP server, Agent Actions, and Agent Context provide complete documented surface without custom code. Also pick Sanity when webhook reliability matters: GROQ delta filters and retry guarantees with idempotency reduce custom infrastructure.
 
-**Pick Payload** when the data layer must be self-hosted due to data residency, compliance, or cost requirements. Also pick Payload when tightly coupled server-side processing logic—hooks that run synchronously within the request lifecycle—is preferable to external compute, or when the schema and CMS should live as first-class code in a monorepo alongside the application.
+* **Pick Payload** when the data layer must be self-hosted for data residency, compliance, or cost. Also pick Payload for tightly coupled server-side logic within the request lifecycle, or when schema and CMS live as first-class code in a monorepo.
 
-**Pick Payload over Sanity** when the organization needs full ownership of the persistence layer and the engineering team is comfortable building agentic integration infrastructure rather than consuming a ready-made surface.
+* **Pick Payload over Sanity** when your organization needs full persistence layer ownership and your team can build agentic infrastructure rather than consuming a ready-made surface.

@@ -1,19 +1,18 @@
 import Link from "next/link";
-import type { ToolFrontmatter, AgentFeatures } from "@/lib/types";
+import type { ToolFrontmatter, FeatureDefinitions } from "@/lib/types";
 import FeatureBadge from "./FeatureBadge";
 
 interface ComparisonColumnsProps {
   tools: ToolFrontmatter[];
+  featureDefinitions?: FeatureDefinitions;
 }
 
-const AGENT_FEATURES: { key: keyof AgentFeatures; label: string }[] = [
-  { key: "agent_sdk", label: "Agent SDK" },
-  { key: "token_delegation", label: "Token Delegation" },
-  { key: "human_in_the_loop", label: "Human-in-the-loop" },
-  { key: "fga", label: "Fine-Grained Authorization" },
-  { key: "mcp_support", label: "MCP Support" },
-  { key: "async_authorization", label: "Async Authorization" },
-];
+function featureLabel(key: string): string {
+  return key
+    .split("_")
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(" ");
+}
 
 function Row({
   label,
@@ -26,11 +25,11 @@ function Row({
     <div
       className="grid items-center py-3 px-4 text-sm"
       style={{
-        gridTemplateColumns: `160px repeat(${(children as React.ReactNode[])?.length || 1}, 1fr)`,
+        gridTemplateColumns: `180px repeat(${(children as React.ReactNode[])?.length || 1}, 1fr)`,
         borderBottom: "1px solid var(--border)",
       }}
     >
-      <span className="font-medium" style={{ color: "var(--muted)" }}>
+      <span className="font-medium flex items-center gap-2" style={{ color: "var(--muted)" }}>
         {label}
       </span>
       {children}
@@ -38,7 +37,9 @@ function Row({
   );
 }
 
-export default function ComparisonColumns({ tools }: ComparisonColumnsProps) {
+export default function ComparisonColumns({ tools, featureDefinitions }: ComparisonColumnsProps) {
+  const featureKeys = featureDefinitions ? Object.keys(featureDefinitions) : [];
+
   return (
     <div
       className="rounded-lg overflow-hidden"
@@ -48,7 +49,7 @@ export default function ComparisonColumns({ tools }: ComparisonColumnsProps) {
       <div
         className="grid items-center py-4 px-4"
         style={{
-          gridTemplateColumns: `160px repeat(${tools.length}, 1fr)`,
+          gridTemplateColumns: `180px repeat(${tools.length}, 1fr)`,
           borderBottom: "1px solid var(--border)",
         }}
       >
@@ -57,8 +58,15 @@ export default function ComparisonColumns({ tools }: ComparisonColumnsProps) {
           <div key={tool.slug} className="text-center">
             <Link
               href={`/tools/${tool.slug}`}
-              className="font-semibold text-lg no-underline hover:opacity-70"
+              className="font-semibold text-lg no-underline hover:opacity-70 inline-flex flex-col items-center gap-2"
             >
+              <img
+                src={`/logos/${tool.slug}.svg`}
+                alt=""
+                width={28}
+                height={28}
+                className="rounded"
+              />
               {tool.name}
             </Link>
             <div className="flex justify-center gap-2 mt-1">
@@ -72,23 +80,36 @@ export default function ComparisonColumns({ tools }: ComparisonColumnsProps) {
                 className="text-xs px-2 py-0.5 rounded"
                 style={{ background: "var(--accent)", color: "var(--muted)" }}
               >
-                {tool.pricing}
+                {tool.pricing_tiers?.[0] ?? tool.pricing}
               </span>
             </div>
           </div>
         ))}
       </div>
 
-      {/* Agent features */}
-      {AGENT_FEATURES.map((feature) => (
-        <Row key={feature.key} label={feature.label}>
+      {/* Category-specific features */}
+      {featureKeys.map((key) => (
+        <Row key={key} label={featureLabel(key)}>
           {tools.map((tool) => (
             <div key={tool.slug} className="text-center">
-              <FeatureBadge value={tool.agent_features[feature.key]} />
+              <FeatureBadge value={tool.agent_features[key] ?? null} />
             </div>
           ))}
         </Row>
       ))}
+
+      {/* Pricing tiers */}
+      <Row label="Pricing">
+        {tools.map((tool) => (
+          <div key={tool.slug} className="text-center">
+            <div className="flex flex-col items-center gap-0.5 text-xs" style={{ color: "var(--muted)" }}>
+              {tool.pricing_tiers?.map((tier, j) => (
+                <span key={j}>{tier}</span>
+              )) ?? <span>{tool.pricing}</span>}
+            </div>
+          </div>
+        ))}
+      </Row>
 
       {/* Open source */}
       <Row label="Open Source">
@@ -191,22 +212,10 @@ export default function ComparisonColumns({ tools }: ComparisonColumnsProps) {
 
       {/* Legend */}
       <div className="px-4 py-3">
-        <p className="text-xs flex gap-3 flex-wrap" style={{ color: "var(--muted)" }}>
-          <span
-            style={{ background: "var(--green-bg)", color: "var(--green-text)" }}
-            className="px-1.5 py-0.5 rounded-full font-medium"
-          >
-            ✓
-          </span>{" "}
-          Supported
-          <span style={{ color: "var(--muted)" }}>✗</span> Not supported
-          <span
-            style={{ background: "var(--amber-bg)", color: "var(--amber-text)" }}
-            className="px-1.5 py-0.5 rounded-full font-medium"
-          >
-            ?
-          </span>{" "}
-          Unverified
+        <p className="text-xs flex gap-3 flex-wrap items-center" style={{ color: "var(--muted)" }}>
+          <span className="inline-flex items-center gap-1"><FeatureBadge value={true} size="sm" /> Supported</span>
+          <span className="inline-flex items-center gap-1"><FeatureBadge value={false} size="sm" /> Not supported</span>
+          <span className="inline-flex items-center gap-1"><FeatureBadge value={null} size="sm" /> Unverified</span>
         </p>
       </div>
     </div>

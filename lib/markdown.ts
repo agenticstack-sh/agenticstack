@@ -11,7 +11,7 @@ import type {
   ParsedContent,
 } from "./types";
 
-const CONTENT_DIR = path.join(process.cwd(), "public", "content");
+const CONTENT_DIR = path.join(process.cwd(), "content");
 
 // gray-matter parses bare YAML dates (2026-04-17) as JS Date objects.
 // Normalize them back to ISO date strings before returning.
@@ -97,7 +97,7 @@ export function getAllComparisons(): ComparisonFrontmatter[] {
   });
 }
 
-export function getRawMarkdown(type: "tools" | "categories", slug: string): string | null {
+export function getRawMarkdown(type: "tools" | "categories" | "comparisons", slug: string): string | null {
   const filePath = path.join(CONTENT_DIR, type, `${slug}.md`);
   if (!fs.existsSync(filePath)) return null;
   return fs.readFileSync(filePath, "utf-8");

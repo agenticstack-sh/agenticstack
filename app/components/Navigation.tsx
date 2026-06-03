@@ -13,9 +13,6 @@ export default function Navigation() {
         <Link href="/" className="font-semibold text-base tracking-tight no-underline" style={{ color: "var(--foreground)" }}>
           AgenticStack
         </Link>
-        <Link href="/categories/auth" className="text-sm transition-opacity hover:opacity-60 no-underline" style={{ color: "var(--foreground)" }}>
-          Auth & Identity
-        </Link>
       </div>
     </nav>
   );

@@ -1,8 +1,9 @@
-import { getComparisonBySlug, getAllComparisons, getToolBySlug, renderToHtml } from "@/lib/markdown";
+import { getComparisonBySlug, getAllComparisons, getToolBySlug, getCategoryBySlug, renderToHtml } from "@/lib/markdown";
 import ComparisonColumns from "@/app/components/ComparisonColumns";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { ToolFrontmatter } from "@/lib/types";
+import { ChevronLeft, ArrowRight, Braces } from "lucide-react";
 
 export function generateStaticParams() {
   const comparisons = getAllComparisons();
@@ -36,17 +37,25 @@ export default async function EditorialComparePage({
     })
     .filter((t): t is ToolFrontmatter => t !== null);
 
-  const dynamicUrl = `/compare?tools=${frontmatter.tools.join(",")}`;
+  let featureDefinitions;
+  try {
+    featureDefinitions = getCategoryBySlug(frontmatter.category).frontmatter.feature_definitions;
+  } catch {
+    // category not found, skip feature definitions
+  }
+
+  const dynamicUrl = `/compare?category=${frontmatter.category}&tools=${frontmatter.tools.join(",")}`;
 
   return (
     <div className="max-w-6xl mx-auto px-6 py-12">
       <div className="mb-2">
         <Link
           href="/compare"
-          className="text-sm no-underline hover:opacity-70 transition-opacity"
+          className="text-sm no-underline hover:opacity-70 transition-opacity inline-flex items-center gap-1"
           style={{ color: "var(--muted)" }}
         >
-          ← Compare Tools
+          <ChevronLeft size={16} />
+          Compare Tools
         </Link>
       </div>
 
@@ -62,21 +71,23 @@ export default async function EditorialComparePage({
         <div className="flex gap-4 mt-3 text-xs font-mono" style={{ color: "var(--muted)" }}>
           <Link
             href={dynamicUrl}
-            className="hover:opacity-60 transition-opacity no-underline"
+            className="hover:opacity-60 transition-opacity no-underline inline-flex items-center gap-1"
           >
-            Live comparison →
+            <ArrowRight size={12} />
+            Live comparison
           </Link>
           <a
-            href={`/content/comparisons/${slug}.md`}
-            className="hover:opacity-60 transition-opacity no-underline"
+            href={`/api/json/comparisons/${slug}`}
+            className="hover:opacity-60 transition-opacity no-underline inline-flex items-center gap-1"
           >
-            View as markdown →
+            <Braces size={12} />
+            View as JSON
           </a>
         </div>
       </div>
 
       <div className="mb-10">
-        <ComparisonColumns tools={tools} />
+        <ComparisonColumns tools={tools} featureDefinitions={featureDefinitions} />
       </div>
 
       {html.trim() && (

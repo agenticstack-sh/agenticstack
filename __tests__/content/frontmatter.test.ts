@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { getAllTools, getCategoryBySlug, getToolBySlug, getAllComparisons } from "@/lib/markdown";
+import { getAllTools, getAllCategories, getCategoryBySlug, getToolBySlug, getAllComparisons } from "@/lib/markdown";
 import fs from "fs";
 import path from "path";
 
@@ -8,15 +8,11 @@ const REQUIRED_TOOL_FIELDS = [
   "agent_features", "last_verified", "source_urls", "best_for", "limitations",
 ];
 
-const REQUIRED_AGENT_FEATURES = [
-  "agent_sdk", "token_delegation", "human_in_the_loop",
-  "fga", "mcp_support", "async_authorization",
-];
-
 describe("Tool frontmatter validation", () => {
   const tools = getAllTools();
 
-  it("all 10 tools have required fields", () => {
+  it("all tools have required fields", () => {
+    expect(tools.length).toBeGreaterThan(0);
     for (const tool of tools) {
       for (const field of REQUIRED_TOOL_FIELDS) {
         expect(
@@ -27,12 +23,18 @@ describe("Tool frontmatter validation", () => {
     }
   });
 
-  it("every agent_features object has all required keys", () => {
+  it("every tool has agent_features matching its category feature_definitions", () => {
+    const categories = getAllCategories();
     for (const tool of tools) {
-      for (const key of REQUIRED_AGENT_FEATURES) {
+      const cat = categories.find((c) => c.category === tool.category);
+      if (!cat) continue;
+      const catData = getCategoryBySlug(cat.category);
+      const featureDefs = catData.frontmatter.feature_definitions;
+      if (!featureDefs) continue;
+      for (const key of Object.keys(featureDefs)) {
         expect(
           key in tool.agent_features,
-          `${tool.slug} agent_features missing key: ${key}`
+          `${tool.slug} agent_features missing key: ${key} (defined in ${cat.category} category)`
         ).toBe(true);
       }
     }
@@ -50,7 +52,7 @@ describe("Tool frontmatter validation", () => {
   });
 
   it("every tool slug matches its filename", () => {
-    const toolsDir = path.join(process.cwd(), "public", "content", "tools");
+    const toolsDir = path.join(process.cwd(), "content", "tools");
     const files = fs.readdirSync(toolsDir).filter((f) => f.endsWith(".md"));
     for (const file of files) {
       const expectedSlug = file.replace(".md", "");
@@ -85,16 +87,30 @@ describe("Tool frontmatter validation", () => {
       expect(tool.limitations.trim(), `${tool.slug} has empty limitations`).toBeTruthy();
     }
   });
+
+  it("every tool belongs to a valid category", () => {
+    const categories = getAllCategories();
+    const categorySlugs = categories.map((c) => c.category);
+    for (const tool of tools) {
+      expect(
+        categorySlugs.includes(tool.category),
+        `${tool.slug} has unknown category: ${tool.category}`
+      ).toBe(true);
+    }
+  });
 });
 
 describe("Category frontmatter validation", () => {
-  it("category auth lists tools that actually exist as files", () => {
-    const category = getCategoryBySlug("auth");
-    for (const toolSlug of category.frontmatter.tools) {
-      expect(
-        () => getToolBySlug(toolSlug),
-        `Category references tool that doesn't exist: ${toolSlug}`
-      ).not.toThrow();
+  it("every category lists tools that actually exist as files", () => {
+    const categories = getAllCategories();
+    for (const cat of categories) {
+      const category = getCategoryBySlug(cat.category);
+      for (const toolSlug of category.frontmatter.tools) {
+        expect(
+          () => getToolBySlug(toolSlug),
+          `Category ${cat.category} references tool that doesn't exist: ${toolSlug}`
+        ).not.toThrow();
+      }
     }
   });
 });
@@ -125,7 +141,7 @@ describe("Comparison frontmatter validation", () => {
   });
 
   it("every comparison slug matches its filename", () => {
-    const comparisonsDir = path.join(process.cwd(), "public", "content", "comparisons");
+    const comparisonsDir = path.join(process.cwd(), "content", "comparisons");
     const files = fs
       .readdirSync(comparisonsDir)
       .filter((f) => f.endsWith(".md") && !f.startsWith("_"));

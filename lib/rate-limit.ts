@@ -7,7 +7,7 @@ export function rateLimit(ip: string): { allowed: boolean; remaining: number } {
   const now = Date.now();
   const entry = requests.get(ip);
 
-  if (!entry || now > entry.resetAt) {
+  if (!entry || now >= entry.resetAt) {
     requests.set(ip, { count: 1, resetAt: now + windowMs });
     return { allowed: true, remaining: maxRequests - 1 };
   }

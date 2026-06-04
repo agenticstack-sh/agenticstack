@@ -447,7 +447,7 @@ export async function GET(
         endpoint_type: type,
         slug: slug ?? null,
         status: response.status,
-        $useragent: request.headers.get("user-agent") ?? "unknown",
+        user_agent: request.headers.get("user-agent") ?? "unknown",
       },
     });
   }

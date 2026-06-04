@@ -11,7 +11,7 @@ export function GET(request: NextRequest) {
       event: "agent_discovery_llms_txt",
       properties: {
         $current_url: request.nextUrl.toString(),
-        $useragent: request.headers.get("user-agent") ?? "unknown",
+        user_agent: request.headers.get("user-agent") ?? "unknown",
       },
     });
   }

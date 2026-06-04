@@ -32,13 +32,15 @@ export function toolJsonLd(tool: {
     url: `${siteUrl}/tools/${tool.slug}`,
     applicationCategory: tool.category,
     description: tool.best_for,
-    ...(isFree && {
-      offers: {
-        "@type": "Offer",
-        price: "0",
-        priceCurrency: "USD",
-      },
-    }),
+    ...(isFree
+      ? {
+          offers: {
+            "@type": "Offer",
+            price: "0",
+            priceCurrency: "USD",
+          },
+        }
+      : {}),
   };
 }
 

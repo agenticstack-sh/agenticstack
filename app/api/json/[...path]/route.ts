@@ -6,6 +6,7 @@ import {
   getAllComparisons,
   getComparisonBySlug,
 } from "@/lib/markdown";
+import { rateLimit } from "@/lib/rate-limit";
 import { NextRequest } from "next/server";
 import type { ToolFrontmatter } from "@/lib/types";
 
@@ -13,7 +14,7 @@ const API_VERSION = "1.1";
 
 const HEADERS = {
   "Content-Type": "application/json; charset=utf-8",
-  "Cache-Control": "public, max-age=3600",
+  "Cache-Control": "public, max-age=3600, stale-while-revalidate=86400",
   "Access-Control-Allow-Origin": "*",
   "X-API-Version": API_VERSION,
 };
@@ -372,41 +373,66 @@ export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ path: string[] }> }
 ) {
+  const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
+  const { allowed, remaining } = rateLimit(ip);
+
+  if (!allowed) {
+    return new Response(JSON.stringify({ error: "Rate limit exceeded. Try again in 60 seconds." }), {
+      status: 429,
+      headers: {
+        "Content-Type": "application/json",
+        "Retry-After": "60",
+        "X-RateLimit-Remaining": "0",
+      },
+    });
+  }
+
   const { path } = await params;
   const [type, slug] = path;
+
+  let response: Response;
 
   // Single segment: list endpoints
   if (path.length === 1) {
     switch (type) {
       case "tools":
-        return handleToolsList(request.nextUrl.searchParams);
+        response = handleToolsList(request.nextUrl.searchParams);
+        break;
       case "categories":
-        return handleCategoriesList();
+        response = handleCategoriesList();
+        break;
       case "comparisons":
-        return handleComparisonsList();
+        response = handleComparisonsList();
+        break;
       case "schema":
-        return handleSchema();
+        response = handleSchema();
+        break;
       default:
-        return jsonResponse({ error: "Not found" }, 404);
+        response = jsonResponse({ error: "Not found" }, 404);
     }
-  }
-
-  // Two segments: detail endpoints + compare
-  if (path.length === 2) {
+  } else if (path.length === 2) {
+    // Two segments: detail endpoints + compare
     if (type === "tools" && slug === "compare") {
-      return handleToolsCompare(request.nextUrl.searchParams);
+      response = handleToolsCompare(request.nextUrl.searchParams);
+    } else {
+      switch (type) {
+        case "tools":
+          response = handleTool(slug);
+          break;
+        case "categories":
+          response = handleCategory(slug);
+          break;
+        case "comparisons":
+          response = handleComparison(slug);
+          break;
+        default:
+          response = jsonResponse({ error: "Not found" }, 404);
+      }
     }
-    switch (type) {
-      case "tools":
-        return handleTool(slug);
-      case "categories":
-        return handleCategory(slug);
-      case "comparisons":
-        return handleComparison(slug);
-      default:
-        return jsonResponse({ error: "Not found" }, 404);
-    }
+  } else {
+    response = jsonResponse({ error: "Not found" }, 404);
   }
 
-  return jsonResponse({ error: "Not found" }, 404);
+  response.headers.set("X-RateLimit-Remaining", String(remaining));
+  return response;
 }

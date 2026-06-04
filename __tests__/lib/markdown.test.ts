@@ -147,4 +147,14 @@ describe("renderToHtml", () => {
     const html = await renderToHtml("");
     expect(typeof html).toBe("string");
   });
+
+  it("strips script tags", async () => {
+    const html = await renderToHtml('<script>alert(1)</script>');
+    expect(html).not.toContain("<script");
+  });
+
+  it("strips event handlers", async () => {
+    const html = await renderToHtml('<img src=x onerror="alert(1)">');
+    expect(html).not.toContain("onerror");
+  });
 });

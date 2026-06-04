@@ -1,12 +1,33 @@
 import { getCategoryBySlug, getToolBySlug, getAllCategories, renderToHtml } from "@/lib/markdown";
 import ComparisonTable from "@/app/components/ComparisonTable";
 import type { ToolFrontmatter } from "@/lib/types";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
 export function generateStaticParams() {
   const categories = getAllCategories();
   return categories.map((cat) => ({ slug: cat.category }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  try {
+    const { frontmatter } = getCategoryBySlug(slug);
+    const title = frontmatter.title;
+    const description = frontmatter.description;
+    return {
+      title,
+      description,
+      openGraph: { title, description },
+    };
+  } catch {
+    return {};
+  }
 }
 
 export default async function CategoryPage({

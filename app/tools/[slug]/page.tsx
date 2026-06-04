@@ -2,10 +2,32 @@ import { getToolBySlug, getAllTools, getCategoryBySlug, renderToHtml } from "@/l
 import FeatureBadge from "@/app/components/FeatureBadge";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
+import { toolJsonLd, breadcrumbJsonLd } from "@/lib/jsonld";
 
 export function generateStaticParams() {
   const tools = getAllTools();
   return tools.map((tool) => ({ slug: tool.slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  try {
+    const { frontmatter: tool } = getToolBySlug(slug);
+    const title = `${tool.name} for AI Agents`;
+    const description = `${tool.best_for}. Compare ${tool.name} features, pricing, and SDK support for agentic workflows.`;
+    return {
+      title,
+      description,
+      openGraph: { title, description },
+    };
+  } catch {
+    return {};
+  }
 }
 
 function featureLabel(key: string): string {
@@ -42,6 +64,18 @@ export default async function ToolPage({
 
   return (
     <div className="max-w-4xl mx-auto px-6 py-12">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(toolJsonLd(tool)) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd([
+          { name: "Home", url: "/" },
+          { name: categoryTitle, url: `/categories/${tool.category}` },
+          { name: tool.name, url: `/tools/${slug}` },
+        ])) }}
+      />
       <div className="mb-2">
         <Link
           href={`/categories/${tool.category}`}

@@ -3,11 +3,33 @@ import ComparisonColumns from "@/app/components/ComparisonColumns";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { ToolFrontmatter } from "@/lib/types";
+import type { Metadata } from "next";
+import { comparisonJsonLd, breadcrumbJsonLd } from "@/lib/jsonld";
 import { ChevronLeft, ArrowRight, Braces } from "lucide-react";
 
 export function generateStaticParams() {
   const comparisons = getAllComparisons();
   return comparisons.map((c) => ({ slug: c.slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  try {
+    const { frontmatter } = getComparisonBySlug(slug);
+    const title = `${frontmatter.title} for AI Agents`;
+    const description = `Compare ${frontmatter.tools[0]} vs ${frontmatter.tools[1]} for agentic workflows. Verdict: ${frontmatter.verdict}.`;
+    return {
+      title,
+      description,
+      openGraph: { title, description },
+    };
+  } catch {
+    return {};
+  }
 }
 
 export default async function EditorialComparePage({
@@ -48,6 +70,18 @@ export default async function EditorialComparePage({
 
   return (
     <div className="max-w-6xl mx-auto px-6 py-12">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(comparisonJsonLd(frontmatter)) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd([
+          { name: "Home", url: "/" },
+          { name: "Compare", url: "/compare" },
+          { name: frontmatter.title, url: `/compare/${slug}` },
+        ])) }}
+      />
       <div className="mb-2">
         <Link
           href="/compare"

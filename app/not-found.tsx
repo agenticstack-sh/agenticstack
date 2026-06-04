@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function NotFound() {
   return (
     <div className="max-w-xl mx-auto px-6 py-32 text-center">
-      <h1 className="text-5xl font-semibold tracking-tight mb-4">404</h1>
+      <h1 className="text-5xl font-semibold tracking-tight mb-4">404 — Page not found</h1>
       <p className="text-base mb-8" style={{ color: "var(--muted)" }}>
         This page doesn't exist. It may have been moved or removed.
       </p>

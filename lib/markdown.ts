@@ -106,7 +106,7 @@ export function getRawMarkdown(type: "tools" | "categories" | "comparisons", slu
 export async function renderToHtml(markdown: string): Promise<string> {
   const result = await remark()
     .use(remarkGfm)
-    .use(remarkHtml, { sanitize: false })
+    .use(remarkHtml, { sanitize: true })
     .process(markdown);
   return result.toString();
 }

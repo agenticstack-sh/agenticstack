@@ -49,14 +49,15 @@ export function comparisonJsonLd(comparison: {
   slug: string;
   tools: [string, string];
   last_verified: string;
-}) {
+}, toolNames?: [string, string]) {
+  const names = toolNames ?? comparison.tools;
   return {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: comparison.title,
     url: `${siteUrl}/compare/${comparison.slug}`,
     dateModified: comparison.last_verified,
-    about: comparison.tools.map((t) => ({
+    about: names.map((t) => ({
       "@type": "SoftwareApplication",
       name: t,
     })),

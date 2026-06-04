@@ -75,7 +75,7 @@ export default async function EditorialComparePage({
     <div className="max-w-6xl mx-auto px-6 py-12">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: safeJsonLd(comparisonJsonLd(frontmatter)) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(comparisonJsonLd(frontmatter, [tools[0]?.name ?? frontmatter.tools[0], tools[1]?.name ?? frontmatter.tools[1]])) }}
       />
       <script
         type="application/ld+json"

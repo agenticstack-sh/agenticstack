@@ -4,7 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { ToolFrontmatter } from "@/lib/types";
 import type { Metadata } from "next";
-import { comparisonJsonLd, breadcrumbJsonLd } from "@/lib/jsonld";
+import { comparisonJsonLd, breadcrumbJsonLd, safeJsonLd } from "@/lib/jsonld";
 import { ChevronLeft, ArrowRight, Braces } from "lucide-react";
 
 export function generateStaticParams() {
@@ -20,8 +20,11 @@ export async function generateMetadata({
   const { slug } = await params;
   try {
     const { frontmatter } = getComparisonBySlug(slug);
-    const title = `${frontmatter.title} for AI Agents`;
-    const description = `Compare ${frontmatter.tools[0]} vs ${frontmatter.tools[1]} for agentic workflows. Verdict: ${frontmatter.verdict}.`;
+    const toolNames = frontmatter.tools.map((t) => {
+      try { return getToolBySlug(t).frontmatter.name; } catch { return t; }
+    });
+    const title = `${toolNames[0]} vs ${toolNames[1]} for AI Agents`;
+    const description = `Compare ${toolNames[0]} vs ${toolNames[1]} for agentic workflows. Verdict: ${frontmatter.verdict}.`;
     return {
       title,
       description,
@@ -72,11 +75,11 @@ export default async function EditorialComparePage({
     <div className="max-w-6xl mx-auto px-6 py-12">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(comparisonJsonLd(frontmatter)) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(comparisonJsonLd(frontmatter)) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd([
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbJsonLd([
           { name: "Home", url: "/" },
           { name: "Compare", url: "/compare" },
           { name: frontmatter.title, url: `/compare/${slug}` },

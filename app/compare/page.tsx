@@ -4,7 +4,18 @@ import ComparisonColumns from "@/app/components/ComparisonColumns";
 import ToolPicker from "@/app/components/ToolPicker";
 import Link from "next/link";
 import type { ToolFrontmatter } from "@/lib/types";
+import type { Metadata } from "next";
 import { GitCompareArrows, BookOpen } from "lucide-react";
+import { collectionPageJsonLd, breadcrumbJsonLd, safeJsonLd } from "@/lib/jsonld";
+
+export const metadata: Metadata = {
+  title: "Compare Tools",
+  description: "Compare AI agent tools side by side across categories — auth, hosting, CMS, email, and observability.",
+  openGraph: {
+    title: "Compare Tools",
+    description: "Compare AI agent tools side by side across categories.",
+  },
+};
 
 function toolName(slug: string): string {
   try { return getToolBySlug(slug).frontmatter.name; } catch { return slug; }
@@ -57,6 +68,22 @@ function CompareContent({
 
   return (
     <div className="max-w-6xl mx-auto px-6 py-12">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(collectionPageJsonLd({
+          name: "Compare Tools",
+          description: "Compare AI agent tools side by side across categories.",
+          url: "/compare",
+          items: comparisons.map((c) => ({ name: c.title, url: `/compare/${c.slug}` })),
+        })) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbJsonLd([
+          { name: "Home", url: "/" },
+          { name: "Compare", url: "/compare" },
+        ])) }}
+      />
       <div className="mb-8">
         <h1 className="text-2xl font-semibold tracking-tight mb-2 flex items-center gap-3">
           <GitCompareArrows size={24} style={{ color: "var(--accent-text)" }} />

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { getAllCategories, getToolBySlug } from "@/lib/markdown";
 import type { ToolFrontmatter } from "@/lib/types";
-import { websiteJsonLd } from "@/lib/jsonld";
+import { websiteJsonLd, safeJsonLd } from "@/lib/jsonld";
 
 export default function Home() {
   const categories = getAllCategories();
@@ -10,7 +10,7 @@ export default function Home() {
     <div className="max-w-5xl mx-auto px-6 py-20">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd()) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(websiteJsonLd()) }}
       />
 
       {/* Hero */}

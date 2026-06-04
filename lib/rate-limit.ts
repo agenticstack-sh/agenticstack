@@ -24,6 +24,6 @@ export function rateLimit(ip: string): { allowed: boolean; remaining: number } {
 setInterval(() => {
   const now = Date.now();
   for (const [ip, entry] of requests) {
-    if (now > entry.resetAt) requests.delete(ip);
+    if (now >= entry.resetAt) requests.delete(ip);
   }
 }, 60_000);

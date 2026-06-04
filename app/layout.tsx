@@ -10,10 +10,26 @@ const dmSans = DM_Sans({
   display: "swap",
 });
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://agenticstack.sh";
+
 export const metadata: Metadata = {
-  title: "AgenticStack — Compare Tools for AI Agents",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: "AgenticStack — Compare Tools for AI Agents",
+    template: "%s | AgenticStack",
+  },
   description:
     "Compare tools for AI agent developers. Structured, editorially maintained data designed for both human developers and AI coding agents.",
+  openGraph: {
+    type: "website",
+    siteName: "AgenticStack",
+    title: "AgenticStack — Compare Tools for AI Agents",
+    description:
+      "Compare tools for AI agent developers. Structured, editorially maintained data designed for both human developers and AI coding agents.",
+  },
+  twitter: {
+    card: "summary_large_image",
+  },
 };
 
 export default function RootLayout({

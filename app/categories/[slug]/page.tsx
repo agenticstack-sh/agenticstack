@@ -1,12 +1,34 @@
 import { getCategoryBySlug, getToolBySlug, getAllCategories, renderToHtml } from "@/lib/markdown";
 import ComparisonTable from "@/app/components/ComparisonTable";
 import type { ToolFrontmatter } from "@/lib/types";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { collectionPageJsonLd, breadcrumbJsonLd, safeJsonLd } from "@/lib/jsonld";
 
 export function generateStaticParams() {
   const categories = getAllCategories();
   return categories.map((cat) => ({ slug: cat.category }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  try {
+    const { frontmatter } = getCategoryBySlug(slug);
+    const title = frontmatter.title;
+    const description = frontmatter.description;
+    return {
+      title,
+      description,
+      openGraph: { title, description },
+    };
+  } catch {
+    return {};
+  }
 }
 
 export default async function CategoryPage({
@@ -37,6 +59,22 @@ export default async function CategoryPage({
 
   return (
     <div className="max-w-6xl mx-auto px-6 py-12">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(collectionPageJsonLd({
+          name: category.frontmatter.title,
+          description: category.frontmatter.description,
+          url: `/categories/${slug}`,
+          items: tools.map((t) => ({ name: t.name, url: `/tools/${t.slug}` })),
+        })) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(breadcrumbJsonLd([
+          { name: "Home", url: "/" },
+          { name: category.frontmatter.title, url: `/categories/${slug}` },
+        ])) }}
+      />
       <div className="mb-10">
         <h1 className="text-2xl font-semibold tracking-tight mb-2">
           {category.frontmatter.title}

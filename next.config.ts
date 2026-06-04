@@ -1,6 +1,9 @@
 import type { NextConfig } from "next";
 import path from "path";
 
+const isDev = process.env.NODE_ENV === "development";
+const posthogHost = process.env.NEXT_PUBLIC_POSTHOG_HOST ?? "https://us.i.posthog.com";
+
 const securityHeaders = [
   { key: "X-Frame-Options", value: "DENY" },
   { key: "X-Content-Type-Options", value: "nosniff" },
@@ -14,11 +17,11 @@ const securityHeaders = [
       "default-src 'self'",
       "base-uri 'self'",
       "object-src 'none'",
-      "script-src 'self' 'unsafe-inline'",
+      `script-src 'self' 'unsafe-inline' ${posthogHost} https://*.posthog.com https://*.i.posthog.com${isDev ? " 'unsafe-eval'" : ""}`,
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "font-src 'self' https://fonts.gstatic.com",
       "img-src 'self' data:",
-      "connect-src 'self'",
+      `connect-src 'self' ${posthogHost} https://*.posthog.com https://*.i.posthog.com`,
       "frame-ancestors 'none'",
     ].join("; "),
   },

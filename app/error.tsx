@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 export default function Error({ reset }: { error: Error; reset: () => void }) {
   return (
     <div className="max-w-xl mx-auto px-6 py-32 text-center">
@@ -15,13 +17,13 @@ export default function Error({ reset }: { error: Error; reset: () => void }) {
         >
           Try again
         </button>
-        <a
+        <Link
           href="/"
           className="inline-flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-lg no-underline transition-opacity hover:opacity-80"
           style={{ background: "var(--card)", color: "var(--muted)", border: "1px solid var(--border)" }}
         >
           Back to home
-        </a>
+        </Link>
       </div>
     </div>
   );

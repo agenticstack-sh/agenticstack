@@ -1,8 +1,20 @@
 import { getAllTools, getAllCategories, getAllComparisons } from "@/lib/markdown";
+import { getPostHogClient } from "@/lib/posthog";
+import { NextRequest } from "next/server";
 
-export const dynamic = "force-static";
-
-export function GET() {
+export function GET(request: NextRequest) {
+  const posthog = getPostHogClient();
+  if (posthog) {
+    const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
+    posthog.capture({
+      distinctId: ip,
+      event: "agent_discovery_llms_txt",
+      properties: {
+        $current_url: request.nextUrl.toString(),
+        $useragent: request.headers.get("user-agent") ?? "unknown",
+      },
+    });
+  }
   const tools = getAllTools();
   const categories = getAllCategories();
 

@@ -7,6 +7,7 @@ import {
   getComparisonBySlug,
 } from "@/lib/markdown";
 import { rateLimit } from "@/lib/rate-limit";
+import { getPostHogClient } from "@/lib/posthog";
 import { NextRequest } from "next/server";
 import type { ToolFrontmatter } from "@/lib/types";
 
@@ -434,5 +435,22 @@ export async function GET(
   }
 
   response.headers.set("X-RateLimit-Remaining", String(remaining));
+
+  const posthog = getPostHogClient();
+  if (posthog) {
+    posthog.capture({
+      distinctId: ip,
+      event: `agent_api_${type}${slug ? `_${slug}` : ""}`,
+      properties: {
+        $current_url: request.nextUrl.toString(),
+        path: `/${path.join("/")}`,
+        endpoint_type: type,
+        slug: slug ?? null,
+        status: response.status,
+        $useragent: request.headers.get("user-agent") ?? "unknown",
+      },
+    });
+  }
+
   return response;
 }

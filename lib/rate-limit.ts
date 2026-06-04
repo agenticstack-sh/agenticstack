@@ -21,9 +21,10 @@ export function rateLimit(ip: string): { allowed: boolean; remaining: number } {
 }
 
 // Periodic cleanup to prevent memory growth
-setInterval(() => {
+const cleanupTimer = setInterval(() => {
   const now = Date.now();
   for (const [ip, entry] of requests) {
     if (now >= entry.resetAt) requests.delete(ip);
   }
 }, 60_000);
+cleanupTimer.unref?.();

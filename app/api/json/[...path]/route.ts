@@ -380,7 +380,7 @@ export async function GET(
     return new Response(JSON.stringify({ error: "Rate limit exceeded. Try again in 60 seconds." }), {
       status: 429,
       headers: {
-        "Content-Type": "application/json",
+        ...HEADERS,
         "Retry-After": "60",
         "X-RateLimit-Remaining": "0",
       },

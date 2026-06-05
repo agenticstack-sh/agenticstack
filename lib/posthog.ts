@@ -1,10 +1,9 @@
 const apiKey = process.env.NEXT_PUBLIC_POSTHOG_KEY;
 const host = process.env.NEXT_PUBLIC_POSTHOG_HOST ?? "https://eu.i.posthog.com";
 
-export async function captureEvent(event: string, distinctId: string, properties: Record<string, unknown>) {
+export async function captureEvent(event: string, distinctId: string, properties: Record<string, unknown>): Promise<string> {
   if (!apiKey) {
-    console.warn("[PostHog] No API key found — skipping");
-    return;
+    return "no-key";
   }
 
   try {
@@ -18,8 +17,8 @@ export async function captureEvent(event: string, distinctId: string, properties
         properties,
       }),
     });
-    console.log("[PostHog] Capture response:", res.status);
+    return `${res.status}:${host}`;
   } catch (err) {
-    console.error("[PostHog] Capture failed:", err);
+    return `error:${err}`;
   }
 }

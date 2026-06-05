@@ -437,7 +437,7 @@ export async function GET(
   response.headers.set("X-RateLimit-Remaining", String(remaining));
 
   const eventName = `agent_api_${type}${slug ? `_${slug}` : ""}`;
-  await captureEvent(eventName, ip, {
+  const phResult = await captureEvent(eventName, ip, {
     $current_url: request.nextUrl.toString(),
     path: `/${path.join("/")}`,
     endpoint_type: type,
@@ -445,6 +445,7 @@ export async function GET(
     status: response.status,
     user_agent: request.headers.get("cloudfront-viewer-user-agent") ?? request.headers.get("x-forwarded-user-agent") ?? request.headers.get("user-agent") ?? "unknown",
   });
+  response.headers.set("X-PostHog-Debug", phResult);
 
   return response;
 }

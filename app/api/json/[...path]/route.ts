@@ -438,7 +438,7 @@ export async function GET(
 
   const eventName = `agent_api_${type}${slug ? `_${slug}` : ""}`;
   const publicUrl = `https://${request.headers.get("host")}${request.nextUrl.pathname}${request.nextUrl.search}`;
-  const phResult = await captureEvent(eventName, ip, {
+  await captureEvent(eventName, ip, {
     $current_url: publicUrl,
     path: `/${path.join("/")}`,
     endpoint_type: type,
@@ -447,8 +447,5 @@ export async function GET(
     user_agent: request.headers.get("cloudfront-viewer-user-agent") ?? request.headers.get("x-forwarded-user-agent") ?? request.headers.get("user-agent") ?? "unknown",
   });
 
-  // Temporary debug: inject PostHog status into response body
-  const body = await response.json();
-  body._posthog_debug = phResult;
-  return new Response(JSON.stringify(body), { status: response.status, headers: response.headers });
+  return response;
 }

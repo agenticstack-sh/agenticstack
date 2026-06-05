@@ -437,10 +437,13 @@ export async function GET(
   response.headers.set("X-RateLimit-Remaining", String(remaining));
 
   const posthog = getPostHogClient();
+  console.log("[PostHog] Client initialized:", !!posthog);
   if (posthog) {
+    const eventName = `agent_api_${type}${slug ? `_${slug}` : ""}`;
+    console.log("[PostHog] Capturing event:", eventName, "path:", `/${path.join("/")}`);
     posthog.capture({
       distinctId: ip,
-      event: `agent_api_${type}${slug ? `_${slug}` : ""}`,
+      event: eventName,
       properties: {
         $current_url: request.nextUrl.toString(),
         path: `/${path.join("/")}`,
@@ -450,7 +453,9 @@ export async function GET(
         user_agent: request.headers.get("user-agent") ?? "unknown",
       },
     });
+    console.log("[PostHog] Flushing...");
     await posthog.flush();
+    console.log("[PostHog] Flush complete");
   }
 
   return response;

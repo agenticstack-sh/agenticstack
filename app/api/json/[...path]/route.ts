@@ -15,7 +15,7 @@ const API_VERSION = "1.1";
 
 const HEADERS = {
   "Content-Type": "application/json; charset=utf-8",
-  "Cache-Control": "public, max-age=3600, stale-while-revalidate=86400",
+  "Cache-Control": "private, no-store",
   "Access-Control-Allow-Origin": "*",
   "X-API-Version": API_VERSION,
 };
@@ -437,8 +437,9 @@ export async function GET(
   response.headers.set("X-RateLimit-Remaining", String(remaining));
 
   const eventName = `agent_api_${type}${slug ? `_${slug}` : ""}`;
+  const publicUrl = `https://${request.headers.get("host")}${request.nextUrl.pathname}${request.nextUrl.search}`;
   const phResult = await captureEvent(eventName, ip, {
-    $current_url: request.nextUrl.toString(),
+    $current_url: publicUrl,
     path: `/${path.join("/")}`,
     endpoint_type: type,
     slug: slug ?? null,

@@ -4,8 +4,9 @@ import { NextRequest } from "next/server";
 
 export async function GET(request: NextRequest) {
   const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
+  const publicUrl = `https://${request.headers.get("host")}${request.nextUrl.pathname}`;
   await captureEvent("agent_discovery_llms_txt", ip, {
-    $current_url: request.nextUrl.toString(),
+    $current_url: publicUrl,
     user_agent: request.headers.get("cloudfront-viewer-user-agent") ?? request.headers.get("x-forwarded-user-agent") ?? request.headers.get("user-agent") ?? "unknown",
   });
   const tools = getAllTools();

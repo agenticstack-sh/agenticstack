@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 import path from "path";
 
 const isDev = process.env.NODE_ENV === "development";
-const posthogHost = process.env.NEXT_PUBLIC_POSTHOG_HOST ?? "https://us.i.posthog.com";
+const posthogHost = process.env.NEXT_PUBLIC_POSTHOG_HOST ?? "https://eu.i.posthog.com";
 
 const securityHeaders = [
   { key: "X-Frame-Options", value: "DENY" },

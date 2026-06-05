@@ -450,6 +450,7 @@ export async function GET(
         user_agent: request.headers.get("user-agent") ?? "unknown",
       },
     });
+    await posthog.flush();
   }
 
   return response;

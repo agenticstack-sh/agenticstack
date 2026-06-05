@@ -2,7 +2,7 @@ import { getAllTools, getAllCategories, getAllComparisons } from "@/lib/markdown
 import { getPostHogClient } from "@/lib/posthog";
 import { NextRequest } from "next/server";
 
-export function GET(request: NextRequest) {
+export async function GET(request: NextRequest) {
   const posthog = getPostHogClient();
   if (posthog) {
     const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
@@ -14,6 +14,7 @@ export function GET(request: NextRequest) {
         user_agent: request.headers.get("user-agent") ?? "unknown",
       },
     });
+    await posthog.flush();
   }
   const tools = getAllTools();
   const categories = getAllCategories();

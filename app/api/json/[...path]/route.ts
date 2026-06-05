@@ -445,7 +445,9 @@ export async function GET(
     status: response.status,
     user_agent: request.headers.get("cloudfront-viewer-user-agent") ?? request.headers.get("x-forwarded-user-agent") ?? request.headers.get("user-agent") ?? "unknown",
   });
-  response.headers.set("X-PostHog-Debug", phResult);
 
-  return response;
+  // Temporary debug: inject PostHog status into response body
+  const body = await response.json();
+  body._posthog_debug = phResult;
+  return new Response(JSON.stringify(body), { status: response.status, headers: response.headers });
 }

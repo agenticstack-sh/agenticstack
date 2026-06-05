@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
       event: "agent_discovery_llms_txt",
       properties: {
         $current_url: request.nextUrl.toString(),
-        user_agent: request.headers.get("user-agent") ?? "unknown",
+        user_agent: request.headers.get("cloudfront-viewer-user-agent") ?? request.headers.get("x-forwarded-user-agent") ?? request.headers.get("user-agent") ?? "unknown",
       },
     });
     await posthog.flush();

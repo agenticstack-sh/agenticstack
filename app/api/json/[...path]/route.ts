@@ -437,6 +437,7 @@ export async function GET(
   response.headers.set("X-RateLimit-Remaining", String(remaining));
 
   const posthog = getPostHogClient();
+  console.log("[PostHog] Headers:", Object.fromEntries(request.headers.entries()));
   console.log("[PostHog] Client initialized:", !!posthog);
   if (posthog) {
     const eventName = `agent_api_${type}${slug ? `_${slug}` : ""}`;
@@ -450,12 +451,16 @@ export async function GET(
         endpoint_type: type,
         slug: slug ?? null,
         status: response.status,
-        user_agent: request.headers.get("user-agent") ?? "unknown",
+        user_agent: request.headers.get("cloudfront-viewer-user-agent") ?? request.headers.get("x-forwarded-user-agent") ?? request.headers.get("user-agent") ?? "unknown",
       },
     });
     console.log("[PostHog] Flushing...");
-    await posthog.flush();
-    console.log("[PostHog] Flush complete");
+    try {
+      await posthog.flush();
+      console.log("[PostHog] Flush complete");
+    } catch (err) {
+      console.error("[PostHog] Flush failed:", err);
+    }
   }
 
   return response;

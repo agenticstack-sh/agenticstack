@@ -1,21 +1,13 @@
 import { getAllTools, getAllCategories, getAllComparisons } from "@/lib/markdown";
-import { getPostHogClient } from "@/lib/posthog";
+import { captureEvent } from "@/lib/posthog";
 import { NextRequest } from "next/server";
 
 export async function GET(request: NextRequest) {
-  const posthog = getPostHogClient();
-  if (posthog) {
-    const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
-    posthog.capture({
-      distinctId: ip,
-      event: "agent_discovery_llms_txt",
-      properties: {
-        $current_url: request.nextUrl.toString(),
-        user_agent: request.headers.get("cloudfront-viewer-user-agent") ?? request.headers.get("x-forwarded-user-agent") ?? request.headers.get("user-agent") ?? "unknown",
-      },
-    });
-    await posthog.flush();
-  }
+  const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
+  await captureEvent("agent_discovery_llms_txt", ip, {
+    $current_url: request.nextUrl.toString(),
+    user_agent: request.headers.get("cloudfront-viewer-user-agent") ?? request.headers.get("x-forwarded-user-agent") ?? request.headers.get("user-agent") ?? "unknown",
+  });
   const tools = getAllTools();
   const categories = getAllCategories();
 

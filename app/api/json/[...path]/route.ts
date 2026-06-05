@@ -7,7 +7,7 @@ import {
   getComparisonBySlug,
 } from "@/lib/markdown";
 import { rateLimit } from "@/lib/rate-limit";
-import { getPostHogClient } from "@/lib/posthog";
+import { captureEvent } from "@/lib/posthog";
 import { NextRequest } from "next/server";
 import type { ToolFrontmatter } from "@/lib/types";
 
@@ -436,32 +436,15 @@ export async function GET(
 
   response.headers.set("X-RateLimit-Remaining", String(remaining));
 
-  const posthog = getPostHogClient();
-  console.log("[PostHog] Headers:", Object.fromEntries(request.headers.entries()));
-  console.log("[PostHog] Client initialized:", !!posthog);
-  if (posthog) {
-    const eventName = `agent_api_${type}${slug ? `_${slug}` : ""}`;
-    console.log("[PostHog] Capturing event:", eventName, "path:", `/${path.join("/")}`);
-    posthog.capture({
-      distinctId: ip,
-      event: eventName,
-      properties: {
-        $current_url: request.nextUrl.toString(),
-        path: `/${path.join("/")}`,
-        endpoint_type: type,
-        slug: slug ?? null,
-        status: response.status,
-        user_agent: request.headers.get("cloudfront-viewer-user-agent") ?? request.headers.get("x-forwarded-user-agent") ?? request.headers.get("user-agent") ?? "unknown",
-      },
-    });
-    console.log("[PostHog] Flushing...");
-    try {
-      await posthog.flush();
-      console.log("[PostHog] Flush complete");
-    } catch (err) {
-      console.error("[PostHog] Flush failed:", err);
-    }
-  }
+  const eventName = `agent_api_${type}${slug ? `_${slug}` : ""}`;
+  await captureEvent(eventName, ip, {
+    $current_url: request.nextUrl.toString(),
+    path: `/${path.join("/")}`,
+    endpoint_type: type,
+    slug: slug ?? null,
+    status: response.status,
+    user_agent: request.headers.get("cloudfront-viewer-user-agent") ?? request.headers.get("x-forwarded-user-agent") ?? request.headers.get("user-agent") ?? "unknown",
+  });
 
   return response;
 }

@@ -116,7 +116,11 @@ Covers markdown parsing, frontmatter validation, cross-reference integrity, and 
 
 ## Agent skills
 
-The [agenticstack-skills](https://github.com/agenticstack-sh/agenticstack-skills) repo provides Claude Code slash commands that query this API:
+The [agenticstack-skills](https://github.com/agenticstack-sh/agenticstack-skills) repo provides skills that query this API from any AI assistant.
+
+```bash
+npx skills add agenticstack-sh/agenticstack-skills
+```
 
 | Skill | What it does |
 |-------|-------------|
@@ -124,6 +128,8 @@ The [agenticstack-skills](https://github.com/agenticstack-sh/agenticstack-skills
 | `/compare-tools` | Side-by-side comparison of 2-3 tools with editorial analysis |
 | `/search-tools` | Filter tools by category, language, framework, or feature |
 | `/explore-category` | Overview of a category with all tools and feature matrix |
+| `/setup-tool` | Pick the right tool and get started with implementation guidance |
+| `/add-tool` | Generate a correctly formatted tool file ready to submit as a PR |
 
 ---
 

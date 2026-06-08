@@ -40,7 +40,15 @@ export default function Home() {
             Use AgenticStack with any AI assistant.
           </p>
           <p className="text-sm leading-relaxed" style={{ color: "var(--muted)" }}>
-            Install the skills to search, compare, and recommend agent tools directly from your AI workflow.
+            Install the skills to search, compare, and recommend agent tools directly from your AI workflow.{" "}
+            <a
+              href="https://skills.sh/agenticstack-sh/agenticstack-skills"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: "var(--accent-text)" }}
+            >
+              View skills →
+            </a>
           </p>
         </div>
         <code

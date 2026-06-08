@@ -11,7 +11,7 @@ pricing_tiers:
   - "Custom Enterprise"
 open_source: false
 self_hosted: false
-sdk_languages: [python, javascript, typescript, go, java, csharp]
+sdk_languages: [python, javascript, typescript, go, java, csharp, ruby, php]
 frameworks: [langchain, llamaindex, vercel-ai, openai-agents]
 agent_features:
   agent_sdk: true

@@ -30,6 +30,31 @@ export default function Home() {
         </Link>
       </div>
 
+      {/* Skills banner */}
+      <div
+        className="rounded-xl px-6 py-5 mb-20 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+        style={{ background: "var(--accent)", border: "1px solid #c4b5fd" }}
+      >
+        <div>
+          <p className="font-semibold text-sm mb-1" style={{ color: "var(--foreground)" }}>
+            Use AgenticStack with any AI assistant.
+          </p>
+          <p className="text-sm leading-relaxed" style={{ color: "var(--muted)" }}>
+            Install the skills to search, compare, and recommend agent tools directly from your AI workflow.
+          </p>
+        </div>
+        <code
+          className="text-sm whitespace-nowrap px-4 py-2.5 rounded-lg font-mono shrink-0"
+          style={{
+            background: "var(--card)",
+            border: "1px solid var(--border)",
+            color: "var(--accent-text)",
+          }}
+        >
+          npx skills add agenticstack-sh/agenticstack-skills
+        </code>
+      </div>
+
       {/* Category grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {categories.map((category) => {

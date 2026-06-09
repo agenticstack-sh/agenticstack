@@ -1,6 +1,6 @@
 # AgenticStack
 
-Structured tool comparisons for AI agent developers. 5 categories live: Auth & Identity, Observability, Email, CMS, Hosting.
+Find the right tool for every layer of your agent stack.
 
 ## What it is
 

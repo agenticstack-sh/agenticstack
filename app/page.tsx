@@ -20,7 +20,7 @@ export default function Home() {
           Find the right tool for<br />every layer of your agent stack.
         </h1>
         <p className="text-base leading-relaxed mb-6" style={{ color: "var(--muted)" }}>
-          Structured comparisons across the tools AI agent developers reach for.
+          Find the right tool for every layer of your agent stack.
         </p>
         <Link
           href="/compare"

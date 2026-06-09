@@ -41,7 +41,7 @@ export async function GET(request: NextRequest) {
 
   const body = `# AgenticStack
 
-> Structured comparisons across the tools AI agent developers reach for. Built for agents first, humans second.
+> Find the right tool for every layer of your agent stack.
 
 ## Quick start for agents
 

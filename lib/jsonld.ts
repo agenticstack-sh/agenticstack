@@ -12,7 +12,7 @@ export function websiteJsonLd() {
     name: "AgenticStack",
     url: siteUrl,
     description:
-      "Structured comparisons across the tools AI agent developers reach for. Designed for both human developers and AI coding agents.",
+      "Find the right tool for every layer of your agent stack.",
   };
 }
 

@@ -34,7 +34,7 @@ function generateLlmsTxt(): string {
 
   return `# AgenticStack
 
-> Structured comparisons across the tools AI agent developers reach for.
+> Find the right tool for every layer of your agent stack.
 
 ## Categories
 

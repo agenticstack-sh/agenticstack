@@ -21,13 +21,13 @@ export const metadata: Metadata = {
     template: "%s | AgenticStack",
   },
   description:
-    "Structured comparisons across the tools AI agent developers reach for. Designed for both human developers and AI coding agents.",
+    "Find the right tool for every layer of your agent stack.",
   openGraph: {
     type: "website",
     siteName: "AgenticStack",
     title: "AgenticStack — Compare Tools for AI Agents",
     description:
-      "Structured comparisons across the tools AI agent developers reach for. Designed for both human developers and AI coding agents.",
+      "Find the right tool for every layer of your agent stack.",
   },
   twitter: {
     card: "summary_large_image",

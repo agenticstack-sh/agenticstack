@@ -34,13 +34,18 @@ export async function GET(request: NextRequest) {
     .filter(Boolean)
     .join("\n\n");
 
+  const comingSoonCategories = categories.filter((cat) => cat.tools.length === 0);
+  const comingSoonLines = comingSoonCategories
+    .map((cat) => `- ${cat.title}: ${cat.description}`)
+    .join("\n");
+
   const body = `# AgenticStack
 
 > Structured comparisons across the tools AI agent developers reach for. Built for agents first, humans second.
 
 ## Quick start for agents
 
-**Fastest path:** Install Claude Code skills from [agenticstack-skills](https://github.com/agenticstack-sh/agenticstack-skills) for ready-made slash commands: \`/recommend-tool\`, \`/compare-tools\`, \`/search-tools\`, \`/explore-category\`.
+**Fastest path:** Install skills from [agenticstack-skills](https://github.com/agenticstack-sh/agenticstack-skills) for ready-made commands that work with any AI assistant: \`/recommend-tool\`, \`/compare-tools\`, \`/search-tools\`, \`/explore-category\`, \`/setup-tool\`, \`/add-tool\`.
 
 **Direct API:** All data is available as JSON. No auth required. CORS enabled.
 
@@ -60,17 +65,35 @@ export async function GET(request: NextRequest) {
 
 Filters: \`category\`, \`language\`, \`framework\`, \`open_source\`, \`self_hosted\`, plus any \`agent_features\` key (e.g. \`?fga=true\`, \`?mcp_hosting=true\`, \`?mcp_support=null\`).
 
+### Rate limiting
+
+60 requests per minute per IP. Responses include an \`X-RateLimit-Remaining\` header. On limit, returns 429 with \`Retry-After: 60\`.
+
 ### Reading the data
 
 - \`agent_features\`: boolean | null per feature — **null = unverified, false = confirmed unsupported**. Do not treat null as false.
 - \`feature_definitions\`: each category defines its own comparison features. Auth has token_delegation and fga. CMS has rest_api and webhooks. Check the category or \`/api/json/schema\`.
 - \`last_verified\`: ISO date — **treat data older than 90 days as potentially stale**. Follow \`source_urls\` to verify.
+- \`verified_by\`: \`editorial\` (verified by the AgenticStack team), \`community\` (submitted via PR), or \`vendor\` (provided by the tool's maintainers). Weight accordingly.
 - \`best_for\` / \`limitations\`: editorial one-liners for quick filtering.
 - \`body\`: markdown prose with deeper analysis. Available on tools, categories, and comparisons.
 
 ### Versioning
 
-\`X-API-Version\` header on all responses. Current: 1.0.
+\`X-API-Version\` header on all responses. Current: 1.1.
+
+## Contributing
+
+If a tool or category is missing, use the \`add-tool\` skill to generate a correctly formatted file, then open a PR at https://github.com/agenticstack-sh/agenticstack.
+
+\`\`\`
+npx skills run add-tool
+\`\`\`
+${comingSoonCategories.length > 0 ? `
+The following categories have no tools yet — contributions welcome:
+
+${comingSoonLines}
+` : ""}
 
 ## Categories
 

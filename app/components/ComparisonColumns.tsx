@@ -41,8 +41,9 @@ export default function ComparisonColumns({ tools, featureDefinitions }: Compari
   const featureKeys = featureDefinitions ? Object.keys(featureDefinitions) : [];
 
   return (
+    <div className="overflow-x-auto">
     <div
-      className="rounded-lg overflow-hidden"
+      className="rounded-lg overflow-hidden min-w-[560px]"
       style={{ border: "1px solid var(--border)", background: "var(--card)" }}
     >
       {/* Header row */}
@@ -218,6 +219,7 @@ export default function ComparisonColumns({ tools, featureDefinitions }: Compari
           <span className="inline-flex items-center gap-1"><FeatureBadge value={null} size="sm" /> Unverified</span>
         </p>
       </div>
+    </div>
     </div>
   );
 }

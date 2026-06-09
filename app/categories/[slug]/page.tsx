@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { collectionPageJsonLd, breadcrumbJsonLd, safeJsonLd } from "@/lib/jsonld";
+import ContributePrompt from "@/app/components/ContributePrompt";
 
 export function generateStaticParams() {
   const categories = getAllCategories();
@@ -104,6 +105,8 @@ export default async function CategoryPage({
       >
         <ComparisonTable tools={tools} featureDefinitions={category.frontmatter.feature_definitions} showLogos={false} />
       </div>
+
+      <ContributePrompt context="category" />
 
       {html.trim() && (
         <div

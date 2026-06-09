@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getAllCategories, getToolBySlug } from "@/lib/markdown";
+import ContributePrompt from "@/app/components/ContributePrompt";
 import type { ToolFrontmatter } from "@/lib/types";
 import { websiteJsonLd, safeJsonLd } from "@/lib/jsonld";
 
@@ -7,15 +8,15 @@ export default function Home() {
   const categories = getAllCategories();
 
   return (
-    <div className="max-w-5xl mx-auto px-6 py-20">
+    <div className="max-w-5xl mx-auto px-4 sm:px-6 py-10 sm:py-20">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: safeJsonLd(websiteJsonLd()) }}
       />
 
       {/* Hero */}
-      <div className="max-w-2xl mb-20">
-        <h1 className="text-4xl font-semibold tracking-tight mb-4 leading-tight">
+      <div className="max-w-2xl mb-12 sm:mb-20">
+        <h1 className="text-2xl sm:text-4xl font-semibold tracking-tight mb-4 leading-tight">
           Find the right tool for<br />every layer of your agent stack.
         </h1>
         <p className="text-base leading-relaxed mb-6" style={{ color: "var(--muted)" }}>
@@ -32,7 +33,7 @@ export default function Home() {
 
       {/* Skills banner */}
       <div
-        className="rounded-xl px-6 py-5 mb-20 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+        className="rounded-xl px-5 py-5 mb-12 sm:mb-20 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
         style={{ background: "var(--accent)", border: "1px solid #c4b5fd" }}
       >
         <div>
@@ -52,7 +53,7 @@ export default function Home() {
           </p>
         </div>
         <code
-          className="text-sm whitespace-nowrap px-4 py-2.5 rounded-lg font-mono shrink-0"
+          className="text-xs sm:text-sm whitespace-normal sm:whitespace-nowrap px-4 py-2.5 rounded-lg font-mono"
           style={{
             background: "var(--card)",
             border: "1px solid var(--border)",
@@ -82,7 +83,7 @@ export default function Home() {
           const card = (
             <div
               key={category.category}
-              className={`category-card flex flex-col justify-between rounded-xl p-6 transition-colors ${isEmpty ? "opacity-60" : ""}`}
+              className={`category-card flex flex-col justify-between rounded-xl p-4 sm:p-6 transition-colors ${isEmpty ? "opacity-60" : ""}`}
             >
               <div>
                 <div className="flex items-start justify-between mb-3">
@@ -142,6 +143,8 @@ export default function Home() {
           );
         })}
       </div>
+
+      <ContributePrompt context="home" />
     </div>
   );
 }

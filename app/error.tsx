@@ -5,11 +5,11 @@ import Link from "next/link";
 export default function Error({ reset }: { error: Error; reset: () => void }) {
   return (
     <div className="max-w-xl mx-auto px-6 py-32 text-center">
-      <h1 className="text-5xl font-semibold tracking-tight mb-4">500 — Something went wrong</h1>
+      <h1 className="text-2xl sm:text-4xl font-semibold tracking-tight mb-4">500 — Something went wrong</h1>
       <p className="text-base mb-8" style={{ color: "var(--muted)" }}>
         Something went wrong. Try again or head back to the homepage.
       </p>
-      <div className="flex gap-3 justify-center">
+      <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
         <button
           onClick={reset}
           className="inline-flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-lg transition-opacity hover:opacity-80 cursor-pointer"

@@ -363,7 +363,7 @@ function handleSchema() {
     },
     skills: {
       repo: "https://github.com/agenticstack-sh/agenticstack-skills",
-      description: "Claude Code slash commands that wrap this API: /recommend-tool, /compare-tools, /search-tools, /explore-category",
+      description: "Agent-agnostic skills that wrap this API, compatible with any AI assistant: /recommend-tool, /compare-tools, /search-tools, /explore-category, /setup-tool, /add-tool",
     },
   });
 }

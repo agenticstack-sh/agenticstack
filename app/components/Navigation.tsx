@@ -1,4 +1,5 @@
 import Link from "next/link";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Navigation() {
   return (
@@ -13,6 +14,7 @@ export default function Navigation() {
         <Link href="/" className="font-semibold text-base tracking-tight no-underline" style={{ color: "var(--foreground)" }}>
           AgenticStack
         </Link>
+        <ThemeToggle />
       </div>
     </nav>
   );

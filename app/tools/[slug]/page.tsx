@@ -63,7 +63,7 @@ export default async function ToolPage({
   } catch {}
 
   return (
-    <div className="max-w-4xl mx-auto px-6 py-12">
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: safeJsonLd(toolJsonLd(tool)) }}
@@ -87,46 +87,48 @@ export default async function ToolPage({
       </div>
 
       <div className="mb-8">
-        <div className="flex items-start gap-4 mb-3">
+        <div className="flex items-start gap-3 mb-3">
           <img
             src={`/logos/${slug}.svg`}
             alt=""
             width={36}
             height={36}
-            className="rounded-lg mt-0.5"
+            className="rounded-lg mt-0.5 shrink-0"
           />
-          <h1 className="text-2xl font-semibold tracking-tight">{tool.name}</h1>
-          <div className="flex gap-2 mt-1">
-            <span
-              className="text-xs px-2 py-0.5 rounded"
-              style={{ background: "var(--accent)", color: "var(--muted)" }}
-            >
-              {tool.type}
-            </span>
-            {tool.pricing_tiers?.map((tier, i) => (
-              <span
-                key={i}
-                className="text-xs px-2 py-0.5 rounded"
-                style={{ background: "var(--accent)", color: "var(--muted)" }}
-              >
-                {tier}
-              </span>
-            )) ?? (
+          <div className="min-w-0">
+            <h1 className="text-2xl font-semibold tracking-tight">{tool.name}</h1>
+            <div className="flex flex-wrap gap-1.5 mt-1.5">
               <span
                 className="text-xs px-2 py-0.5 rounded"
                 style={{ background: "var(--accent)", color: "var(--muted)" }}
               >
-                {tool.pricing}
+                {tool.type}
               </span>
-            )}
-            {tool.open_source && (
-              <span
-                className="text-xs px-2 py-0.5 rounded-full font-medium"
-                style={{ background: "var(--green-bg)", color: "var(--green-text)" }}
-              >
-                open source
-              </span>
-            )}
+              {tool.pricing_tiers?.map((tier, i) => (
+                <span
+                  key={i}
+                  className="text-xs px-2 py-0.5 rounded"
+                  style={{ background: "var(--accent)", color: "var(--muted)" }}
+                >
+                  {tier}
+                </span>
+              )) ?? (
+                <span
+                  className="text-xs px-2 py-0.5 rounded"
+                  style={{ background: "var(--accent)", color: "var(--muted)" }}
+                >
+                  {tool.pricing}
+                </span>
+              )}
+              {tool.open_source && (
+                <span
+                  className="text-xs px-2 py-0.5 rounded-full font-medium"
+                  style={{ background: "var(--green-bg)", color: "var(--green-text)" }}
+                >
+                  open source
+                </span>
+              )}
+            </div>
           </div>
         </div>
         <div className="flex gap-4 text-sm flex-wrap">
@@ -258,7 +260,7 @@ export default async function ToolPage({
       )}
 
       <div
-        className="mt-12 pt-6 flex items-center justify-between text-xs flex-wrap gap-3"
+        className="mt-12 pt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between text-xs gap-3"
         style={{ borderTop: "1px solid var(--border)", color: "var(--muted)" }}
       >
         <div className="flex gap-4">
@@ -276,7 +278,7 @@ export default async function ToolPage({
             </span>
           </span>
         </div>
-        <div className="flex gap-4 font-mono">
+        <div className="flex flex-wrap items-center gap-4 font-mono">
           {Object.entries(tool.source_urls).map(([key, url]) => (
             <a
               key={key}
@@ -288,6 +290,15 @@ export default async function ToolPage({
               {key} ↗
             </a>
           ))}
+          <a
+            href="https://github.com/agenticstack-sh/agenticstack/pulls"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="no-underline hover:opacity-70 transition-opacity font-sans"
+            style={{ color: "var(--accent-text)" }}
+          >
+            Spot a mistake? Open a PR →
+          </a>
         </div>
       </div>
     </div>

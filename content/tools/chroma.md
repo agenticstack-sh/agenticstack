@@ -7,8 +7,9 @@ website: https://www.trychroma.com
 pricing: freemium
 pricing_tiers:
   - "Free (self-hosted, Apache 2.0)"
-  - "Free Chroma Cloud starter"
-  - "Usage-based Chroma Cloud (from ~$0.40/GB/mo storage + query units)"
+  - "Starter ($0/mo + usage)"
+  - "Team ($250/mo + usage)"
+  - "Custom Enterprise"
 open_source: true
 self_hosted: true
 sdk_languages: [python, javascript, typescript, ruby]

@@ -7,9 +7,9 @@ website: https://qdrant.tech
 pricing: freemium
 pricing_tiers:
   - "Free (self-hosted, Apache 2.0)"
-  - "Free Cloud (1GB cluster)"
-  - "$25+/mo Cloud (usage-based)"
-  - "Custom Hybrid Cloud / Private Cloud"
+  - "Free Tier (1GB cluster)"
+  - "Standard Tier (usage-based)"
+  - "Premium Tier (minimum spend required)"
 open_source: true
 self_hosted: true
 sdk_languages: [python, javascript, typescript, rust, go, java, csharp]

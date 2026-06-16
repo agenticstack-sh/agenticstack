@@ -7,8 +7,10 @@ website: https://weaviate.io
 pricing: freemium
 pricing_tiers:
   - "Free (self-hosted, open-source)"
-  - "$25/mo Serverless Cloud (Sandbox free)"
-  - "Custom Enterprise / BYOC"
+  - "Free Hosted"
+  - "$45/mo Flex"
+  - "$280/mo Plus"
+  - "$400/mo Premium"
 open_source: true
 self_hosted: true
 sdk_languages: [python, javascript, typescript, go, java]

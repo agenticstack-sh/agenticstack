@@ -4,7 +4,6 @@ slug: contentful-vs-sanity
 tools: [contentful, sanity]
 category: headless-cms
 last_verified: 2026-05-09
-verdict: Sanity
 ---
 
 Both Contentful and Sanity offer hosted MCP servers with OAuth, so neither requires local setup. Sanity wins on query depth, AI tools, and webhook features. Contentful wins for non-JavaScript runtimes and existing installations.

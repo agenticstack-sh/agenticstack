@@ -4,7 +4,6 @@ slug: datadog-vs-langsmith
 tools: [datadog, langsmith]
 category: observability
 last_verified: 2026-05-09
-verdict: LangSmith
 ---
 
 Datadog LLM Observability and LangSmith both provide deep agent chain tracing. They diverge on evaluation depth, prompt management, framework breadth, and deployment flexibility. LangSmith wins on evaluation pipelines, prompt engineering, and self-hosting. Datadog wins on infrastructure integration and anomaly detection.

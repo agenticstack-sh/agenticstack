@@ -4,7 +4,6 @@ slug: helicone-vs-langfuse
 tools: [helicone, langfuse]
 category: observability
 last_verified: 2026-05-09
-verdict: Langfuse
 ---
 
 Helicone and Langfuse are both LLM-specific observability platforms. They differ in depth. Langfuse provides nested agent chain tracing, evaluation pipelines, and prompt management. Helicone provides proxy-based request logging with cost tracking and session grouping. Langfuse wins on trace depth, evaluation, and prompt management. Helicone wins on zero-code integration and AI gateway features.

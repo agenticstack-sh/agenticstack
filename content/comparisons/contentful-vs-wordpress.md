@@ -4,7 +4,6 @@ slug: contentful-vs-wordpress
 tools: [contentful, wordpress]
 category: headless-cms
 last_verified: 2026-05-09
-verdict: Contentful
 ---
 
 WordPress was built for publishing; its REST API came later. Contentful was designed as headless from the start. That difference shows on every agentic dimension: MCP support, webhooks, API design, and token security. WordPress self-hosting is real but not relevant for new agent projects.

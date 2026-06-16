@@ -4,7 +4,6 @@ slug: langfuse-vs-datadog
 tools: [langfuse, datadog]
 category: observability
 last_verified: 2026-05-09
-verdict: "Langfuse"
 popular: true
 ---
 

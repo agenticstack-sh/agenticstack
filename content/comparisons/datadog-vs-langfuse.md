@@ -4,7 +4,6 @@ slug: datadog-vs-langfuse
 tools: [datadog, langfuse]
 category: observability
 last_verified: 2026-05-09
-verdict: Langfuse
 ---
 
 Datadog LLM Observability and Langfuse both provide nested trace capture for agent reasoning chains. They diverge on evaluation depth, prompt management, framework breadth, self-hosting, and pricing. Langfuse wins on evaluation pipelines, framework integrations, and open-source self-hosting. Datadog wins on APM integration and anomaly detection.

@@ -5,7 +5,6 @@ tools: [keycloak, ory]
 category: auth
 popular: true
 last_verified: 2026-05-09
-verdict: "Ory"
 ---
 
 Keycloak and Ory both provide open-source self-hosted identity infrastructure, but Keycloak is a Red Hat all-in-one identity and access management server while Ory is a modular, API-first identity stack with Keto, a Zanzibar-inspired Fine-Grained Authorization engine. Ory wins on modular microservice architecture, Zanzibar-style FGA for RAG pipelines, and schema-based headless identity modeling; Keycloak wins on all-in-one IAM, enterprise protocol depth including LDAP and SAML, and deep Java SPI customization for legacy integrations.

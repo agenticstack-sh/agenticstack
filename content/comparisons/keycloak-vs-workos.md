@@ -4,7 +4,6 @@ slug: keycloak-vs-workos
 tools: [keycloak, workos]
 category: auth
 last_verified: 2026-05-09
-verdict: "WorkOS"
 ---
 
 Keycloak and WorkOS both provide identity infrastructure for modern applications, but Keycloak is a Red Hat-backed open-source identity and access management server designed for complete self-hosted control while WorkOS is a developer-first B2B identity platform with a self-service Admin Portal for enterprise SSO and SCIM provisioning, Fine-Grained Authorization, and free usage up to one million MAUs. WorkOS wins on enterprise B2B go-to-market velocity, self-service Admin Portal, native FGA for RAG pipelines, and zero MAU cost up to one million users; Keycloak wins on open-source self-hosting including air-gapped deployments, no per-connection SSO or SCIM fees, and deep Java SPI customization for complex legacy integrations.

@@ -5,7 +5,6 @@ tools: [firebase-auth, supabase-auth]
 category: auth
 popular: true
 last_verified: 2026-05-09
-verdict: "Supabase"
 ---
 
 For developers building AI agents, Supabase wins on open-source self-hostability and database-native access control for regulated deployments, while Firebase has zero agentic capabilities. Supabase is the better choice if you need air-gapped or on-premises agent deployment for healthcare, finance, or defense applications. Firebase is unsuitable for any agent workload requiring governance, self-hosting, or regulatory compliance.

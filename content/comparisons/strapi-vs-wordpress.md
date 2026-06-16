@@ -4,7 +4,6 @@ slug: strapi-vs-wordpress
 tools: [strapi, wordpress]
 category: cms
 last_verified: 2026-05-09
-verdict: Strapi
 ---
 
 Strapi and WordPress are both open-source and self-hosted. Strapi was designed as headless, WordPress added REST to publishing. Strapi wins on API depth, webhooks, and AI/MCP. WordPress is only relevant if you already run it.

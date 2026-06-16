@@ -4,7 +4,6 @@ slug: firebase-auth-vs-keycloak
 tools: [firebase-auth, keycloak]
 category: auth
 last_verified: 2026-05-09
-verdict: "Keycloak"
 ---
 For developers building AI agents, Keycloak wins decisively. It provides CIBA for asynchronous approvals and protocol extensibility. Firebase is purely a human B2C authentication service with zero agent governance capabilities. Firebase has no agent abstractions, no token management for machine identities, and no extensibility for agent workflows. Choose Keycloak for any agent system needing protocol depth, human-in-the-loop governance, or on-premises deployment. Firebase is unsuitable for agent-centric architectures.
 

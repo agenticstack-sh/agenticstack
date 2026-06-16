@@ -4,7 +4,6 @@ slug: datadog-vs-grafana
 tools: [datadog, grafana]
 category: observability
 last_verified: 2026-05-09
-verdict: Datadog
 ---
 
 Datadog and Grafana are both general observability platforms. They occupy different positions for agent observability. Datadog ships a dedicated LLM Observability product with agent-specific span types and auto-instrumentation. Grafana provides OpenTelemetry-based trace ingestion and custom dashboards. It has no dedicated LLM observability product. Datadog wins on agent trace depth and LLM-specific features. Grafana wins on self-hosting and vendor independence.

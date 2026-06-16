@@ -4,7 +4,6 @@ slug: grafana-vs-langfuse
 tools: [grafana, langfuse]
 category: observability
 last_verified: 2026-05-09
-verdict: Langfuse
 ---
 
 Grafana and Langfuse are both open-source and self-hostable. They serve different observability needs. Langfuse is built for LLM application observability with agent trace capture, evaluation, prompt management, and cost tracking. Grafana is a general-purpose observability platform with no LLM-specific features. Langfuse wins on all three agentic dimensions.

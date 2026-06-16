@@ -4,7 +4,6 @@ slug: descope-vs-supabase-auth
 tools: [descope, supabase-auth]
 category: auth
 last_verified: 2026-05-09
-verdict: "Descope"
 ---
 Descope and Supabase both offer authentication. Supabase is open-source backend-as-a-service with authentication alongside PostgreSQL and backend tools. Descope is a low-code platform with visual workflow orchestration and AI agent capabilities. For agents needing third-party tool access, Descope wins: Agentic Identity Hub with visual design, pre-built Outbound Apps with managed credentials, and MCP support. Supabase excels at unified backends but lacks agent infrastructure.
 

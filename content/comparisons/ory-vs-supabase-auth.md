@@ -4,7 +4,6 @@ slug: ory-vs-supabase-auth
 tools: [ory, supabase-auth]
 category: auth
 last_verified: 2026-05-09
-verdict: "Ory"
 ---
 
 For developers building AI agents, Ory and Supabase address different architectural stacks. Ory is a modular, open-source identity stack with Keto, a Zanzibar-inspired Fine-Grained Authorization engine for enforcing document-level permissions in RAG pipelines, plus standards-compliant OAuth2 and OIDC for M2M token flows. Supabase is an integrated open-source BaaS with bundled authentication and PostgreSQL Row Level Security, but lacks application-layer FGA for agent authorization, agent provisioning primitives, and agent-specific abuse detection. Ory wins for agent-centric FGA and infrastructure control; Supabase wins for integrated BaaS convenience and database-native access control.

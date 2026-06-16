@@ -4,7 +4,6 @@ slug: stytch-vs-supabase-auth
 tools: [stytch, supabase-auth]
 category: auth
 last_verified: 2026-05-09
-verdict: "Stytch"
 ---
 
 For developers building AI agents, Stytch and Supabase address different architectural stacks. Stytch is a managed identity platform for agent provisioning — Connected Apps provides Dynamic Client Registration for runtime OAuth client onboarding, M2M tokens for service-to-service authentication, and agent abuse detection for machine-actor traffic patterns. Supabase is an open-source PostgreSQL backend with bundled authentication and Row Level Security but lacks native agent onboarding primitives, Dynamic Client Registration, or machine-actor abuse controls. Stytch wins for managed agent provisioning with abuse detection; Supabase wins for integrated open-source BaaS with database-native authorization and self-hosting sovereignty.

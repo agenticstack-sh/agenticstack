@@ -4,7 +4,6 @@ slug: netlify-vs-railway
 tools: [netlify, railway]
 category: hosting-deployment
 last_verified: 2026-05-09
-verdict: Railway
 ---
 
 Netlify and Railway represent different hosting models. Railway provides persistent Docker containers with no timeout, private networking, and managed databases. Netlify provides stateless serverless functions with a 15-minute ceiling and no persistent compute. Railway wins on three agentic dimensions. Netlify's advantages are limited to frontend deployment simplicity.

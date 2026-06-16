@@ -4,7 +4,6 @@ slug: ory-vs-stytch
 tools: [ory, stytch]
 category: auth
 last_verified: 2026-05-09
-verdict: "Stytch"
 ---
 
 For developers building AI agents, Ory and Stytch follow different paths. Stytch is a managed platform that lets your app act as an OAuth identity provider through Connected Apps. Agents register at runtime, get scoped tokens, and trigger built-in machine-actor abuse detection. Ory is open-source where you self-host each microservice (Hydra for OAuth, Keto for FGA, Kratos for identity) independently. Keto provides Zanzibar authorization for RAG document scoping. Stytch wins for managed agent provisioning with abuse controls. Ory wins for self-hosted RAG authorization and infrastructure flexibility.

@@ -4,7 +4,6 @@ slug: cloudflare-vs-netlify
 tools: [cloudflare, netlify]
 category: hosting-deployment
 last_verified: 2026-05-09
-verdict: Cloudflare
 ---
 
 Cloudflare and Netlify both offer serverless functions and edge compute but serve different patterns. Cloudflare provides persistent stateful compute, an Agents SDK with MCP hosting, and GPU inference. Netlify provides serverless functions with a 15-minute background ceiling and no persistent compute, GPU, or agent tooling. Cloudflare wins on all three High-weight dimensions.

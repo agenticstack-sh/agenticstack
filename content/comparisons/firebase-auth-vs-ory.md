@@ -4,7 +4,6 @@ slug: firebase-auth-vs-ory
 tools: [firebase-auth, ory]
 category: auth
 last_verified: 2026-05-09
-verdict: "Ory"
 ---
 
 For developers building AI agents, Firebase Authentication and Ory follow different deployment models. Firebase is Google's managed B2C service with tight GCP integration but lacks Fine-Grained Authorization, agent provisioning primitives, agent-specific abuse detection, and RAG pipeline scoping. Ory is a modular, open-source identity stack with Keto, a Zanzibar-inspired Fine-Grained Authorization engine for document-level permissions in RAG pipelines, plus standards-compliant OAuth2 and OIDC for M2M token flows. Ory wins for self-hosted FGA and infrastructure sovereignty; Firebase wins for zero infrastructure overhead and native GCP integration.

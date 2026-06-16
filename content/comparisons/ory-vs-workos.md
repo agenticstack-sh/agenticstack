@@ -4,7 +4,6 @@ slug: ory-vs-workos
 tools: [ory, workos]
 category: auth
 last_verified: 2026-05-09
-verdict: "WorkOS"
 ---
 
 Ory and WorkOS both provide identity infrastructure for modern applications, but Ory is a modular, API-first open-source identity stack for complete architectural control via independent microservices including Keto, a Zanzibar-inspired Fine-Grained Authorization engine, while WorkOS is a managed B2B identity platform with a self-service Admin Portal for enterprise SSO and SCIM, Fine-Grained Authorization, MCP support, and free users up to 1 million MAUs with AuthKit. WorkOS wins on enterprise B2B SSO and SCIM with a self-service Admin Portal, zero infrastructure overhead, and a generous free tier; Ory wins on modular open-source self-hosted microservices, no MAU-based pricing at scale, and complete infrastructure ownership including air-gapped deployments.

@@ -4,7 +4,6 @@ slug: clerk-vs-firebase-auth
 tools: [clerk, firebase-auth]
 category: auth
 last_verified: 2026-05-09
-verdict: "Clerk"
 ---
 
 For developers building AI agents, Clerk wins decisively on agent-aware tooling with @clerk/agent-toolkit and ML-based bot protection. Firebase has zero agentic capabilities. Choose Clerk if you need agent MCP integration, managed edge performance, and ML-based abuse prevention for agent endpoints. Firebase is unsuitable for any agent workload requiring governance or agent-specific handling.

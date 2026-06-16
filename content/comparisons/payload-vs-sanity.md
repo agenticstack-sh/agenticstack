@@ -4,7 +4,6 @@ slug: payload-vs-sanity
 tools: [payload, sanity]
 category: headless-cms
 last_verified: 2026-05-09
-verdict: Sanity
 ---
 
 Payload and Sanity are both code-first TypeScript CMSes. Sanity wins on hosting model, event architecture, and agent integration. Payload wins on hosting ownership and data residency.

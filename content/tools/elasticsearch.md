@@ -7,9 +7,8 @@ website: https://www.elastic.co/elasticsearch
 pricing: freemium
 pricing_tiers:
   - "Free (self-hosted, Elastic License v2 / SSPL)"
-  - "Free Elastic Cloud Serverless trial"
-  - "$95+/mo Elastic Cloud"
-  - "Custom Enterprise"
+  - "Elastic Cloud Hosted $99+/mo (Standard, Gold, Platinum, Enterprise)"
+  - "Elasticsearch Serverless (pay per use)"
 open_source: true
 self_hosted: true
 sdk_languages: [python, javascript, typescript, go, java, ruby, php, csharp, rust]
@@ -29,7 +28,7 @@ last_verified: 2026-06-10
 source_urls:
   docs: https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html
   pricing: https://www.elastic.co/pricing
-  changelog: https://www.elastic.co/guide/en/elasticsearch/reference/current/release-notes.html
+  changelog: https://www.elastic.co/docs/release-notes/elasticsearch
 ---
 
 # Elasticsearch

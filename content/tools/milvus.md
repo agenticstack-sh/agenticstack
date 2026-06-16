@@ -8,8 +8,9 @@ pricing: freemium
 pricing_tiers:
   - "Free (self-hosted, Apache 2.0)"
   - "Free Zilliz Cloud Serverless tier"
-  - "$99+/mo Zilliz Cloud Dedicated"
-  - "Custom Enterprise / BYOC"
+  - "$126/GB/mo Standard Zilliz Cloud Dedicated"
+  - "$197/mo Enterprise"
+  - "Business Critical"
 open_source: true
 self_hosted: true
 sdk_languages: [python, javascript, typescript, go, java, csharp, ruby]

@@ -1,6 +1,6 @@
 # AgenticStack
 
-Find the right tool for every layer of your agent stack.
+Find the right tool for every layer of your agent stack. Check out the skills: [agenticstack-skills](https://github.com/agenticstack-sh/agenticstack-skills)
 
 ## What it is
 

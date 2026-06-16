@@ -10,7 +10,6 @@
 #   tools    — array of exactly 2 tool slugs that exist in /content/tools/
 #   category — string, must match an existing category slug
 #   last_verified — ISO 8601 date (YYYY-MM-DD), update on each editorial review
-#   verdict  — string, one sentence summarizing when to pick each tool
 #
 # The head-to-head feature table is auto-generated from tool frontmatter.
 # Do not duplicate feature data in prose — it stays in sync automatically.
@@ -24,7 +23,6 @@ slug: toola-vs-toolb
 tools: [toola, toolb]
 category: auth
 last_verified: 2026-04-22
-verdict: "One sentence: when to pick Tool A vs Tool B."
 ---
 
 ## Where [Tool B] wins

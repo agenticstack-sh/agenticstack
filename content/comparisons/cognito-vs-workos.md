@@ -4,7 +4,6 @@ slug: cognito-vs-workos
 tools: [cognito, workos]
 category: auth
 last_verified: 2026-05-09
-verdict: "WorkOS"
 ---
 
 Amazon Cognito and WorkOS both offer identity infrastructure for modern applications, but Amazon Cognito is a low-cost B2C utility tightly coupled to the AWS ecosystem while WorkOS is a B2B SaaS identity platform with enterprise SSO, SCIM Directory Sync, a self-serve Admin Portal, and Fine-Grained Authorization. Cognito wins on cost-sensitive B2C and AWS ecosystem integration; WorkOS wins on enterprise B2B onboarding, self-serve IT administration, and agentic MCP support.

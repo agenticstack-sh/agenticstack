@@ -24,7 +24,7 @@ export async function generateMetadata({
       try { return getToolBySlug(t).frontmatter.name; } catch { return t; }
     });
     const title = `${toolNames[0]} vs ${toolNames[1]} for AI Agents`;
-    const description = `Compare ${toolNames[0]} vs ${toolNames[1]} for agentic workflows. Verdict: ${frontmatter.verdict}.`;
+    const description = `Compare ${toolNames[0]} vs ${toolNames[1]} for agentic workflows.`;
     return {
       title,
       description,
@@ -100,11 +100,6 @@ export default async function EditorialComparePage({
         <h1 className="text-2xl font-semibold tracking-tight mb-2">
           {frontmatter.title}
         </h1>
-        {frontmatter.verdict && (
-          <p className="text-sm" style={{ color: "var(--muted)" }}>
-            {frontmatter.verdict}
-          </p>
-        )}
         <div className="flex gap-4 mt-3 text-xs font-mono" style={{ color: "var(--muted)" }}>
           <Link
             href={dynamicUrl}

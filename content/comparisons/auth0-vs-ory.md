@@ -3,8 +3,7 @@ title: "Auth0 vs Ory"
 slug: auth0-vs-ory
 tools: [auth0, ory]
 category: auth
-last_verified: 2026-05-09
-verdict: auth0
+last_verified: 2026-06-02
 ---
 
 Auth0 and Ory are both capable identity platforms. Ory is modular open-source microservices. Auth0 is fully managed. Auth0 wins for AI agents with Token Vault and FGA plus managed reliability. Ory wins on deployment flexibility and open-source control.

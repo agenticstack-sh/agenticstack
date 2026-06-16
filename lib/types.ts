@@ -46,7 +46,6 @@ export interface ComparisonFrontmatter {
   tools: [string, string];
   category: string;
   last_verified: string;
-  verdict: string;
   popular?: boolean;
 }
 

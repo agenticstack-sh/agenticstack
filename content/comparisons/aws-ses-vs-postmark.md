@@ -4,7 +4,6 @@ slug: aws-ses-vs-postmark
 tools: [aws-ses, postmark]
 category: email
 last_verified: 2026-05-09
-verdict: Postmark
 ---
 
 Postmark and AWS SES represent opposite approaches to email infrastructure. Postmark ships an official MCP server and delivers structured inbound events directly to HTTP endpoints. AWS SES has no MCP server and routes all events through SNS. AWS SES provides the most granular credential scoping via IAM and operates within the AWS compliance boundary. The verdict depends on whether tool-call surface or infrastructure ownership matters more.

@@ -4,7 +4,6 @@ slug: firebase-auth-vs-stytch
 tools: [firebase-auth, stytch]
 category: auth
 last_verified: 2026-05-09
-verdict: "Stytch"
 ---
 For developers building AI agents, Firebase and Stytch address different application stacks. Stytch is a managed platform where agents provision themselves through Connected Apps — runtime Dynamic Client Registration, scoped token delegation, built-in machine-actor abuse detection, and M2M flows — works cross-cloud. Firebase is a GCP-native B2C service with no agent provisioning primitives, no Dynamic Client Registration, no agent abuse detection, but tight Google Cloud integration. Stytch wins for managed agent provisioning with abuse controls; Firebase wins for GCP-native B2C applications with potential upgrade to Identity Platform.
 

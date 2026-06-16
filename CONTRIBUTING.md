@@ -82,7 +82,6 @@ slug: tool-a-vs-tool-b    # must match filename
 tools: [tool-a, tool-b]   # must exist in content/tools/
 category: auth
 last_verified: 2026-06-04
-verdict: "One sentence summary"
 ---
 ```
 

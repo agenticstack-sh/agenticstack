@@ -4,7 +4,6 @@ slug: langfuse-vs-langsmith
 tools: [langfuse, langsmith]
 category: observability
 last_verified: 2026-05-09
-verdict: Langfuse
 ---
 
 Langfuse and LangSmith are the two most complete LLM observability platforms for agent systems. Both provide deep tracing, evaluation, prompt management, and cost tracking. They are closer in capability than any other pairing in this category. The verdict turns on open-source self-hosting, framework neutrality, and pricing transparency. LangSmith wins on evaluation depth and LangChain-native integration.

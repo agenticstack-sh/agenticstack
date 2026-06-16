@@ -4,7 +4,6 @@ slug: clerk-vs-ory
 tools: [clerk, ory]
 category: auth
 last_verified: 2026-05-09
-verdict: "Ory"
 ---
 
 For developers building AI agents, Clerk and Ory address different deployment models. Clerk is a managed SaaS platform optimized for React and Next.js with edge-deployed sessions and ML-powered bot protection, but lacks Fine-Grained Authorization for RAG pipelines and agent provisioning primitives. Ory is a modular, open-source identity stack with Keto, a Zanzibar-inspired Fine-Grained Authorization engine for enforcing document-level permissions in RAG scenarios, plus standards-compliant OAuth2 and OIDC for M2M flows. Ory wins for self-hosted FGA and infrastructure control; Clerk wins for managed frontend developer experience and edge performance.

@@ -4,7 +4,6 @@ slug: supabase-auth-vs-workos
 tools: [supabase-auth, workos]
 category: auth
 last_verified: 2026-05-09
-verdict: "WorkOS"
 ---
 
 Supabase and WorkOS both provide authentication infrastructure. Supabase is an open-source Firebase alternative bundling authentication with PostgreSQL and Row Level Security. WorkOS is an identity platform with an Admin Portal for enterprise SSO and SCIM provisioning, Fine-Grained Authorization, and native MCP integration. WorkOS wins on enterprise B2B identity depth, FGA for document-level authorization, and MCP readiness; Supabase wins on integrated open-source BaaS, database-native Row Level Security, and cost efficiency.

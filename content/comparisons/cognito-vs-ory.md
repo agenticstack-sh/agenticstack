@@ -4,7 +4,6 @@ slug: cognito-vs-ory
 tools: [cognito, ory]
 category: auth
 last_verified: 2026-05-09
-verdict: "Ory"
 ---
 
 For developers building AI agents, Amazon Cognito and Ory follow different deployment models. Amazon Cognito is a fully managed AWS utility with low per-MAU pricing and native AWS integration, but lacks Fine-Grained Authorization for RAG, uses static IAM provisioning instead of Dynamic Client Registration, and locks resource scoping to AWS. Ory is a modular, open-source identity stack with Keto, a Zanzibar-inspired Fine-Grained Authorization engine for document-level permissions in RAG pipelines, plus standards-compliant OAuth2 and OIDC for M2M flows. Ory wins for self-hosted FGA and agent-centric infrastructure; Cognito wins for zero infrastructure overhead and low B2C cost.

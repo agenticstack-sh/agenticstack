@@ -4,7 +4,6 @@ slug: firebase-auth-vs-workos
 tools: [firebase-auth, workos]
 category: auth
 last_verified: 2026-05-09
-verdict: "WorkOS"
 ---
 
 Firebase Authentication and WorkOS both provide identity infrastructure for modern applications, but Firebase is Google's managed B2C authentication service tightly integrated with GCP while WorkOS is an enterprise identity platform with an Admin Portal, SCIM provisioning across major enterprise directories, Fine-Grained Authorization, and MCP server support. WorkOS wins on enterprise B2B multi-tenancy, self-serve SSO provisioning, and agentic FGA capabilities; Firebase wins on native GCP ecosystem integration and an accessible B2C baseline with an upgradable enterprise path.

@@ -107,7 +107,7 @@ ${(() => {
     const comparisons = getAllComparisons();
     if (comparisons.length === 0) return "";
     const lines = comparisons
-      .map((c) => `- [${c.title}](/api/json/comparisons/${c.slug}): ${c.verdict}`)
+      .map((c) => `- [${c.title}](/api/json/comparisons/${c.slug})`)
       .join("\n");
     return `## Comparisons\n\n${lines}`;
   })()}

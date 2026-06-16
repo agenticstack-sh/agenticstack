@@ -30,7 +30,7 @@ function generateLlmsTxt(): string {
 
   const comparisons = getAllComparisons();
   const compSection = comparisons.length === 0 ? "" :
-    `## Comparisons\n\n${comparisons.map((c) => `- [${c.title}](/api/json/comparisons/${c.slug}): ${c.verdict}`).join("\n")}`;
+    `## Comparisons\n\n${comparisons.map((c) => `- [${c.title}](/api/json/comparisons/${c.slug})`).join("\n")}`;
 
   return `# AgenticStack
 

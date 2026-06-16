@@ -4,7 +4,6 @@ slug: clerk-vs-supabase-auth
 tools: [clerk, supabase-auth]
 category: auth
 last_verified: 2026-05-09
-verdict: "Clerk"
 ---
 
 For developers building AI agents, Clerk wins on agent-aware tooling with @clerk/agent-toolkit and ML-based bot protection. Supabase is a backend database service offering no agentic primitives. Choose Clerk if you need agent MCP integration, managed edge performance, and ML-based abuse prevention for agent endpoints. Choose Supabase only for full-stack applications where agents are entirely autonomous and require no separate identity governance.

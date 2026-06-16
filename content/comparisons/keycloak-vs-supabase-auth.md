@@ -4,7 +4,6 @@ slug: keycloak-vs-supabase-auth
 tools: [keycloak, supabase-auth]
 category: auth
 last_verified: 2026-05-09
-verdict: "Keycloak"
 ---
 
 For developers building AI agents, Keycloak wins on CIBA support for asynchronous agent approvals. Supabase is a backend-as-a-service offering no agentic primitives. Choose Keycloak if you need asynchronous human-in-the-loop authorization for agent actions, self-hosted or air-gapped deployment, and standalone IAM infrastructure. Choose Supabase only for full-stack applications where agents are purely autonomous and require no separate identity governance.

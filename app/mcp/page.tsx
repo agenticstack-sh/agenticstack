@@ -36,6 +36,11 @@ const tools = [
 
 const clients = [
   {
+    name: "Claude Code",
+    path: "Run once in your terminal",
+    snippet: `claude mcp add agenticstack -- npx -y agenticstack-mcp`,
+  },
+  {
     name: "Claude Desktop",
     path: "~/Library/Application Support/Claude/claude_desktop_config.json",
     snippet: `{

@@ -20,6 +20,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     { url: siteUrl },
+    { url: `${siteUrl}/mcp` },
     { url: `${siteUrl}/compare` },
     ...categories,
     ...tools,

@@ -31,9 +31,9 @@ export default function Home() {
         </Link>
       </div>
 
-      {/* Skills banner */}
+      {/* Skills + MCP banner */}
       <div
-        className="rounded-xl px-5 py-5 mb-12 sm:mb-20 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+        className="rounded-xl px-5 py-5 mb-12 sm:mb-20 flex flex-col gap-4"
         style={{ background: "var(--accent)", border: "1px solid #c4b5fd" }}
       >
         <div>
@@ -41,27 +41,50 @@ export default function Home() {
             Use AgenticStack with any AI assistant.
           </p>
           <p className="text-sm leading-relaxed" style={{ color: "var(--muted)" }}>
-            Install the skills to search, compare, and recommend agent tools directly from your AI workflow.{" "}
-            <a
-              href="https://skills.sh/agenticstack-sh/agenticstack-skills"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ color: "var(--accent-text)" }}
-            >
-              View skills →
-            </a>
+            Install the skills for any AI workflow, or connect via MCP for native tool calls in Claude Desktop, Cursor, and other MCP-compatible clients.
           </p>
         </div>
-        <code
-          className="text-xs sm:text-sm whitespace-normal sm:whitespace-nowrap px-4 py-2.5 rounded-lg font-mono"
-          style={{
-            background: "var(--card)",
-            border: "1px solid var(--border)",
-            color: "var(--accent-text)",
-          }}
-        >
-          npx skills add agenticstack-sh/agenticstack-skills
-        </code>
+        <div className="flex flex-col sm:flex-row gap-3">
+          <div className="flex flex-col gap-1 flex-1">
+            <span className="text-xs font-medium" style={{ color: "var(--muted)" }}>
+              Skills —{" "}
+              <a
+                href="https://skills.sh/agenticstack-sh/agenticstack-skills"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: "var(--accent-text)" }}
+              >
+                view skills →
+              </a>
+            </span>
+            <code
+              className="text-xs sm:text-sm px-4 py-2.5 rounded-lg font-mono"
+              style={{
+                background: "var(--card)",
+                border: "1px solid var(--border)",
+                color: "var(--accent-text)",
+              }}
+            >
+              npx skills add agenticstack-sh/agenticstack-skills
+            </code>
+          </div>
+          <div className="flex flex-col gap-1 flex-1">
+            <span className="text-xs font-medium" style={{ color: "var(--muted)" }}>
+              MCP
+            </span>
+            <Link
+              href="/mcp"
+              className="text-xs sm:text-sm px-4 py-2.5 rounded-lg no-underline flex items-center"
+              style={{
+                background: "var(--card)",
+                border: "1px solid var(--border)",
+                color: "var(--accent-text)",
+              }}
+            >
+              Connect Claude Desktop, Cursor, and more →
+            </Link>
+          </div>
+        </div>
       </div>
 
       {/* Category grid */}

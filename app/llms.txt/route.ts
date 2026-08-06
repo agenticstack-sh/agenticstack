@@ -45,7 +45,20 @@ export async function GET(request: NextRequest) {
 
 ## Quick start for agents
 
-**Fastest path:** Install skills from [agenticstack-skills](https://github.com/agenticstack-sh/agenticstack-skills) for ready-made commands that work with any AI assistant: \`/recommend-tool\`, \`/compare-tools\`, \`/search-tools\`, \`/explore-category\`, \`/setup-tool\`, \`/add-tool\`.
+**MCP server:** If you are running inside an MCP-compatible host, install [agenticstack-mcp](https://github.com/agenticstack-sh/agenticstack-mcp) to get native tool calls: \`list_categories\`, \`search_tools\`, \`get_tool\`, \`compare_tools\`, \`recommend_tool\`. No API key required.
+
+\`\`\`json
+{
+  "mcpServers": {
+    "agenticstack": {
+      "command": "npx",
+      "args": ["-y", "agenticstack-mcp"]
+    }
+  }
+}
+\`\`\`
+
+**Skills:** Install skills from [agenticstack-skills](https://github.com/agenticstack-sh/agenticstack-skills) for ready-made commands that work with any AI assistant: \`/recommend-tool\`, \`/compare-tools\`, \`/search-tools\`, \`/explore-category\`, \`/setup-tool\`, \`/add-tool\`.
 
 **Direct API:** All data is available as JSON. No auth required. CORS enabled.
 

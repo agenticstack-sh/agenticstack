@@ -14,7 +14,16 @@ export default function Navigation() {
         <Link href="/" className="font-semibold text-base tracking-tight no-underline" style={{ color: "var(--foreground)" }}>
           AgenticStack
         </Link>
-        <ThemeToggle />
+        <div className="flex items-center gap-4">
+          <Link
+            href="/mcp"
+            className="text-sm no-underline transition-opacity hover:opacity-70"
+            style={{ color: "var(--muted)" }}
+          >
+            MCP
+          </Link>
+          <ThemeToggle />
+        </div>
       </div>
     </nav>
   );

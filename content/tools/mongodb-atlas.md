@@ -1,5 +1,5 @@
 ---
-name: MongoDB Atlas Vector Search
+name: MongoDB Vector Search
 slug: mongodb-atlas
 category: vectordb
 type: cloud
@@ -32,19 +32,19 @@ source_urls:
   changelog: https://www.mongodb.com/docs/atlas/release-notes/
 ---
 
-# MongoDB Atlas Vector Search
+# MongoDB Vector Search
 
-MongoDB Atlas Vector Search adds dense vector retrieval and hybrid (vector + Atlas Search BM25) queries to the operational MongoDB database many teams already run. Vectors live alongside the document they describe, so a single `$vectorSearch` aggregation can retrieve, filter, and join in one stage — no dual-write between an operational store and a vector store.
+MongoDB Vector Search, a feature hosted on MongoDB Atlas, adds dense vector retrieval and hybrid (vector + Atlas Search BM25) queries to the operational MongoDB database many teams already run. Vectors live alongside the document they describe, so a single `$vectorSearch` aggregation can retrieve, filter, and join in one stage — no dual-write between an operational store and a vector store.
 
-For agents, the value is the unified data model. The same document holds your business data, its metadata, and its embedding. You can scope queries with rich `$match` filters, run hybrid search through `$rankFusion`, and stream changes to keep embeddings fresh via change streams. MongoDB ships a first-party MCP server that exposes collection and vector search operations as agent tools.
+For agents, the value is the unified data model. The same document holds your business data, its metadata, and its embedding. You can scope queries with rich `$match` filters, run hybrid search through `$rankFusion`, and stream changes to keep embeddings fresh via change streams. MongoDB ships a first-party MCP server that exposes Atlas collection and vector search operations as agent tools.
 
-Atlas runs the vector workload on dedicated Search Nodes that scale independently of the main cluster — effectively a serverless-style storage/compute split — and Atlas Stream Processing can keep embeddings in sync with upstream sources.
+MongoDB Atlas runs the vector workload on dedicated Search Nodes that scale independently of the main cluster — effectively a serverless-style storage/compute split — and Atlas Stream Processing can keep embeddings in sync with upstream sources.
 
-The tradeoff is platform lock-in: Vector Search is an Atlas feature, not part of MongoDB Community Server. Teams that need fully air-gapped deployments need MongoDB Enterprise Advanced with Search or a different engine.
+The tradeoff is platform lock-in: Vector Search is an Atlas feature, not part of self-hosted MongoDB Community Server. Teams that need fully air-gapped or on-premise deployments need MongoDB Enterprise Advanced with Search Nodes or a different engine altogether.
 
 **Agent-specific features:**
 - Vectors stored next to operational data — no sync pipeline between two databases
 - Hybrid search via `$rankFusion` combining `$vectorSearch` and Atlas Search (BM25)
-- Independent Search Nodes scale vector workload separately from operational load
+- Independent Atlas Search Nodes scale vector workload separately from operational load
 - First-party MongoDB MCP server for agent-driven CRUD and vector search
 - Built-in `embedding` model bindings for ingestion via Atlas Stream Processing

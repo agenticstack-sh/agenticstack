@@ -4,7 +4,6 @@ slug: milvus-vs-pgvector
 tools: [milvus, pgvector]
 category: vectordb
 last_verified: 2026-06-10
-verdict: "Milvus for billion-vector scale and index choice; pgvector when Postgres is already the operational store."
 ---
 
 Milvus and pgvector represent two ends of the operational spectrum. Milvus is a distributed, purpose-built vector database with a managed cloud (Zilliz); pgvector is a small PostgreSQL extension. The choice usually comes down to scale and whether you want to add a new database to your stack.

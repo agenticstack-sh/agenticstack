@@ -5,7 +5,6 @@ tools: [pinecone, qdrant]
 category: vectordb
 last_verified: 2026-06-10
 popular: true
-verdict: Qdrant
 ---
 
 Pinecone and Qdrant are the two go-to choices when you need a vector database that is *only* a vector database — no full-text search baggage, no document-DB legacy, just fast similarity search with rich filtering. They diverge on licensing, deployment model, and how aggressively payload filters can drive the query plan. Qdrant wins on portability, filter-aware querying, and price-performance. Pinecone wins on managed-service polish and proven serverless scaling.

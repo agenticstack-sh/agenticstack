@@ -18,7 +18,7 @@ Vector databases are the persistence layer behind retrieval-augmented generation
 
 For AI agents specifically, the vector store is rarely a passive lookup. Agents call it as a tool, scope queries per user or per session, filter by metadata, and combine vector relevance with keyword precision. The right database can mean the difference between an agent that grounds its answers and one that hallucinates against stale context.
 
-The tools in this category range from purpose-built, fully managed services (Pinecone, MongoDB Atlas Vector Search) to open-source engines you can self-host (Weaviate, Qdrant, Milvus, Chroma) to extensions on databases you already run (pgvector, Elasticsearch).
+The tools in this category range from purpose-built, fully managed services (Pinecone, MongoDB Vector Search) to open-source engines you can self-host (Weaviate, Qdrant, Milvus, Chroma) to extensions on databases you already run (pgvector, Elasticsearch).
 
 **What each feature means:**
 

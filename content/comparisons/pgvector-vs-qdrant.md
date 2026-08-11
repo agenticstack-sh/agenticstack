@@ -4,7 +4,6 @@ slug: pgvector-vs-qdrant
 tools: [pgvector, qdrant]
 category: vectordb
 last_verified: 2026-06-10
-verdict: "pgvector when Postgres is already the store; Qdrant for purpose-built vector performance and filter-heavy queries."
 ---
 
 pgvector and Qdrant offer two answers to "where should embeddings live?" — alongside your relational data in Postgres, or in a dedicated Rust-built vector engine. They appeal to different teams.

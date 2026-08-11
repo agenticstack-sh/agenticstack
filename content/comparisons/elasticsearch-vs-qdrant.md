@@ -4,7 +4,6 @@ slug: elasticsearch-vs-qdrant
 tools: [elasticsearch, qdrant]
 category: vectordb
 last_verified: 2026-06-10
-verdict: "Elasticsearch for hybrid retrieval on a mature search platform; Qdrant for purpose-built vector performance and payload filtering."
 ---
 
 Elasticsearch and Qdrant both run as self-hosted engines with managed cloud options, but they come at vector search from opposite directions. Elasticsearch added vectors to a mature search platform; Qdrant is a Rust-built engine designed exclusively for vector workloads.

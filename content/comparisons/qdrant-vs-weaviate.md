@@ -4,14 +4,13 @@ slug: qdrant-vs-weaviate
 tools: [qdrant, weaviate]
 category: vectordb
 last_verified: 2026-06-10
-verdict: "Qdrant for filter-heavy queries and lightweight ops; Weaviate for AI-native modules and tenant lifecycle."
 ---
 
 Qdrant and Weaviate are the two most-considered open-source vector databases for production agent workloads. Both ship hybrid search, multi-tenancy, and MCP servers, but they prioritize different things: Qdrant favors raw performance and filter-driven querying, Weaviate favors module ecosystem and tenant lifecycle.
 
 ## Where Qdrant wins
 
-* **Payload-aware query planner.** Qdrant indexes payload fields (keyword, integer, geo, datetime, UUID) and uses filter selectivity to drive the plan. Weaviate filters work but lack the same planner depth.
+* **Payload-aware query planner.** Qdrant indexes payload fields (keyword, integer, geo, datetime, and UUID) and uses filter selectivity to drive the plan. Weaviate filters work but lack the same planner depth.
 
 * **Lighter footprint.** Rust binary with low memory baseline. Weaviate is heavier per node.
 

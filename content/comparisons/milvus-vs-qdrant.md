@@ -4,7 +4,6 @@ slug: milvus-vs-qdrant
 tools: [milvus, qdrant]
 category: vectordb
 last_verified: 2026-06-10
-verdict: "Milvus for billion-scale and index choice; Qdrant for lighter ops and filter-heavy queries."
 ---
 
 Milvus and Qdrant are both open-source, purpose-built vector databases with managed cloud offerings. Milvus targets billion-vector distributed workloads; Qdrant prioritizes operational simplicity and filter-driven query planning.

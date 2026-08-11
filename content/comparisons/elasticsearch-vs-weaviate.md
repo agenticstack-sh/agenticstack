@@ -4,7 +4,6 @@ slug: elasticsearch-vs-weaviate
 tools: [elasticsearch, weaviate]
 category: vectordb
 last_verified: 2026-06-10
-verdict: "Elasticsearch for mature hybrid retrieval; Weaviate for AI-native modules and tenant scale."
 ---
 
 Elasticsearch and Weaviate both ship strong hybrid search and run self-hosted, BYOC, or as a managed cloud. Elasticsearch comes from the search world; Weaviate was built around vectors and AI modules from day one.

@@ -4,7 +4,6 @@ slug: chroma-vs-pgvector
 tools: [chroma, pgvector]
 category: vectordb
 last_verified: 2026-06-10
-verdict: "Chroma when the agent is vector-first; pgvector when Postgres is already the source of truth."
 ---
 
 Chroma is a dedicated AI-native vector database. pgvector is a PostgreSQL extension that grafts vector search onto a database many applications already run. They appeal to opposite instincts: minimize new infrastructure, or maximize developer ergonomics for the vector workload itself.
@@ -21,7 +20,7 @@ Chroma is a dedicated AI-native vector database. pgvector is a PostgreSQL extens
 
 * **One database, one backup, one auth story.** Embeddings live in the same Postgres instance as users, documents, and audit logs. ACID transactions span vector and relational writes.
 
-* **Row-level security enforces multi-tenancy in the database.** Chroma scopes tenants in the application — a filter bug leaks data. With RLS, Postgres refuses the query.
+* **Row-level security enforces multi-tenancy in the database.** Chroma relies on your application code to filter tenant data, meaning a single missing filter can cause a major security leak. Postgres enforces isolation at the database level using Row-Level Security (RLS), automatically blocking unauthorized queries even if your code makes a mistake.
 
 * **Available on every managed Postgres.** Supabase, Neon, RDS, Cloud SQL, Crunchy Bridge. No new vendor relationship needed.
 

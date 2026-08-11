@@ -4,7 +4,6 @@ slug: pgvector-vs-weaviate
 tools: [pgvector, weaviate]
 category: vectordb
 last_verified: 2026-06-10
-verdict: "pgvector when Postgres is the operational store; Weaviate for AI-native modules and per-tenant scale."
 ---
 
 pgvector adds vectors to Postgres; Weaviate is an AI-native vector database with managed cloud and BYOC options. The decision is whether you want vectors in your existing operational database or in a purpose-built engine with deeper AI tooling.

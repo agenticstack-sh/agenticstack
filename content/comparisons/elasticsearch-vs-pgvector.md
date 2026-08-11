@@ -4,7 +4,6 @@ slug: elasticsearch-vs-pgvector
 tools: [elasticsearch, pgvector]
 category: vectordb
 last_verified: 2026-06-10
-verdict: "Elasticsearch for hybrid retrieval at scale; pgvector when the agent already lives inside Postgres."
 ---
 
 Elasticsearch and pgvector both add vector search to platforms you might already run. Elasticsearch is a heavyweight search engine; pgvector is a small extension on Postgres. The decision is whether your operational data is search-shaped or relational.

@@ -1,15 +1,14 @@
 ---
-title: "MongoDB Atlas Vector Search vs pgvector"
+title: "MongoDB Vector Search vs pgvector"
 slug: mongodb-atlas-vs-pgvector
 tools: [mongodb-atlas, pgvector]
 category: vectordb
 last_verified: 2026-06-10
-verdict: "MongoDB Atlas when you already run MongoDB; pgvector when Postgres is the operational store."
 ---
 
-MongoDB Atlas Vector Search and pgvector both add vector retrieval to a database you may already operate. The decision is almost entirely about which database your application is already shaped around.
+MongoDB Vector Search and pgvector both add vector retrieval to a database you may already operate. The decision is almost entirely about which database your application is already shaped around.
 
-## Where MongoDB Atlas wins
+## Where MongoDB Vector Search wins
 
 * **Hybrid search via `$rankFusion` in one pipeline.** Combine `$vectorSearch` and Atlas Search (BM25) without external orchestration. pgvector + `tsvector` requires you to fuse results yourself.
 
@@ -31,6 +30,6 @@ For agents already reading and writing MongoDB documents, Atlas keeps embeddings
 
 ## When to pick which
 
-* **Pick MongoDB Atlas** when MongoDB is the operational store, you want a first-party MCP server, and hybrid search via `$rankFusion` matters.
+* **Pick MongoDB Vector Search** when MongoDB is the operational store, you want a first-party MCP server, and hybrid search via `$rankFusion` matters.
 
 * **Pick pgvector** when Postgres is the operational store, you need RLS for multi-tenancy, or you want open-source with no platform lock-in.
